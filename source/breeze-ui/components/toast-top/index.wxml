@@ -1,0 +1,8 @@
+<view
+  class="bz-load {{status == 'success' ? 'bg-green light' : 'bg-red light'}} {{customClass || ''}}"
+  animation="{{animation}}"
+  style="height: 0"
+  bindtap="onTap"
+>
+  <text class="bzIcon-roundclose lg padding-right-xs" wx:if="{{status == 'error'}}"></text>{{message}}
+</view>

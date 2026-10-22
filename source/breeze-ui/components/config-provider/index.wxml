@@ -1,0 +1,3 @@
+<view class="bz-config-provider theme-wrap {{configClass}} {{customClass}}" style="{{configStyle}}">
+  <slot></slot>
+</view>

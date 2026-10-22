@@ -1,0 +1,6 @@
+@import "../../styles/shared/form-group.wxss";
+
+.bz-form-group.is-error textarea,
+textarea.is-error {
+  color: var(--red, #e54d42);
+}

@@ -1,0 +1,3 @@
+<view class="bz-progress {{xs ? 'xs' : ''}} {{sm ? 'sm' : ''}} {{striped?'striped':''}} {{active?'active':''}} {{extraClass}} {{customClass||''}}" bindtap="onTap">
+<view class="bg-{{bg}}" style="width:{{value}};">{{value}}</view>
+</view>

@@ -1,0 +1,2 @@
+/* bz-list-grid：共享 list-base */
+@import "../../styles/shared/list-base.wxss";

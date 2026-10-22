@@ -1,0 +1,8 @@
+.bz-list-page {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.bz-list-page__footer {
+  padding: 8rpx 0 32rpx;
+}

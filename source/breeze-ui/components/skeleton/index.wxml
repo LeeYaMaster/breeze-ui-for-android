@@ -1,0 +1,16 @@
+<block wx:if="{{loading}}">
+  <view class="bz-skeleton__box padding {{customClass||''}}" bindtap="onTap">
+    <view wx:if="{{resolvedAvatar}}" class="bz-skeleton__avatar {{active ? 'bz-skeleton__bar--active' : ''}}"></view>
+    <view class="bz-skeleton__column">
+      <view
+        wx:for="{{skeletonRows}}"
+        wx:key="*this"
+        class="bz-skeleton__bar {{active ? 'bz-skeleton__bar--active' : ''}}"
+        style="width: {{resolvedColumnWidth[index] || '100%'}};{{index === skeletonRows.length - 1 && resolvedEndHeight ? ' height:' + resolvedEndHeight + ';' : ''}}"
+      ></view>
+    </view>
+  </view>
+</block>
+<block wx:else>
+  <slot></slot>
+</block>

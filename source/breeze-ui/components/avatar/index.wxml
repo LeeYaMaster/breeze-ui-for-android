@@ -1,0 +1,4 @@
+<view class="bz-avatar {{bg?'bg-' + bg:''}} {{extraClass}} {{round?'round':''}} {{radius?'radius':''}} {{sm?'sm':''}} {{lg?'lg':''}} {{xl?'xl':''}} {{customClass||''}}"
+  style="background-image:url({{src}});" bindtap="onTap">
+  <slot></slot>
+</view>

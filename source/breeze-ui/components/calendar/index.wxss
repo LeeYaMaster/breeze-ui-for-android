@@ -1,0 +1,63 @@
+.container {
+  padding-bottom: 10rpx;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+.bz-calendar__header {
+  height: 100rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24rpx;
+  background: var(--theme-gradient, linear-gradient(135deg, #5b6cff 0%, #7c3aed 100%));
+  color: #fff;
+}
+
+.bz-calendar__date {
+  font-weight: 600;
+}
+
+.main {
+  padding: 24rpx 20rpx 20rpx;
+}
+
+.main-title {
+  display: flex;
+  margin-bottom: 8rpx;
+}
+
+.main-title view {
+  width: 90rpx;
+  height: 72rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22rpx;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.main-center {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.bz-calendar__day {
+  width: 90rpx;
+  height: 90rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  font-size: 28rpx;
+  color: #334155;
+}
+
+.bz-calendar__day--active {
+  background-color: var(--theme-primary, #5b6cff);
+  color: #fff;
+  font-weight: 600;
+}

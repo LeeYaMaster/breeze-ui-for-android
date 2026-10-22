@@ -1,0 +1,9 @@
+{
+  "component": true,
+  "usingComponents": {
+    "bz-toast": "../toast/index",
+    "bz-modal": "../modal/index",
+    "bz-toast-top": "../toast-top/index",
+    "bz-action-sheet": "../action-sheet/index"
+  }
+}

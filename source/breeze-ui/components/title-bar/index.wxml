@@ -1,0 +1,8 @@
+<view class="bz-bar bg-white solid-bottom {{extraClass}} {{customClass||''}}" bindtap="onTap">
+    <view class="action">
+      <text class="bzIcon-title {{color?'text-'+color:''}}"></text>{{title}}
+    </view>
+    <view class="action">
+      <slot></slot>
+    </view>
+  </view>

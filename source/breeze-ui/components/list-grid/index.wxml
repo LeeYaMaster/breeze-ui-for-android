@@ -1,0 +1,10 @@
+<view class="bz-list grid {{gridCol?'col-'+gridCol:''}} {{gridBorder?'':'no-border'}} {{customClass||''}}" bindtap="onTap">
+  <view class="bz-item" wx:for="{{data}}" wx:key>
+    <view class="{{item.icon?'bzIcon-'+item.icon:''}} {{item.color?'text-'+item.color:''}}">
+      <view class="bz-tag badge" wx:if="{{item.badge!=0}}">
+        <block wx:if="{{item.badge!=1}}">{{item.badge>99?"99+":item.badge}}</block>
+      </view>
+    </view>
+    <text>{{item.name}}</text>
+  </view>
+</view>

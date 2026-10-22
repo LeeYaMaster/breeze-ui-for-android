@@ -1,0 +1,13 @@
+<view class="bz-form-group solid-bottom {{customClass||''}}">
+  <view class="grid col-3 grid-square flex-sub">
+    <view class="bg-img" wx:for="{{fileList}}" wx:key="{{index}}" bindtap="viewImage" data-url="{{fileList[index]}}">
+      <image src='{{fileList[index]}}' mode='aspectFill'></image>
+      <view class="bz-tag bg-red" catchtap="delImg" data-index="{{index}}">
+        <text class="bzIcon-close"></text>
+      </view>
+    </view>
+    <view class="solids" bindtap="chooseImage" wx:if="{{fileList.length<1}}">
+      <text class="bzIcon-cameraadd"></text>
+    </view>
+  </view>
+</view>

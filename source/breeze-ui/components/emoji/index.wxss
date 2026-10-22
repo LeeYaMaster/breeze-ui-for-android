@@ -1,0 +1,22 @@
+.emojis {
+  width: 100%;
+  padding: 16rpx 20rpx 24rpx;
+  display: flex;
+  flex-wrap: wrap;
+  height: 280rpx;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.emoji {
+  width: 12.5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10rpx 0;
+}
+
+.emoji-image {
+  width: 56rpx;
+  height: 56rpx;
+}

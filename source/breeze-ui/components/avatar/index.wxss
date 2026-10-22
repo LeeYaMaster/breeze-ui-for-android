@@ -1,0 +1,43 @@
+/* bz-avatar 组件样式（源文件） */
+
+.bz-avatar {
+	font-variant: small-caps;
+	margin: 0;
+	padding: 0;
+	display: inline-flex;
+	text-align: center;
+	justify-content: center;
+	align-items: center;
+	background-color: #ccc;
+	color: var(--white);
+	white-space: nowrap;
+	position: relative;
+	width: 64rpx;
+	height: 64rpx;
+	background-size: cover;
+	background-position: center;
+	vertical-align: middle;
+	font-size: 1.5em;
+}
+
+.bz-avatar.sm {
+	width: 48rpx;
+	height: 48rpx;
+	font-size: 1em;
+}
+
+.bz-avatar.lg {
+	width: 96rpx;
+	height: 96rpx;
+	font-size: 2em;
+}
+
+.bz-avatar.xl {
+	width: 128rpx;
+	height: 128rpx;
+	font-size: 2.5em;
+}
+
+.bz-avatar .avatar-text {
+	font-size: 0.4em;
+}

@@ -1,0 +1,28 @@
+/* 基础重置与全局默认 */
+
+page {
+	background-color: var(--ghostWhite);
+	font-size: 28rpx;
+	color: var(--black);
+	font-family: Helvetica Neue, Helvetica, sans-serif;
+}
+
+view,
+scroll-view,
+swiper,
+button,
+input,
+textarea,
+label,
+navigator,
+image {
+	box-sizing: border-box;
+}
+
+.round {
+	border-radius: 5000rpx;
+}
+
+.radius {
+	border-radius: var(--bz-radius-md, 6rpx);
+}

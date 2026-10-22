@@ -1,0 +1,22 @@
+<block wx:if="{{hideLabel}}">
+  <input
+    class="{{error ? 'is-error' : ''}}"
+    placeholder="{{placeholder}}"
+    disabled="{{disabled}}"
+    id="{{id}}"
+    value="{{value}}"
+    bindinput="setInput"
+  />
+  <slot name="right" />
+</block>
+<view wx:else class="bz-form-group {{extraClass}} {{customClass || ''}} {{error ? 'is-error' : ''}}" bindtap="onTap">
+  <view class="title">{{label}}</view>
+  <input
+    placeholder="{{placeholder}}"
+    disabled="{{disabled}}"
+    id="{{id}}"
+    value="{{value}}"
+    bindinput="setInput"
+  />
+  <slot name="right" />
+</view>

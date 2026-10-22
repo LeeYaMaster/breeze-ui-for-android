@@ -1,0 +1,14 @@
+<view class="praise {{customClass||''}}">
+  <block wx:for="{{box}}" wx:key="idx">
+    <view
+      wx:if="{{item}}"
+      class="praise_bubble"
+      style="left: {{item.x - 50}}px; top: {{item.y - 80}}px;"
+    >
+      <view wx:for="{{item.element}}" wx:for-item="child" class="{{child.className}}" wx:key="*this">
+        <image src="{{child.image}}" class="like_image"></image>
+      </view>
+    </view>
+  </block>
+  <slot/>
+</view>

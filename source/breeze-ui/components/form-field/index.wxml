@@ -1,0 +1,12 @@
+<view class="bz-form-field {{customClass || ''}}" bind:change="onValueChange">
+  <view class="bz-form-group {{alignStart ? 'align-start' : ''}} {{extraClass}} {{errorMessage ? 'is-error' : ''}}">
+    <view class="title">
+      {{label}}
+      <text wx:if="{{required}}" class="bz-form-field__required">*</text>
+    </view>
+    <view class="bz-form-field__control {{controlAlign === 'right' ? 'is-right' : ''}}">
+      <slot></slot>
+    </view>
+  </view>
+  <view wx:if="{{errorMessage}}" class="bz-form-field__error">{{errorMessage}}</view>
+</view>

@@ -1,0 +1,19 @@
+<block wx:if="{{hideLabel}}">
+  <switch
+    checked="{{checked}}"
+    disabled="{{disabled}}"
+    class="{{switchClass}}"
+    bindchange="onChange"
+  />
+  <slot name="right" />
+</block>
+<view wx:else class="bz-form-group {{extraClass}} {{customClass || ''}}" bindtap="onTap">
+  <view class="title">{{label}}</view>
+  <switch
+    checked="{{checked}}"
+    disabled="{{disabled}}"
+    class="{{switchClass}}"
+    bindchange="onChange"
+  />
+  <slot name="right" />
+</view>

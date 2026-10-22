@@ -1,0 +1,11 @@
+<view class="emojis {{customClass || ''}}">
+  <view
+    wx:for="{{emojiList}}"
+    wx:key="id"
+    class="emoji"
+    data-src="{{item.src}}"
+    bindtap="chooseEmoji"
+  >
+    <image src="{{item.src}}" class="emoji-image" mode="aspectFit" />
+  </view>
+</view>

@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "bz-skeleton": "../skeleton/index"
+  }
+}

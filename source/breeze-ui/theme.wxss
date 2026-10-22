@@ -1,0 +1,95 @@
+/**
+ * 主题色配置（做法一：主题 class 切换）
+ * 使用方式：在页面根节点加 class="theme-wrap {{themeClass}}"
+ * 子元素中使用 var(--theme-primary) / var(--theme-secondary) / var(--theme-light) 等
+ */
+
+/* 默认主题（Breeze 品牌色） */
+.theme-wrap.theme-default {
+  --theme-primary: #5b6cff;
+  --theme-secondary: #7c3aed;
+  --theme-light: #eef0ff;
+  --theme-gradient: linear-gradient(135deg, #5b6cff 0%, #7c3aed 52%, #22d3ee 100%);
+}
+
+/* 蓝色主题 */
+.theme-wrap.theme-blue {
+  --theme-primary: #0081ff;
+  --theme-secondary: #1cbbb4;
+  --theme-light: #cce6ff;
+  --theme-gradient: linear-gradient(45deg, #0081ff, #1cbbb4);
+}
+
+/* 紫色主题 */
+.theme-wrap.theme-purple {
+  --theme-primary: #6739b6;
+  --theme-secondary: #9c26b0;
+  --theme-light: #e1d7f0;
+  --theme-gradient: linear-gradient(45deg, #9000ff, #5e00ff);
+}
+
+/* 橙色主题 */
+.theme-wrap.theme-orange {
+  --theme-primary: #f37b1d;
+  --theme-secondary: #ed1c24;
+  --theme-light: #fde6d2;
+  --theme-gradient: linear-gradient(45deg, #ff9700, #ed1c24);
+}
+
+/* 红色主题 */
+.theme-wrap.theme-red {
+  --theme-primary: #e54d42;
+  --theme-secondary: #ec008c;
+  --theme-light: #fadbd9;
+  --theme-gradient: linear-gradient(45deg, #f43f3b, #ec008c);
+}
+
+/* 青色主题 */
+.theme-wrap.theme-cyan {
+  --theme-primary: #1cbbb4;
+  --theme-secondary: #10b981;
+  --theme-light: #d2f1f0;
+  --theme-gradient: linear-gradient(135deg, #1cbbb4, #10b981);
+}
+
+/* 演示层：theme-wrap 内映射 Breeze 品牌 class → 当前主题变量 */
+.theme-wrap {
+  --gradualBreeze: var(--theme-gradient);
+  --breeze-brand: var(--theme-primary);
+}
+
+.theme-wrap .bg-gradual-breeze {
+  background-image: var(--theme-gradient);
+  color: #ffffff;
+}
+
+.theme-wrap .text-breeze {
+  color: var(--theme-primary);
+}
+
+.theme-wrap .demo-tabbar .action.is-active .demo-tabbar__icon,
+.theme-wrap .demo-tabbar .action.is-active .demo-tabbar__label {
+  color: var(--theme-primary);
+}
+
+.theme-wrap .about-hero.bg-gradual-breeze {
+  background-image: var(--theme-gradient);
+}
+
+/* 主题色占位类：在使用了 theme-wrap 的容器内，可用 .bg-theme / .text-theme 等 */
+.theme-wrap .bg-theme {
+  background-color: var(--theme-primary);
+}
+.theme-wrap .bz-btn.bg-theme,
+.theme-wrap button.bz-btn.bg-theme {
+  color: #ffffff;
+}
+.theme-wrap .text-theme {
+  color: var(--theme-primary);
+}
+.theme-wrap .bg-theme-light {
+  background-color: var(--theme-light);
+}
+.theme-wrap .theme-gradient {
+  background: var(--theme-gradient);
+}

@@ -1,0 +1,28 @@
+<block wx:if="{{hideLabel}}">
+  <textarea
+    class="{{error ? 'is-error' : ''}}"
+    placeholder="{{placeholder}}"
+    disabled="{{disabled}}"
+    maxlength="{{maxlength}}"
+    auto-height="{{autoHeight}}"
+    value="{{value}}"
+    bindinput="onInput"
+  />
+  <slot name="right" />
+</block>
+<view
+  wx:else
+  class="bz-form-group {{alignStart ? 'align-start' : ''}} {{extraClass}} {{customClass || ''}} {{error ? 'is-error' : ''}}"
+  bindtap="onTap"
+>
+  <view class="title">{{label}}</view>
+  <textarea
+    placeholder="{{placeholder}}"
+    disabled="{{disabled}}"
+    maxlength="{{maxlength}}"
+    auto-height="{{autoHeight}}"
+    value="{{value}}"
+    bindinput="onInput"
+  />
+  <slot name="right" />
+</view>

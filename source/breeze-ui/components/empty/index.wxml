@@ -1,0 +1,4 @@
+<view wx:if="{{data.length == 0}}" class="empty {{customClass||''}}" bindtap="onTap">
+  <text class="bzIcon-searchlist text-gray icon"></text>
+  <view class="text-gray text">数据为空</view>
+</view>

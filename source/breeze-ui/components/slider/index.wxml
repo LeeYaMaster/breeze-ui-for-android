@@ -1,0 +1,16 @@
+<view class="bz-form-group {{customClass || ''}}" bindtap="onTap">
+  <view class="title" wx:if="{{label}}">{{label}}</view>
+  <slider
+    min="{{min}}"
+    max="{{max}}"
+    step="{{step}}"
+    value="{{value}}"
+    disabled="{{disabled}}"
+    show-value="{{showValue}}"
+    activeColor="{{activeColor}}"
+    backgroundColor="{{backgroundColor}}"
+    block-size="{{blockSize}}"
+    bindchange="onChange"
+    bindchanging="onChanging"
+  />
+</view>

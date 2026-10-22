@@ -1,0 +1,20 @@
+<view class="bz-item {{isLink ? 'arrow' : ''}} {{customClass || ''}}" bindtap="onTap">
+  <view class="content">
+    <slot name="icon">
+      <text wx:if="{{icon}}" class="{{icon}} margin-right-sm"></text>
+    </slot>
+    <view class="flex-sub">
+      <slot name="title">
+        <view wx:if="{{title}}">
+          <text wx:if="{{required}}" class="text-red margin-right-xs">*</text>{{title}}
+        </view>
+        <view wx:if="{{label}}" class="text-gray text-sm margin-top-xs">{{label}}</view>
+      </slot>
+    </view>
+  </view>
+  <view class="action">
+    <slot name="value">
+      <text wx:if="{{value}}" class="text-gray">{{value}}</text>
+    </slot>
+  </view>
+</view>

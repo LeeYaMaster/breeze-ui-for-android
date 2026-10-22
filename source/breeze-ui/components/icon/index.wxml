@@ -1,0 +1,3 @@
+<text 
+class="{{name?'bzIcon-'+name:''}} {{extraClass}} {{textColor?'text-'+textColor:''}} {{customClass||''}}"
+style="font-size:{{size?size:''}}" bindtap="onTap"></text>

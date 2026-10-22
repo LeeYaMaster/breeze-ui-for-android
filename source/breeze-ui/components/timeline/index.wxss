@@ -1,0 +1,83 @@
+/* bz-timeline 组件样式（源文件） */
+
+.bz-timeline {
+	display: block;
+	background-color: var(--white);
+}
+
+.bz-timeline .bz-time {
+	width: 120rpx;
+	text-align: center;
+	padding: 20rpx 0;
+	font-size: 26rpx;
+	color: #888;
+	display: block;
+}
+
+.bz-timeline>.bz-item {
+	padding: 30rpx 30rpx 30rpx 120rpx;
+	position: relative;
+	display: block;
+	z-index: 0;
+}
+
+.bz-timeline>.bz-item:not([class*="text-"]) {
+	color: #ccc;
+}
+
+.bz-timeline>.bz-item::after {
+	content: "";
+	display: block;
+	position: absolute;
+	width: 1rpx;
+	background-color: #ddd;
+	left: 60rpx;
+	height: 100%;
+	top: 0;
+	z-index: 8;
+}
+
+.bz-timeline>.bz-item::before {
+	font-family: "bzIcon";
+	display: block;
+	position: absolute;
+	top: 36rpx;
+	z-index: 9;
+	background-color: var(--white);
+	width: 50rpx;
+	height: 50rpx;
+	text-align: center;
+	border: none;
+	line-height: 50rpx;
+	left: 36rpx;
+}
+
+.bz-timeline>.bz-item:not([class*="bzIcon-"])::before {
+	content: "\e763";
+}
+
+.bz-timeline>.bz-item[class*="bzIcon-"]::before {
+	background-color: var(--white);
+	width: 50rpx;
+	height: 50rpx;
+	text-align: center;
+	border: none;
+	line-height: 50rpx;
+	left: 36rpx;
+}
+
+.bz-timeline>.bz-item>.content {
+	padding: 30rpx;
+	border-radius: 6rpx;
+	display: block;
+	line-height: 1.6;
+}
+
+.bz-timeline>.bz-item>.content:not([class*="bg-"]) {
+	background-color: var(--ghostWhite);
+	color: var(--black);
+}
+
+.bz-timeline>.bz-item>.content+.content {
+	margin-top: 20rpx;
+}

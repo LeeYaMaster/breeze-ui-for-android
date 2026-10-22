@@ -1,0 +1,7 @@
+/* bz-input：共享 form-group */
+@import "../../styles/shared/form-group.wxss";
+
+.bz-form-group.is-error input,
+input.is-error {
+  color: var(--red, #e54d42);
+}

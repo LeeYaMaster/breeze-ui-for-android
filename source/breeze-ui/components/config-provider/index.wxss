@@ -1,0 +1,12 @@
+/* bz-config-provider：局部设计令牌默认值（可被 inline style 覆盖） */
+
+.bz-config-provider {
+  --bz-radius-sm: 4rpx;
+  --bz-radius-md: 6rpx;
+  --bz-radius-lg: 12rpx;
+  --bz-radius-xl: 24rpx;
+  --bz-font-size-sm: 24rpx;
+  --bz-font-size-md: 28rpx;
+  --bz-font-size-lg: 32rpx;
+  font-size: var(--bz-font-size-md, 28rpx);
+}

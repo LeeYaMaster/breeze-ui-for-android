@@ -1,0 +1,2 @@
+<!--breeze-ui/components/choose/index.wxml-->
+<view class="{{customClass||''}}" bindtap="onTap"><text>breeze-ui/components/choose/index.wxml</text></view>

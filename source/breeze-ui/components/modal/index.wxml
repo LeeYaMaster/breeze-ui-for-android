@@ -1,0 +1,72 @@
+<block wx:if="{{type == 'dialog'}}">
+  <view class="bz-modal {{show ? 'show' : ''}} {{customClass || ''}}" bindtap="onMaskTap">
+    <view class="bz-dialog" catchtap>
+      <view class="padding-xl">
+        <view class="text-lg text-bold" wx:if="{{title}}">{{title}}</view>
+        <view class="{{title ? 'padding-top-sm' : ''}} text-gray">{{content}}</view>
+      </view>
+      <view class="bz-bar bg-white">
+        <view class="action" wx:if="{{showCancel}}" bindtap="onCancel">{{cancelText}}</view>
+        <view class="action text-green solid-left" bindtap="onConfirm">{{confirmText}}</view>
+      </view>
+    </view>
+  </view>
+</block>
+<block wx:elif="{{type == ''}}">
+  <view class="bz-modal {{show ?'show':''}} {{customClass||''}}" bindtap="hideModal">
+    <view class="bz-dialog">
+      <view class="bz-bar bg-white justify-end">
+        <view class="content">{{title}}</view>
+        <view class="action" bindtap="hideModal">
+          <text class="bzIcon-close text-red"></text>
+        </view>
+      </view>
+      <slot name="content" />
+      <slot name="footer" />
+    </view>
+  </view>
+</block>
+<block wx:if="{{type == 'bottom'}}">
+  <view class="bz-modal bottom-modal {{show ?'show':''}} {{customClass||''}}" bindtap="hideModal">
+    <view class="bz-dialog">
+      <view class="bz-bar bg-white">
+        <view class="action text-green">确定</view>
+        <view class="action text-blue" bindtap="hideModal">取消</view>
+      </view>
+      <slot />
+    </view>
+  </view>
+</block>
+<block wx:if="{{type == 'image'}}">
+  <view class="bz-modal {{show ?'show':''}} {{customClass||''}}" bindtap="hideModal">
+    <view class="bz-dialog">
+      <view class="bg-img" style="background-image: url({{src}});height:200px;">
+        <view class="bz-bar justify-end text-white">
+          <view class="action" bindtap="hideModal">
+            <text class="bzIcon-close"></text>
+          </view>
+        </view>
+      </view>
+      <view class="bz-bar bg-white">
+        <view class="action margin-0 flex-sub  solid-left" bindtap="hideModal">{{prompt}}</view>
+      </view>
+    </view>
+  </view>
+</block>
+<block wx:if="{{type == 'pithy'}}">
+  <view class="bz-modal {{show ?'show':''}} {{customClass||''}}" bindtap="hideModal">
+    <view class="bz-dialog" catchtap>
+      <slot />
+    </view>
+  </view>
+</block>
+<block wx:if="{{type == 'drawer'}}">
+  <view class="bz-modal drawer-modal justify-{{direction == 'right' ? 'end' : 'start'}} {{ show ?'show':''}} {{customClass||''}}"
+    bindtap="hideModal">
+    <view class="bz-dialog basis-lg" catchtap style="top:{{CustomBar}}px;height:calc(100vh - {{CustomBar}}px)">
+      <view class="bz-list menu text-left">
+        <slot />
+      </view>
+    </view>
+  </view>
+</block>

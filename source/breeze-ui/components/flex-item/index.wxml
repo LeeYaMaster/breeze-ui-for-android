@@ -1,0 +1,3 @@
+<view class="class flex-{{utils.multipleFormat(multiple)}} {{extraClass}} {{customClass || ''}}" bindtap="onTap">
+  <slot></slot>
+</view>

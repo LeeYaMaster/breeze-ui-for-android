@@ -1,0 +1,65 @@
+/* 弹幕组件根容器 — 必须由外部 .danmu-fill 提供绝对定位尺寸 */
+.danmu {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* 弹幕渲染层 — 填满父容器，裁剪超出部分 */
+.danmu-layer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* 单条弹幕 */
+.danmu-box {
+  position: absolute;
+  left: 0;
+  white-space: nowrap;
+  padding: 10rpx 24rpx;
+  border-radius: 50rpx;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  font-size: 28rpx;
+  /* 使用 % 而非 vw — 微信小程序组件内 keyframes 对 vw 解析不可靠 */
+  animation: danmu-move linear forwards;
+  will-change: transform;
+  /* 确保可见：不设 width 让内容撑开 */
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.12);
+}
+
+.gift-like {
+  width: 36rpx;
+  height: 36rpx;
+  flex-shrink: 0;
+}
+
+.danmu-text {
+  padding-left: 14rpx;
+  font-size: 26rpx;
+  line-height: 1.4;
+}
+
+/*
+ * 弹幕飞行动画
+ * 从屏幕右侧外（800rpx ≈ 全屏宽度）飞到左侧外（-200%）
+ * 使用 rpx 单位确保跨设备一致，起始位置完全在视口之外
+ */
+@keyframes danmu-move {
+  from {
+    transform: translateX(800rpx);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-200%);
+    opacity: 1;
+  }
+}

@@ -1,0 +1,3 @@
+<view class="box {{customClass||''}}" style="top:{{top}}" bindtap="onTap">
+  <slot/>
+</view>

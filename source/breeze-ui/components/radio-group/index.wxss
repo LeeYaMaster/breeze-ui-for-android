@@ -1,0 +1,20 @@
+@import "../../styles/shared/form-group.wxss";
+@import "../../styles/shared/native-controls.wxss";
+
+.bz-radio-group.inline {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.bz-radio-group__item {
+  display: flex;
+  align-items: center;
+  margin-right: 30rpx;
+  margin-bottom: 10rpx;
+}
+
+.bz-radio-group__label {
+  margin-left: 10rpx;
+  font-size: var(--bz-font-size-md, 28rpx);
+  color: #555;
+}

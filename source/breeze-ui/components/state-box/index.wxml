@@ -1,0 +1,54 @@
+<view
+  class="bz-state-box {{customClass || ''}}"
+  style="min-height: {{viewState === 'content' ? '' : minHeight}};"
+>
+  <block wx:if="{{viewState === 'loading'}}">
+    <view class="bz-state-box__panel">
+      <view class="bz-load bg-grey loading"></view>
+      <view wx:if="{{loadingText}}" class="text-gray text-sm text-center margin-top-sm">
+        {{loadingText}}
+      </view>
+    </view>
+  </block>
+
+  <block wx:elif="{{viewState === 'skeleton'}}">
+    <view class="bz-state-box__panel bz-state-box__skeleton">
+      <bz-skeleton
+        wx:for="{{skeletonItems}}"
+        wx:key="*this"
+        loading
+        template="{{skeletonTemplate}}"
+        custom-class="margin-bottom-sm"
+      />
+    </view>
+  </block>
+
+  <block wx:elif="{{viewState === 'error'}}">
+    <slot name="error">
+      <view class="bz-state-box__panel bz-state-box__error">
+        <text class="bzIcon-warnfill text-red bz-state-box__icon"></text>
+        <view class="text-gray text-center margin-top-sm">{{errorMessage}}</view>
+        <button
+          wx:if="{{retry}}"
+          class="bz-btn bg-blue sm margin-top-lg"
+          bindtap="onRetry"
+        >
+          重试
+        </button>
+      </view>
+    </slot>
+  </block>
+
+  <block wx:elif="{{viewState === 'empty'}}">
+    <slot name="empty">
+      <view class="bz-state-box__panel bz-state-box__empty">
+        <text class="bzIcon-searchlist text-gray bz-state-box__icon"></text>
+        <view class="text-gray margin-top-sm">{{emptyText}}</view>
+      </view>
+    </slot>
+  </block>
+
+  <block wx:else>
+    <slot></slot>
+  </block>
+</view>

@@ -1,0 +1,7 @@
+<view class="bz-page {{customClass || ''}}">
+  <slot></slot>
+  <bz-toast wx:if="{{toast}}" global />
+  <bz-modal wx:if="{{modal}}" global />
+  <bz-toast-top wx:if="{{toastTop}}" global />
+  <bz-action-sheet wx:if="{{actionSheet}}" global />
+</view>

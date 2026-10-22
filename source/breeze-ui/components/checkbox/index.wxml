@@ -1,0 +1,19 @@
+<block wx:if="{{hideLabel}}">
+  <checkbox
+    checked="{{checked}}"
+    disabled="{{disabled}}"
+    class="{{checkboxClass}}"
+    bindtap="onToggle"
+  />
+  <slot name="right" />
+</block>
+<view wx:else class="bz-form-group {{extraClass}} {{customClass || ''}}" bindtap="onTap">
+  <view class="title">{{label}}</view>
+  <checkbox
+    checked="{{checked}}"
+    disabled="{{disabled}}"
+    class="{{checkboxClass}}"
+    bindtap="onToggle"
+  />
+  <slot name="right" />
+</view>

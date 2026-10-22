@@ -1,0 +1,16 @@
+<view class="danmu {{customClass || ''}}">
+  <slot />
+  <view class="danmu-layer">
+    <view
+      wx:for="{{box}}"
+      wx:key="id"
+      wx:if="{{item && item.status == 'like'}}"
+      class="danmu-box danmu-box--active"
+      style="top: {{item.top}}%; animation-duration: {{item.time}}s; background-color: {{item.color}};"
+    >
+      <image src="/color_pro_img/icon/gift-like.png" class="gift-like" mode="aspectFit" />
+      <text class="danmu-text">{{item.text}}</text>
+    </view>
+  </view>
+  <slot />
+</view>

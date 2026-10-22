@@ -1,0 +1,24 @@
+<view class="bz-modal bottom-modal {{show ? 'show' : ''}} {{customClass || ''}}" bindtap="onMaskTap">
+  <view class="bz-dialog" catchtap>
+    <view class="bz-bar bg-white solid-bottom" wx:if="{{title}}">
+      <view class="content text-gray text-sm text-center">{{title}}</view>
+    </view>
+    <view class="bz-list menu text-center">
+      <view
+        class="bz-item"
+        wx:for="{{actions}}"
+        wx:key="name"
+        bindtap="onSelect"
+        data-index="{{index}}"
+      >
+        <view class="content">
+          <view class="{{item.color ? 'text-' + item.color : ''}}">{{item.text || item.name}}</view>
+          <view wx:if="{{item.subname}}" class="text-gray text-sm margin-top-xs">{{item.subname}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="bz-bar bg-white margin-top-sm solid-top">
+      <view class="action" bindtap="onCancel">{{cancelText}}</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,8 @@
+<view class="bz-item {{menuArrow?'arrow':''}} {{customClass||''}}" bindtap="onTap">
+  <view class="content">
+    <slot name="left"></slot>
+  </view>
+  <view class="action">
+    <slot name="right"></slot>
+  </view>
+</view>

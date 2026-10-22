@@ -1,0 +1,133 @@
+/* bz-steps 组件样式（源文件） */
+
+.bz-steps {
+	display: flex;
+}
+
+scroll-view.bz-steps {
+	display: block;
+	white-space: nowrap;
+}
+
+scroll-view.bz-steps .bz-item {
+	display: inline-block;
+}
+
+.bz-steps .bz-item {
+	flex: 1;
+	text-align: center;
+	position: relative;
+	min-width: 100rpx;
+}
+
+.bz-steps .bz-item:not([class*="text-"]) {
+	color: var(--grey);
+}
+
+.bz-steps .bz-item [class*="bzIcon-"],
+.bz-steps .bz-item .num {
+	display: block;
+	font-size: 40rpx;
+	line-height: 80rpx;
+}
+
+.bz-steps .bz-item::before,
+.bz-steps .bz-item::after,
+.bz-steps.steps-arrow .bz-item::before,
+.bz-steps.steps-arrow .bz-item::after {
+	content: "";
+	display: block;
+	position: absolute;
+	height: 0px;
+	width: calc(100% - 80rpx);
+	border-bottom: 1px solid #ccc;
+	left: calc(0px - (100% - 80rpx) / 2);
+	top: 40rpx;
+	z-index: 0;
+}
+
+.bz-steps.steps-arrow .bz-item::before,
+.bz-steps.steps-arrow .bz-item::after {
+	content: "\e6a3";
+	font-family: "bzIcon";
+	height: 30rpx;
+	border-bottom-width: 0px;
+	line-height: 30rpx;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+	color: #ccc;
+}
+
+.bz-steps.steps-bottom .bz-item::before,
+.bz-steps.steps-bottom .bz-item::after {
+	bottom: 40rpx;
+	top: initial;
+}
+
+.bz-steps .bz-item::after {
+	border-bottom: 1px solid currentColor;
+	width: 0px;
+	transition: all 0.3s ease-in-out 0s;
+}
+
+.bz-steps .bz-item[class*="text-"]::after {
+	width: calc(100% - 80rpx);
+	color: currentColor;
+}
+
+.bz-steps .bz-item:first-child::before,
+.bz-steps .bz-item:first-child::after {
+	display: none;
+}
+
+.bz-steps .bz-item .num {
+	width: 40rpx;
+	height: 40rpx;
+	border-radius: 50%;
+	line-height: 40rpx;
+	margin: 20rpx auto;
+	font-size: 24rpx;
+	border: 1px solid currentColor;
+	position: relative;
+	overflow: hidden;
+}
+
+.bz-steps .bz-item[class*="text-"] .num {
+	background-color: currentColor;
+}
+
+.bz-steps .bz-item .num::before,
+.bz-steps .bz-item .num::after {
+	content: attr(data-index);
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+	transition: all 0.3s ease-in-out 0s;
+	transform: translateY(0rpx);
+}
+
+.bz-steps .bz-item[class*="text-"] .num::before {
+	transform: translateY(-40rpx);
+	color: var(--white);
+}
+
+.bz-steps .bz-item .num::after {
+	transform: translateY(40rpx);
+	color: var(--white);
+	transition: all 0.3s ease-in-out 0s;
+}
+
+.bz-steps .bz-item[class*="text-"] .num::after {
+	content: "\e645";
+	font-family: "bzIcon";
+	color: var(--white);
+	transform: translateY(0rpx);
+}
+
+.bz-steps .bz-item[class*="text-"] .num.err::after {
+	content: "\e646";
+}

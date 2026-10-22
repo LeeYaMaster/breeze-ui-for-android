@@ -1,0 +1,126 @@
+/* bz-tag 组件样式（源文件） */
+
+.bz-tag {
+	font-size: var(--bz-font-size-sm, 24rpx);
+	vertical-align: middle;
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+	padding: 0rpx 16rpx;
+	height: 48rpx;
+	font-family: Helvetica Neue, Helvetica, sans-serif;
+	white-space: nowrap;
+}
+
+.bz-tag:not([class*="bg"]):not([class*="line"]) {
+	background-color: var(--ghostWhite);
+}
+
+.bz-tag[class*="line-"]::after {
+	content: " ";
+	width: 200%;
+	height: 200%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	border: 1rpx solid currentColor;
+	transform: scale(0.5);
+	transform-origin: 0 0;
+	box-sizing: border-box;
+	border-radius: 0;
+	z-index: 1;
+	pointer-events: none;
+}
+
+.bz-tag.radius {
+	border-radius: var(--bz-radius-md, 6rpx);
+}
+
+.bz-tag.radius[class*="line-"]::after {
+	border-radius: calc(var(--bz-radius-md, 6rpx) * 2);
+}
+
+.bz-tag.round[class*="line"]::after {
+	border-radius: 1000rpx;
+}
+
+.bz-tag+.bz-tag {
+	margin-left: 10rpx;
+}
+
+.bz-capsule {
+	display: inline-flex;
+	vertical-align: middle;
+}
+
+.bz-capsule+.bz-capsule {
+	margin-left: 10rpx;
+}
+
+.bz-capsule .bz-tag {
+	margin: 0;
+}
+
+.bz-capsule .bz-tag[class*="line-"]:last-child::after {
+	border-left: 0rpx solid transparent;
+}
+
+.bz-capsule .bz-tag[class*="line-"]:first-child::after {
+	border-right: 0rpx solid transparent;
+}
+
+.bz-capsule.radius .bz-tag:first-child {
+	border-top-left-radius: var(--bz-radius-md, 6rpx);
+	border-bottom-left-radius: var(--bz-radius-md, 6rpx);
+}
+
+.bz-capsule.radius .bz-tag:last-child::after,
+.bz-capsule.radius .bz-tag[class*="line-"] {
+	border-top-right-radius: calc(var(--bz-radius-md, 6rpx) * 2);
+	border-bottom-right-radius: calc(var(--bz-radius-md, 6rpx) * 2);
+}
+
+.bz-capsule.round .bz-tag:first-child {
+	border-top-left-radius: 200rpx;
+	border-bottom-left-radius: 200rpx;
+	text-indent: 4rpx;
+}
+
+.bz-capsule.round .bz-tag:last-child::after,
+.bz-capsule.round .bz-tag:last-child {
+	border-top-right-radius: 200rpx;
+	border-bottom-right-radius: 200rpx;
+	text-indent: -4rpx;
+}
+
+.bz-tag.badge {
+	border-radius: 200rpx;
+	position: absolute;
+	top: -10rpx;
+	right: -10rpx;
+	font-size: 20rpx;
+	padding: 0rpx 10rpx;
+	height: 28rpx;
+	color: var(--white);
+}
+
+.bz-tag.badge:not([class*="bg-"]) {
+	background-color: #dd514c;
+}
+
+.bz-tag:empty:not([class*="bzIcon-"]) {
+	padding: 0rpx;
+	width: 16rpx;
+	height: 16rpx;
+	top: -4rpx;
+	right: -4rpx;
+}
+
+.bz-tag[class*="bzIcon-"] {
+	width: 32rpx;
+	height: 32rpx;
+	top: -4rpx;
+	right: -4rpx;
+}

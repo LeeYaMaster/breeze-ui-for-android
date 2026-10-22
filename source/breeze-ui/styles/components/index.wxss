@@ -1,0 +1,26 @@
+/* 组件样式全局入口 — 直接引用源文件，无中间兼容层 */
+
+/* 跨页面 / 多组件共享 */
+@import "../shared/bar.wxss";
+@import "../shared/native-controls.wxss";
+@import "../shared/nav.wxss";
+@import "../shared/swiper.wxss";
+@import "../shared/form-group.wxss";
+@import "../shared/list-base.wxss";
+
+/* 已内聚到 breeze-ui/components/ */
+@import "../../components/button/index.wxss";
+@import "../../components/tag/index.wxss";
+@import "../../components/avatar-group/index.wxss";
+@import "../../components/progress/index.wxss";
+@import "../../components/modal/index.wxss";
+@import "../../components/steps/index.wxss";
+@import "../../components/card/index.wxss";
+@import "../../components/timeline/index.wxss";
+@import "../../components/loading/index.wxss";
+@import "../../components/state-box/index.wxss";
+@import "../../components/list-page/index.wxss";
+@import "../../components/list-message/index.wxss";
+@import "../../components/switch/index.wxss";
+@import "../../components/checkbox/index.wxss";
+@import "../../components/radio-group/index.wxss";

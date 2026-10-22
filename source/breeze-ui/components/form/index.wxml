@@ -1,0 +1,3 @@
+<view class="bz-form {{customClass || ''}}" bindtap="onTap">
+  <slot></slot>
+</view>

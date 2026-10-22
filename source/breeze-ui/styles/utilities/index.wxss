@@ -1,0 +1,7 @@
+/* 工具类聚合入口 — 原子类，可在任意节点直接使用 */
+
+@import "./image.wxss";
+@import "./border.wxss";
+@import "./layout.wxss";
+@import "./background.wxss";
+@import "./text.wxss";

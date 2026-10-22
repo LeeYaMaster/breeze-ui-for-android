@@ -1,0 +1,5 @@
+@import "../bz-custom/index.wxss";
+
+.bz-custom.lucency .bz-bar {
+	background: transparent !important;
+}

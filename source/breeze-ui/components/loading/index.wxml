@@ -1,0 +1,14 @@
+<view
+  wx:if="{{modal}}"
+  class="bz-load load-modal {{customClass || ''}}"
+  bindtap="onTap"
+>
+  <slot></slot>
+</view>
+<view
+  wx:else
+  class="bz-load {{icon ? 'load-icon' : ''}} {{status}} {{customClass || ''}}"
+  bindtap="onTap"
+>
+  <slot></slot>
+</view>

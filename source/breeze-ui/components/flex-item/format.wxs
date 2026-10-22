@@ -1,0 +1,12 @@
+var format = {
+  multipleFormat: function (data) {
+    data = +data;
+    if (data === 2) return 'twice';
+    if (data === 3) return 'treble';
+    return 'sub';
+  },
+};
+
+module.exports = {
+  multipleFormat: format.multipleFormat,
+};

@@ -1,0 +1,3 @@
+<view
+  class="bz-tag {{round?'round':''}} {{radius?'radius':''}} {{sm?'sm':''}} {{bgColor?'bg-'+bgColor:''}} {{line?'line-'+line:''}} {{light?'light':''}} {{customClass||''}}" bindtap="onTap">
+  <slot/></view>

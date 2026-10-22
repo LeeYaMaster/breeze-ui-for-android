@@ -1,0 +1,2 @@
+/* bz-upload：共享 form-group */
+@import "../../styles/shared/form-group.wxss";

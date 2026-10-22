@@ -1,0 +1,4 @@
+<view class="bz-avatar-group {{customClass||''}}" bindtap="onTap">
+  <bz-avatar round lg wx:for="{{data}}" src="{{item}}">
+  </bz-avatar>
+</view>

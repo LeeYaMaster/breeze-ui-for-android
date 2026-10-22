@@ -1,0 +1,2 @@
+/* bz-choose：共享 form-group（预留） */
+@import "../../styles/shared/form-group.wxss";

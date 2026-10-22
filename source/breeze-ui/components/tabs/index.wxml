@@ -1,0 +1,36 @@
+<block wx:if="{{scroll && !equal}}">
+  <scroll-view
+    scroll-x
+    scroll-with-animation
+    scroll-left="{{scrollLeft}}"
+    class="{{navClass}} nav {{centered ? 'text-center' : ''}} {{customClass || ''}}"
+  >
+    <view
+      class="bz-item {{index === current ? activeClass + ' cur' : ''}}"
+      wx:for="{{tabs}}"
+      wx:key="name"
+      bindtap="onTabTap"
+      data-index="{{index}}"
+    >{{item.title}}</view>
+  </scroll-view>
+</block>
+<view wx:elif="{{equal}}" class="{{navClass}} nav {{customClass || ''}}">
+  <view class="flex text-center">
+    <view
+      class="bz-item flex-sub {{index === current ? activeClass + ' cur' : ''}}"
+      wx:for="{{tabs}}"
+      wx:key="name"
+      bindtap="onTabTap"
+      data-index="{{index}}"
+    >{{item.title}}</view>
+  </view>
+</view>
+<scroll-view wx:else scroll-x class="{{navClass}} nav {{centered ? 'text-center' : ''}} {{customClass || ''}}">
+  <view
+    class="bz-item {{index === current ? activeClass + ' cur' : ''}}"
+    wx:for="{{tabs}}"
+    wx:key="name"
+    bindtap="onTabTap"
+    data-index="{{index}}"
+  >{{item.title}}</view>
+</scroll-view>

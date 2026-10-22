@@ -1,0 +1,21 @@
+/* bz-avatar-group 组件样式（源文件） */
+
+@import "../avatar/index.wxss";
+
+.bz-avatar-group {
+	direction: rtl;
+	unicode-bidi: bidi-override;
+	padding: 0 10rpx 0 40rpx;
+	display: inline-block;
+}
+
+.bz-avatar-group .bz-avatar {
+	margin-left: -30rpx;
+	border: 4rpx solid var(--ghostWhite);
+	vertical-align: middle;
+}
+
+.bz-avatar-group .bz-avatar.sm {
+	margin-left: -20rpx;
+	border: 1rpx solid var(--ghostWhite);
+}

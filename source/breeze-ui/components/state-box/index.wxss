@@ -1,0 +1,30 @@
+.bz-state-box {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.bz-state-box__panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 360rpx;
+  padding: 48rpx 32rpx;
+  box-sizing: border-box;
+}
+
+.bz-state-box__skeleton {
+  align-items: stretch;
+  justify-content: flex-start;
+}
+
+.bz-state-box__icon {
+  font-size: 96rpx;
+  line-height: 1;
+}
+
+.bz-state-box__empty,
+.bz-state-box__error {
+  background: var(--white);
+  border-radius: 12rpx;
+}

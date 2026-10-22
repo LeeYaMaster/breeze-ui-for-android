@@ -1,0 +1,19 @@
+<view wx:if="{{!hideLabel && block}}" class="{{customClass || ''}}">
+  <radio-group class="block" bindchange="onChange">
+    <view class="bz-form-group {{extraClass}}" wx:for="{{options}}" wx:key="value">
+      <view class="title">{{item.label}}</view>
+      <radio value="{{item.value}}" checked="{{value === item.value}}" class="{{radioClass}}" />
+    </view>
+  </radio-group>
+</view>
+
+<radio-group
+  wx:else
+  class="bz-radio-group {{inline ? 'inline' : 'block'}} {{customClass || ''}}"
+  bindchange="onChange"
+>
+  <label class="bz-radio-group__item" wx:for="{{options}}" wx:key="value">
+    <radio value="{{item.value}}" checked="{{value === item.value}}" class="{{radioClass}}" disabled="{{disabled}}" />
+    <text class="bz-radio-group__label">{{item.label}}</text>
+  </label>
+</radio-group>

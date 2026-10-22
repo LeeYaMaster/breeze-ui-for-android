@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "bz-state-box": "../state-box/index",
+    "bz-loadmore": "../loadmore/index"
+  }
+}

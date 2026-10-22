@@ -1,0 +1,59 @@
+<block wx:if="{{type == 'multi'}}">
+  <view wx:if="{{!hideLabel}}" class="bz-form-group {{extraClass}} {{customClass || ''}}">
+    <view class="title">{{label}}</view>
+    <picker mode="multiSelector" bindchange="multiChange" bindcolumnchange="multiColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+      <view class="picker">{{multiArray[0][multiIndex[0]]}}，{{multiArray[1][multiIndex[1]]}}，{{multiArray[2][multiIndex[2]]}}</view>
+    </picker>
+  </view>
+  <picker wx:else mode="multiSelector" bindchange="multiChange" bindcolumnchange="multiColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+    <view class="picker">{{multiArray[0][multiIndex[0]]}}，{{multiArray[1][multiIndex[1]]}}，{{multiArray[2][multiIndex[2]]}}</view>
+  </picker>
+</block>
+
+<block wx:elif="{{type == 'time'}}">
+  <view wx:if="{{!hideLabel}}" class="bz-form-group {{extraClass}} {{customClass || ''}}">
+    <view class="title">{{label}}</view>
+    <picker mode="time" value="{{time}}" start="{{start}}" end="{{end}}" bindchange="timeChange">
+      <view class="picker">{{time || placeholder}}</view>
+    </picker>
+  </view>
+  <picker wx:else mode="time" value="{{time}}" start="{{start}}" end="{{end}}" bindchange="timeChange">
+    <view class="picker">{{time || placeholder}}</view>
+  </picker>
+</block>
+
+<block wx:elif="{{type == 'date'}}">
+  <view wx:if="{{!hideLabel}}" class="bz-form-group {{extraClass}} {{customClass || ''}}">
+    <view class="title">{{label}}</view>
+    <picker mode="date" value="{{date}}" start="{{start}}" end="{{end}}" bindchange="dateChange">
+      <view class="picker">{{date || placeholder}}</view>
+    </picker>
+  </view>
+  <picker wx:else mode="date" value="{{date}}" start="{{start}}" end="{{end}}" bindchange="dateChange">
+    <view class="picker">{{date || placeholder}}</view>
+  </picker>
+</block>
+
+<block wx:elif="{{type == 'region'}}">
+  <view wx:if="{{!hideLabel}}" class="bz-form-group {{extraClass}} {{customClass || ''}}">
+    <view class="title">{{label}}</view>
+    <picker mode="region" bindchange="regionChange" value="{{region}}" custom-item="{{customItem}}">
+      <view class="picker">{{region[0]}}，{{region[1]}}，{{region[2]}}</view>
+    </picker>
+  </view>
+  <picker wx:else mode="region" bindchange="regionChange" value="{{region}}" custom-item="{{customItem}}">
+    <view class="picker">{{region[0]}}，{{region[1]}}，{{region[2]}}</view>
+  </picker>
+</block>
+
+<block wx:else>
+  <view wx:if="{{!hideLabel}}" class="bz-form-group {{extraClass}} {{customClass || ''}}">
+    <view class="title">{{label}}</view>
+    <picker bindchange="pickerChange" value="{{index}}" range="{{picker}}" id="{{id}}">
+      <view class="picker">{{index != null && picker[index] != null ? picker[index] : placeholder}}</view>
+    </picker>
+  </view>
+  <picker wx:else bindchange="pickerChange" value="{{index}}" range="{{picker}}" id="{{id}}">
+    <view class="picker">{{index != null && picker[index] != null ? picker[index] : placeholder}}</view>
+  </picker>
+</block>

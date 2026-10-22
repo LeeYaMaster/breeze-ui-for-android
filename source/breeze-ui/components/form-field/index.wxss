@@ -1,0 +1,48 @@
+@import "../../styles/shared/form-group.wxss";
+
+.bz-form-field__control {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.bz-form-field__control.is-right {
+  justify-content: flex-end;
+}
+
+.bz-form-group.align-start .bz-form-field__control {
+  align-items: flex-start;
+  width: 100%;
+}
+
+.bz-form-group.align-start .bz-form-field__control textarea {
+  width: 100%;
+}
+
+.bz-form-field__control input,
+.bz-form-field__control textarea {
+  flex: 1;
+  font-size: 30rpx;
+  color: #555;
+  padding-right: 20rpx;
+}
+
+.bz-form-field__required {
+  color: var(--red, #e54d42);
+  margin-left: 6rpx;
+}
+
+.bz-form-field__error {
+  color: var(--red, #e54d42);
+  font-size: 24rpx;
+  line-height: 1.4;
+  padding: 8rpx 30rpx 16rpx;
+  background-color: var(--white, #ffffff);
+}
+
+.bz-form-group.is-error input,
+.bz-form-group.is-error textarea,
+.bz-form-group.is-error .picker {
+  color: var(--red, #e54d42);
+}

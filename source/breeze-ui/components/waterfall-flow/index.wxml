@@ -1,0 +1,12 @@
+<view class="container {{customClass||''}}" bindtap="onTap">
+  <view class="left">
+    <view class="flow">
+      <bz-waterfall-flow-item data="{{leftData}}" />
+    </view>
+  </view>
+  <view class="right">
+    <view class="flow">
+      <bz-waterfall-flow-item data="{{rightData}}" />
+    </view>
+  </view>
+</view>

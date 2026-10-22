@@ -1,0 +1,14 @@
+<button wx:if="{{!block}}"
+  class="bz-btn {{round?'round':''}} {{radius?'radius':''}} {{icon?'icon':''}} {{sm?'sm':''}} {{shadow?'shadow':''}} {{bgColor?'bg-'+bgColor:''}} {{line?'line-'+line:''}} {{lines?'lines-'+lines:''}} {{customClass ||''}}"
+  disabled="{{disabled}}" bindtap="onTap">
+  <text class="bzIcon-loading2 iconfont-spin" wx:if="{{loading}}"></text>
+  <slot />
+</button>
+<view class="padding flex flex-direction" wx:if="{{block}}">
+  <button
+    class="bz-btn {{round?'round':''}} {{radius?'radius':''}} {{icon?'icon':''}} {{sm?'sm':''}} {{shadow?'shadow':''}} {{bgColor?'bg-'+bgColor:''}} {{line?'line-'+line:''}} {{lines?'lines-'+lines:''}} {{customClass ||''}}"
+    disabled="{{disabled}}" bindtap="onTap">
+    <text class="bzIcon-loading2 iconfont-spin" wx:if="{{loading}}"></text>
+    <slot />
+  </button>
+</view>

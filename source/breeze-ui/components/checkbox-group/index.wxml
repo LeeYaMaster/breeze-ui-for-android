@@ -1,0 +1,15 @@
+<view wx:if="{{!hideLabel && block}}" class="{{customClass || ''}}">
+  <checkbox-group bindchange="onChange">
+    <view class="bz-form-group {{extraClass}}" wx:for="{{options}}" wx:key="value">
+      <view class="title">{{item.label}}</view>
+      <checkbox value="{{item.value}}" checked="{{checkedMap[item.value]}}" class="{{checkboxClass}}" disabled="{{disabled}}" />
+    </view>
+  </checkbox-group>
+</view>
+
+<checkbox-group wx:else class="bz-checkbox-group {{customClass || ''}}" bindchange="onChange">
+  <label class="bz-checkbox-group__item" wx:for="{{options}}" wx:key="value">
+    <checkbox value="{{item.value}}" checked="{{checkedMap[item.value]}}" class="{{checkboxClass}}" disabled="{{disabled}}" />
+    <text class="bz-checkbox-group__label">{{item.label}}</text>
+  </label>
+</checkbox-group>

@@ -1,0 +1,17 @@
+/* Breeze UI 样式体系入口
+ *
+ * 分层结构：
+ *   tokens.wxss      — 设计令牌（CSS 变量）
+ *   base.wxss        — 全局重置与默认样式
+ *   utilities/       — 工具类（布局、颜色、文本、边框…）
+ *   components/      — 组件样式（bz-btn、bz-bar、bz-list…）
+ *
+ * 按需引入示例（仅需布局与颜色时）：
+ *   @import "breeze-ui/styles/tokens.wxss";
+ *   @import "breeze-ui/styles/utilities/index.wxss";
+ */
+
+@import "./tokens.wxss";
+@import "./base.wxss";
+@import "./utilities/index.wxss";
+@import "./components/index.wxss";

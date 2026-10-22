@@ -1,0 +1,8 @@
+/*
+  Breeze UI for MP-weixin
+  基于 ColorUI 演进，类名体系为 bz-* / bzIcon
+
+  样式目录：breeze-ui/styles/，详见 breeze-ui/styles/README.md
+*/
+
+@import "./styles/index.wxss";

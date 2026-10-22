@@ -1,0 +1,11 @@
+<scroll-view
+  scroll-y
+  style="height: {{height}};"
+  class="{{customClass || ''}}"
+  refresher-enabled="{{enabled}}"
+  refresher-triggered="{{refreshing}}"
+  bindrefresherrefresh="onRefresh"
+  bindtap="onTap"
+>
+  <slot></slot>
+</scroll-view>

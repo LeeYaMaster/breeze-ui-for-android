@@ -1,0 +1,58 @@
+/* bz-skeleton — 使用独立 class 前缀，避免与全局 .bg / .list 冲突 */
+
+.bz-skeleton__box {
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.bz-skeleton__box::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.bz-skeleton__column > .bz-skeleton__bar {
+  height: 80rpx;
+  margin-bottom: 15rpx;
+  border-radius: 8rpx;
+}
+
+.bz-skeleton__column {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.bz-skeleton__bar {
+  background: linear-gradient(90deg, #f2f2f2 25%, #e6e6e6 37%, #f2f2f2 63%);
+  background-size: 400% 100%;
+}
+
+.bz-skeleton__bar--active {
+  animation: bz-skeleton-loading 1.4s ease infinite;
+}
+
+@keyframes bz-skeleton-loading {
+  0% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0 50%;
+  }
+}
+
+.bz-skeleton__avatar {
+  border-radius: 50%;
+  width: 100rpx;
+  height: 100rpx;
+  float: left;
+  margin-right: 20rpx;
+  background: linear-gradient(90deg, #f2f2f2 25%, #e6e6e6 37%, #f2f2f2 63%);
+  background-size: 400% 100%;
+}
+
+.bz-skeleton__avatar.bz-skeleton__bar--active {
+  animation: bz-skeleton-loading 1.4s ease infinite;
+}
