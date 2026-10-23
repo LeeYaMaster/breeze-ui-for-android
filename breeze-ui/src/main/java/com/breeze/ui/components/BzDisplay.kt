@@ -7,6 +7,7 @@ import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -201,18 +202,48 @@ fun BzProgress(
     progress: Float,
     modifier: Modifier = Modifier,
     color: Color = BreezeTheme.colors.primary,
+    indeterminate: Boolean = false,
+    circular: Boolean = false,
 ) {
+    val trackMod = modifier
+        .then(if (!circular) Modifier.fillMaxWidth().height(6.dp).clip(RoundedCornerShape(3.dp)) else Modifier.size(48.dp))
+    if (indeterminate) {
+        if (circular) {
+            CircularProgressIndicator(
+                modifier = trackMod,
+                color = color,
+                strokeWidth = 4.dp,
+            )
+        } else {
+            LinearProgressIndicator(
+                modifier = trackMod,
+                color = color,
+                trackColor = BreezeTheme.colors.light,
+            )
+        }
+        return
+    }
     val animated by animateFloatAsState(
         targetValue = progress.coerceIn(0f, 1f),
-        animationSpec = tween(BreezeMotion.durationMs(BreezeMotion.DurationNormal), easing = BreezeMotion.EasingDecelerate),
+        animationSpec = BreezeMotion.springSmooth(stiffness = Spring.StiffnessLow),
         label = "progress",
     )
-    LinearProgressIndicator(
-        progress = { animated },
-        modifier = modifier.fillMaxWidth().height(6.dp).clip(RoundedCornerShape(3.dp)),
-        color = color,
-        trackColor = BreezeTheme.colors.light,
-    )
+    if (circular) {
+        CircularProgressIndicator(
+            progress = { animated },
+            modifier = trackMod,
+            color = color,
+            strokeWidth = 4.dp,
+            trackColor = BreezeTheme.colors.light,
+        )
+    } else {
+        LinearProgressIndicator(
+            progress = { animated },
+            modifier = trackMod,
+            color = color,
+            trackColor = BreezeTheme.colors.light,
+        )
+    }
 }
 
 /**
@@ -226,9 +257,12 @@ fun BzLoading(
 ) {
     val wave = rememberInfiniteTransition(label = "loadWave")
     val scale by wave.animateFloat(
-        initialValue = 0.92f,
-        targetValue = if (BreezeMotion.isEnabled()) 1.08f else 1f,
-        animationSpec = infiniteRepeatable(tween(BreezeMotion.DurationEmphasis), RepeatMode.Reverse),
+        initialValue = 0.88f,
+        targetValue = if (BreezeMotion.isEnabled()) 1.1f else 1f,
+        animationSpec = infiniteRepeatable(
+            tween(BreezeMotion.durationMs(BreezeMotion.DurationSlow), easing = BreezeMotion.EasingEmphasized),
+            RepeatMode.Reverse,
+        ),
         label = "loadScale",
     )
     Column(modifier, horizontalAlignment = Alignment.CenterHorizontally) {

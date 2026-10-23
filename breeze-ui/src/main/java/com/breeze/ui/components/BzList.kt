@@ -133,7 +133,7 @@ fun BzTabs(
         val tabWidth = maxWidth / tabs.size.coerceAtLeast(1)
         val indicatorOffset by animateDpAsState(
             targetValue = tabWidth * selectedIndex,
-            animationSpec = tween(BreezeMotion.durationMs(BreezeMotion.DurationNormal), easing = BreezeMotion.EasingStandard),
+            animationSpec = BreezeMotion.springEmphasisDp(),
             label = "tabIndicator",
         )
         Row(Modifier.fillMaxWidth()) {
@@ -184,7 +184,7 @@ fun BzSegment(
         val segmentWidth = (maxWidth - 8.dp) / options.size.coerceAtLeast(1)
         val pillOffset by animateDpAsState(
             targetValue = segmentWidth * selectedIndex,
-            animationSpec = tween(BreezeMotion.durationMs(BreezeMotion.DurationNormal), easing = BreezeMotion.EasingEmphasized),
+            animationSpec = BreezeMotion.springEmphasisDp(),
             label = "segmentPill",
         )
         Box(

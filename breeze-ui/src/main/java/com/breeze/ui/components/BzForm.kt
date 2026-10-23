@@ -2,6 +2,7 @@ package com.breeze.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Arrangement
@@ -136,8 +137,8 @@ fun BzCheckbox(
     label: String? = null,
 ) {
     val scale by animateFloatAsState(
-        targetValue = if (checked) 1.05f else 1f,
-        animationSpec = tween(BreezeMotion.durationMs(BreezeMotion.DurationFast)),
+        targetValue = if (checked && BreezeMotion.isEnabled()) 1.08f else 1f,
+        animationSpec = BreezeMotion.springPress(dampingRatio = Spring.DampingRatioLowBouncy),
         label = "chkScale",
     )
     Row(modifier.bzClickable { onCheckedChange(!checked) }, verticalAlignment = Alignment.CenterVertically) {

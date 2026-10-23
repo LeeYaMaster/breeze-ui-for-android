@@ -16,9 +16,9 @@
 
 ## 动效（Motion）
 
-库内统一使用 **`BreezeMotion`** 令牌（`DurationFast/Normal/Slow`、`EasingStandard/Emphasized` 等）。交互默认走 **`Modifier.bzClickable`**（主题色 Ripple）。系统关闭 Animator 时自动降级。
+库内统一使用 **`BreezeMotion`** 令牌（`DurationFast/Normal/Slow`、`EasingStandard/Emphasized`，以及 `springPress` / `springSmooth` / `springEmphasis` 弹簧规格）。交互默认走 **`Modifier.bzClickable`**（主题色 Ripple）。系统关闭 Animator 时自动降级。
 
-Modal / ActionSheet / Toast、Tabs / Segment 指示器、进度条、骨架屏 shimmer、按钮按压与主 CTA 呼吸等均遵循上述令牌。
+Modal / ActionSheet / Toast、Tabs / Segment 指示器、进度条（含不确定态与圆形）、骨架屏 shimmer、按钮按压回弹与主 CTA 呼吸、`BzBessel` 路径动画等均遵循上述令牌。
 
 ## 工程结构
 

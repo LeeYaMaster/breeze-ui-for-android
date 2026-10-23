@@ -2,6 +2,7 @@ package com.breeze.ui.demo.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -25,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.breeze.ui.theme.BreezeTokens
 import com.breeze.ui.components.BzAvatar
+import com.breeze.ui.components.BzBessel
 import com.breeze.ui.components.BzAvatarGroup
 import com.breeze.ui.components.BzAvatarGroupItem
 import com.breeze.ui.components.BzButton
@@ -144,7 +146,25 @@ fun DemoCategoryScreen(categoryId: String, onBack: () -> Unit) {
 
 @Composable
 private fun NavDemos() {
-    BzButton(text = "主题按钮", onClick = {}, block = true, pulseHint = true)
+    var progress by remember { mutableFloatStateOf(0.35f) }
+    var progressBusy by remember { mutableStateOf(false) }
+    BzButton(text = "主题按钮（按压 / 呼吸）", onClick = {}, block = true, pulseHint = true)
+    BzFlex {
+        BzFlexItem(weight = 1f) {
+            BzButton(text = "+20%", onClick = { progress = (progress + 0.2f).coerceAtMost(1f) }, size = BzButtonSize.Sm)
+        }
+        BzFlexItem(weight = 1f) {
+            BzButton(
+                text = if (progressBusy) "停止加载" else "不确定进度",
+                onClick = { progressBusy = !progressBusy },
+                size = BzButtonSize.Sm,
+            )
+        }
+    }
+    BzProgress(progress = progress, indeterminate = progressBusy)
+    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
+        BzProgress(progress = progress, circular = true, indeterminate = progressBusy)
+    }
     BzFlex(justify = Arrangement.SpaceBetween) {
         BzFlexItem(weight = 1f) { BzButton(text = "小", onClick = {}, size = BzButtonSize.Sm) }
         BzFlexItem(weight = 1f) { BzButton(text = "大", onClick = {}, size = BzButtonSize.Lg) }
@@ -164,7 +184,6 @@ private fun NavDemos() {
     BzTag(text = "标签", colorName = "theme")
     BzTag(text = "成功", colorName = "green", light = true)
     RowAvatars()
-    BzProgress(progress = 0.65f)
     BzLoading()
 }
 
@@ -235,6 +254,17 @@ private fun FormDemos() {
 
 @Composable
 private fun FeedbackDemos() {
+    var likeBurst by remember { mutableIntStateOf(0) }
+    BzBessel(
+        onLikeClick = { BzToast.show("点赞 +1") },
+        onLikeClickDelay = { count ->
+            likeBurst = count
+            BzToast.success("2s 内共点赞 $count 次")
+        },
+    )
+    if (likeBurst > 0) {
+        androidx.compose.material3.Text("最近汇总：$likeBurst 次", color = BreezeTheme.colors.primary)
+    }
     BzSkeleton(height = 20.dp)
     BzSkeleton(height = 20.dp, modifier = Modifier.fillMaxWidth(0.7f))
     BzEmpty(title = "暂无订单", description = "去逛逛吧") {

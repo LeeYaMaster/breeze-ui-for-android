@@ -1,6 +1,6 @@
 # 移植状态 — Breeze UI For Android
 
-Maven：**`com.breeze.ui:breeze-ui:1.2.0`**。JitPack：**`com.github.LeeYaMaster.breeze-ui-for-android:breeze-ui:1.2.0`**。产品名：**Breeze UI For Android**。
+Maven：**`com.breeze.ui:breeze-ui:1.3.0`**。JitPack：**`com.github.LeeYaMaster.breeze-ui-for-android:breeze-ui:1.3.0`**。产品名：**Breeze UI For Android**。
 
 ## 已移植
 
@@ -26,15 +26,20 @@ Maven：**`com.breeze.ui:breeze-ui:1.2.0`**。JitPack：**`com.github.LeeYaMaste
 
 `BzForm`、`BzFormField`、`BzCheckboxGroup`、`BzChoose`、`BzStateBox`、`BzToastTop`、`BzListMessage`（简化聊天行）
 
-### v1.3 列表场景与互动特效
+### v1.3 列表场景、互动特效与动效强化
 
 `BzAdminTable`、`BzListGrid`、`BzListPage`（含 `resolveBzListPageViewState`）、`BzBarrage` / `BzBarrageController`、`BzEmoji`、`BzFullLike`
+
+`BreezeMotion.springPress` / `springSmooth` / `springEmphasis`（弹簧按压、进度、Tabs/Segment）
+
+按钮按压回弹、进度条弹簧补间、`BzProgress` 支持 `indeterminate` / `circular`
+
+`BzBessel`（`bz-bessel` 爱心上浮路径动画；事件 `onLikeClick` / `onLikeClickDelay`）
 
 ## 未移植 / 阻塞
 
 | 组件 | 说明 |
 | ---- | ---- |
-| `bz-bessel` | 贝塞尔路径爱心动画；小程序无独立演示页，Compose 侧可用 `BzFullLike` 覆盖主场景 |
 | 其余业务插件 | 见 `source/docs/组件清单.md`（如独立聊天页插件等），非通用 UI 原子组件 |
 
 ## 说明

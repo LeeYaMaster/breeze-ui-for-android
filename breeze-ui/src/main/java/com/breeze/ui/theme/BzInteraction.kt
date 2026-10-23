@@ -25,7 +25,7 @@ fun Modifier.bzClickable(
     val indication = ripple(
         bounded = bounded,
         radius = radius,
-        color = primary.copy(alpha = 0.28f),
+        color = primary.copy(alpha = 0.36f),
     )
     val interaction = remember { MutableInteractionSource() }
     return clickable(
@@ -44,7 +44,7 @@ fun Modifier.bzClickable(
     interactionSource: MutableInteractionSource,
     onClick: () -> Unit,
 ): Modifier {
-    val indication = ripple(color = BreezeTheme.colors.primary.copy(alpha = 0.28f))
+    val indication = ripple(color = BreezeTheme.colors.primary.copy(alpha = 0.36f))
     return clickable(
         interactionSource = interactionSource,
         indication = indication,

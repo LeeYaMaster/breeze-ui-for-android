@@ -12,6 +12,7 @@
 | `bz-avatar` | `BzAvatar` |
 | `bz-avatar-group` | `BzAvatarGroup` / `BzAvatarGroupItem` |
 | `bz-progress` | `BzProgress` |
+| `bz-bessel` | `BzBessel` |
 | `bz-loading` | `BzLoading` |
 | `bz-title-bar` | `BzTitleBar` |
 | `bz-input` | `BzInput` |

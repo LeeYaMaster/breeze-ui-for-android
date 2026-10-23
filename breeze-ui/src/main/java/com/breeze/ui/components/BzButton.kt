@@ -68,16 +68,16 @@ fun BzButton(
     val pressed by interaction.collectIsPressedAsState()
     val motion = BreezeMotion.isEnabled()
     val pressScale by animateFloatAsState(
-        targetValue = if (motion && pressed) 0.97f else 1f,
-        animationSpec = tween(BreezeMotion.durationMs(BreezeMotion.DurationFast), easing = BreezeMotion.EasingStandard),
+        targetValue = if (motion && pressed) 0.92f else 1f,
+        animationSpec = BreezeMotion.springPress(),
         label = "btnPress",
     )
     val infinite = rememberInfiniteTransition(label = "btnPulse")
     val pulse by infinite.animateFloat(
         initialValue = 1f,
-        targetValue = if (pulseHint && motion && enabled && !loading) 1.03f else 1f,
+        targetValue = if (pulseHint && motion && enabled && !loading && !pressed) 1.045f else 1f,
         animationSpec = infiniteRepeatable(
-            tween(BreezeMotion.DurationEmphasis, easing = BreezeMotion.EasingDecelerate),
+            tween(BreezeMotion.durationMs(BreezeMotion.DurationSlow), easing = BreezeMotion.EasingDecelerate),
             RepeatMode.Reverse,
         ),
         label = "pulse",

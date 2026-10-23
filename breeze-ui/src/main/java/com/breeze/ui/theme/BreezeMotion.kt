@@ -1,14 +1,19 @@
 package com.breeze.ui.theme
 
 import android.provider.Settings
+import androidx.compose.animation.core.AnimationSpec
 import androidx.compose.animation.core.CubicBezierEasing
 import androidx.compose.animation.core.FastOutLinearInEasing
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.snap
+import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.Dp
 
 /**
  * Breeze UI 动效令牌（时长 / 缓动）。
@@ -53,4 +58,39 @@ object BreezeMotion {
 
     @Composable
     fun durationMs(base: Int): Int = if (isEnabled()) base else DurationInstant
+
+    /** 按压反馈：略带回弹的弹簧。 */
+    @Composable
+    fun springPress(dampingRatio: Float = Spring.DampingRatioMediumBouncy): AnimationSpec<Float> =
+        if (isEnabled()) {
+            spring(dampingRatio = dampingRatio, stiffness = Spring.StiffnessMedium)
+        } else {
+            snap()
+        }
+
+    /** 进度、指示条等需要顺滑靠拢目标的弹簧。 */
+    @Composable
+    fun springSmooth(stiffness: Float = Spring.StiffnessMediumLow): AnimationSpec<Float> =
+        if (isEnabled()) {
+            spring(dampingRatio = Spring.DampingRatioNoBouncy, stiffness = stiffness)
+        } else {
+            snap()
+        }
+
+    /** Tabs / Segment 等强调位移动画。 */
+    @Composable
+    fun springEmphasis(): AnimationSpec<Float> =
+        if (isEnabled()) {
+            spring(dampingRatio = Spring.DampingRatioLowBouncy, stiffness = Spring.StiffnessMediumLow)
+        } else {
+            snap()
+        }
+
+    @Composable
+    fun springEmphasisDp(): AnimationSpec<Dp> =
+        if (isEnabled()) {
+            spring(dampingRatio = Spring.DampingRatioLowBouncy, stiffness = Spring.StiffnessMediumLow)
+        } else {
+            snap()
+        }
 }
