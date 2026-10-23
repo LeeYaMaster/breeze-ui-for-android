@@ -22,6 +22,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.breeze.ui.theme.BreezeTokens
 import com.breeze.ui.components.BzAvatar
 import com.breeze.ui.components.BzAvatarGroup
 import com.breeze.ui.components.BzAvatarGroupItem
@@ -90,7 +92,22 @@ import com.breeze.ui.theme.BreezeTheme
 import com.breeze.ui.theme.BreezeThemeVariant
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.Text
 import androidx.compose.ui.graphics.Color
+import com.breeze.ui.components.BzAdminTable
+import com.breeze.ui.components.BzAdminTableAction
+import com.breeze.ui.components.BzAdminTableHeader
+import com.breeze.ui.components.BzAdminTableRow
+import com.breeze.ui.components.BzBarrage
+import com.breeze.ui.components.BzEmoji
+import com.breeze.ui.components.BzFullLike
+import com.breeze.ui.components.BzListGrid
+import com.breeze.ui.components.BzListGridItem
+import com.breeze.ui.components.BzListPage
+import com.breeze.ui.components.BzListPageLoadMore
+import com.breeze.ui.components.rememberBzBarrageController
 import java.time.LocalDate
 
 @Composable
@@ -248,6 +265,46 @@ private fun ListDemos() {
         ),
         current = 1,
     )
+    BzListGrid(
+        data = listOf(
+            BzListGridItem("首页", Icons.Default.Home, badge = 1),
+            BzListGridItem("收藏", Icons.Default.Favorite, colorName = "red", badge = 12),
+            BzListGridItem("设置", Icons.Default.Settings, badge = 120),
+        ),
+        gridBorder = true,
+        onItemClick = { item, _ -> BzToast.show(item.name) },
+    )
+    var pageRefreshing by remember { mutableStateOf(false) }
+    var pageLoadMore by remember { mutableStateOf(BzListPageLoadMore.Loading) }
+    BzListPage(
+        height = 220.dp,
+        refreshing = pageRefreshing,
+        onRefresh = {
+            pageRefreshing = true
+            pageRefreshing = false
+            pageLoadMore = BzListPageLoadMore.Over
+        },
+        loadMore = pageLoadMore,
+        showLoadMore = true,
+        onLoadMore = { pageLoadMore = BzListPageLoadMore.Over },
+    ) {
+        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            repeat(4) { BzCell(title = "列表项 ${it + 1}", showArrow = true) }
+        }
+    }
+    BzAdminTable(
+        header = listOf(BzAdminTableHeader(name = "姓名", time = "时间")),
+        list = listOf(
+            BzAdminTableRow("1", "张三", time = "2026-01-01"),
+            BzAdminTableRow("2", "李四", time = "2026-01-02"),
+        ),
+        showView = true,
+        showUpdate = true,
+        showDelete = true,
+        onAction = { _, action, row ->
+            BzToast.show("${row.name}: $action")
+        },
+    )
 }
 
 @Composable
@@ -339,5 +396,33 @@ private fun ExtendedDemos() {
     )
     BzTooltip(text = "提示说明") {
         BzTag(text = "点我看 Tooltip", onClick = {})
+    }
+    val barrage = rememberBzBarrageController()
+    var barrageSeq by remember { mutableIntStateOf(0) }
+    Box(Modifier.fillMaxWidth().height(160.dp)) {
+        BzBarrage(controller = barrage, modifier = Modifier.fillMaxSize()) {
+            Column(Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
+                BzButton(text = "发送弹幕", onClick = {
+                    barrageSeq += 1
+                    barrage.push(text = "Breeze UI $barrageSeq")
+                })
+            }
+        }
+    }
+    var pickedEmoji by remember { mutableStateOf("—") }
+    Text("已选表情：$pickedEmoji", fontSize = 14.sp)
+    BzEmoji(
+        modifier = Modifier.height(160.dp),
+        onChooseEmoji = { pickedEmoji = it.emoji; BzToast.show(it.emoji) },
+    )
+    Box(Modifier.fillMaxWidth().height(200.dp)) {
+        BzFullLike(
+            modifier = Modifier.fillMaxSize(),
+            onLikeClickDelay = { n -> if (n > 0) BzToast.show("3 秒内点赞 ×$n") },
+        ) {
+            Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                Text("点击任意位置触发全屏点赞", color = BreezeTokens.Grey)
+            }
+        }
     }
 }

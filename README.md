@@ -7,7 +7,8 @@
 - **Cursor 私有 codebase**：https://cursor.com/codebase/levi-li-dev/breeze-ui-for-android
 
 - **产品名**：Breeze UI For Android
-- **Maven**：`com.breeze.ui:breeze-ui`（坐标未改，无需迁移）
+- **Maven 本地发布**：`com.breeze.ui:breeze-ui:1.2.0`
+- **JitPack**：`com.github.LeeYaMaster.breeze-ui-for-android:breeze-ui:1.2.0`（合并后由维护者打 Git tag `1.2.0` 再触发构建）
 - **最低 SDK**：24
 - **UI**：Compose + Breeze 品牌视觉（非 Material 默认紫色）
 
@@ -58,23 +59,68 @@ export GITEE_TOKEN=...
 
 ## 在其他项目中使用
 
-### JitPack
+当前库版本：**1.2.0**（`group` = `com.breeze.ui`，`artifactId` = `breeze-ui`）。
 
-```gradle
-repositories { maven { url 'https://jitpack.io' } }
-dependencies {
-    implementation 'com.github.<你的用户名>.<仓库名>:breeze-ui:1.0.0'
+### JitPack（推荐第三方接入）
+
+1. 在 **settings** 中增加 JitPack 仓库（本仓库为多模块工程，依赖坐标中的模块名为 `breeze-ui`）。
+
+**Kotlin DSL — `settings.gradle.kts`：**
+
+```kotlin
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url = uri("https://jitpack.io") }
+    }
 }
 ```
 
-### Maven Publish（本地）
+**Groovy — `settings.gradle`：**
+
+```gradle
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
+
+2. 在 **app 模块** 添加依赖（发布 tag `1.2.0` 后使用；合并前可用 JitPack 的 commit hash 试构建）：
+
+**Kotlin DSL — `build.gradle.kts`：**
+
+```kotlin
+dependencies {
+    implementation("com.github.LeeYaMaster.breeze-ui-for-android:breeze-ui:1.2.0")
+}
+```
+
+**Groovy — `build.gradle`：**
+
+```gradle
+dependencies {
+    implementation 'com.github.LeeYaMaster.breeze-ui-for-android:breeze-ui:1.2.0'
+}
+```
+
+JitPack 构建配置见根目录 [`jitpack.yml`](./jitpack.yml)（执行 `:breeze-ui:publishReleasePublicationToMavenLocal`）。
+
+### Maven Publish（本地 / 自建仓库）
 
 ```bash
 ./gradlew :breeze-ui:publishReleasePublicationToMavenLocal
 ```
 
-```gradle
-dependencies { implementation 'com.breeze.ui:breeze-ui:1.0.0' }
+```kotlin
+dependencies {
+    implementation("com.breeze.ui:breeze-ui:1.2.0")
+}
 ```
 
 ## 快速接入
@@ -91,3 +137,5 @@ setContent {
 ```
 
 命令式 API（需在 `BzPage` 内）：`BzToast`、`BzModal`、`BzActionSheet`。
+
+列表场景与互动组件（`BzListPage`、`BzAdminTable`、`BzBarrage`、`BzEmoji`、`BzFullLike` 等）见 [PORTING.md](./PORTING.md) v1.3。

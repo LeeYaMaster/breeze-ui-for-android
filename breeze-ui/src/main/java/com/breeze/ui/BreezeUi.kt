@@ -5,5 +5,5 @@ package com.breeze.ui
 
 object BreezeUi {
     const val LIBRARY_NAME: String = "Breeze UI For Android"
-    const val VERSION: String = "1.0.0"
+    const val VERSION: String = "1.2.0"
 }
