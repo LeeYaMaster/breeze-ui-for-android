@@ -2,10 +2,23 @@
 
 将微信小程序 **Breeze UI** 移植为 **Jetpack Compose** Android 组件库，供其他应用通过 Maven / JitPack 依赖。
 
+## 效果预览
+
+无需安装 Android，在浏览器中点击体验按钮、进度条、分段控件与点赞动效等视觉近似演示：
+
+**[打开交互预览 `docs/preview/index.html`](./docs/preview/index.html)** · [预览说明](./docs/preview/README.md)
+
+| 示意 | |
+| ---- | ---- |
+| ![手机布局示意](./docs/preview/assets/preview-phone.svg) | ![按钮样式示意](./docs/preview/assets/preview-buttons.svg) |
+
+> 此页为 Web 静态预览，真实效果以 Jetpack Compose 库与 `:app` 演示为准。
+
 ## 文档
 
 | 文档 | 说明 |
 | ---- | ---- |
+| [**效果预览（浏览器）**](./docs/preview/index.html) | 无需 Android，交互式查看品牌 UI 与动效近似 |
 | [**开发手册**](./docs/DEVELOPER_GUIDE.md) | 接入、主题与动效、命令式 API、本地 Demo、发布与贡献 |
 | [**API 文档**](./docs/API.md) | 公开 `Bz*` / 主题 API 分类索引与示例 |
 | [NAMING.md](./NAMING.md) | 小程序 ↔ Compose 命名对照 |

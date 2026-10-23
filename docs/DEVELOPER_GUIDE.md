@@ -2,6 +2,8 @@
 
 面向 **应用开发者**（JitPack / Maven Local 接入）与 **库贡献者**（扩展组件、对齐小程序移植）。组件命名见 [NAMING.md](../NAMING.md)，移植进度见 [PORTING.md](../PORTING.md)；公开 API 索引见 [API.md](./API.md)。
 
+**浏览器效果预览**（无需 Gradle / 模拟器）：[docs/preview/index.html](./preview/index.html) — 交互式按钮、进度、布局与点赞动效；说明见 [preview/README.md](./preview/README.md)。
+
 ---
 
 ## 1. 产品定位

@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Breeze UI For Android — 效果预览</title>
+  <style>
+    :root {
+      --primary: #5b6cff;
+      --secondary: #7c3aed;
+      --accent: #22d3ee;
+      --light: #eef0ff;
+      --text: #1a1d2e;
+      --text-muted: #5c6378;
+      --border: #e2e6f5;
+      --phone-w: 390px;
+      --radius: 14px;
+      --gradient: linear-gradient(135deg, #5b6cff 0%, #7c3aed 55%, #22d3ee 100%);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB",
+        "Microsoft YaHei", sans-serif;
+      background: #f4f6fc;
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+
+    .page-header {
+      text-align: center;
+      padding: 2rem 1rem 1rem;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .page-header h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .notice {
+      margin-top: 0.75rem;
+      padding: 0.65rem 1rem;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .layout {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 1rem 1rem 3rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* Phone frame */
+    .phone-shell {
+      flex-shrink: 0;
+      width: calc(var(--phone-w) + 24px);
+      padding: 12px;
+      background: #0f111a;
+      border-radius: 36px;
+      box-shadow: 0 24px 60px rgba(91, 108, 255, 0.25), 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    .phone-notch {
+      width: 120px;
+      height: 28px;
+      background: #0f111a;
+      border-radius: 0 0 18px 18px;
+      margin: 0 auto -14px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .phone-screen {
+      width: var(--phone-w);
+      height: 720px;
+      background: #fafbff;
+      border-radius: 28px;
+      overflow: hidden;
+      overflow-y: auto;
+      position: relative;
+      scrollbar-width: thin;
+    }
+
+    .title-bar {
+      background: var(--gradient);
+      color: #fff;
+      padding: 48px 16px 14px;
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      box-shadow: 0 4px 16px rgba(91, 108, 255, 0.2);
+    }
+
+    .screen-body { padding: 12px 14px 80px; }
+
+    .section {
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .caption {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+
+    /* Buttons */
+    .btn-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+
+    .bz-btn {
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 10px 18px;
+      border-radius: 10px;
+      transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s, opacity 0.2s;
+      transform: scale(1);
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .bz-btn:active { transform: scale(0.92); }
+
+    .bz-btn--primary {
+      background: var(--gradient);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(91, 108, 255, 0.35);
+    }
+
+    .bz-btn--primary.pulse {
+      animation: cta-pulse 2.2s ease-in-out infinite;
+    }
+
+    @keyframes cta-pulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 4px 14px rgba(91, 108, 255, 0.35); }
+      50% { transform: scale(1.03); box-shadow: 0 6px 20px rgba(124, 58, 237, 0.45); }
+    }
+
+    .bz-btn--primary.pulse:active { animation: none; transform: scale(0.92); }
+
+    .bz-btn--secondary {
+      background: var(--light);
+      color: var(--primary);
+      border: 1.5px solid rgba(91, 108, 255, 0.35);
+    }
+
+    .bz-btn--ghost {
+      background: transparent;
+      color: var(--primary);
+      border: 1.5px solid transparent;
+    }
+
+    .bz-btn--ghost:hover { background: rgba(238, 240, 255, 0.8); }
+
+    .bz-btn--block { width: 100%; margin-top: 6px; }
+
+    /* Progress */
+    .progress-track {
+      height: 8px;
+      background: #e8ebfa;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 35%;
+      background: var(--gradient);
+      border-radius: 99px;
+      transition: width 0.45s cubic-bezier(0.34, 1.2, 0.64, 1);
+    }
+
+    .progress-indeterminate {
+      height: 8px;
+      background: #e8ebfa;
+      border-radius: 99px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-indeterminate::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      width: 40%;
+      background: linear-gradient(90deg, transparent, var(--primary), var(--secondary), transparent);
+      animation: shimmer 1.4s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-120%); }
+      100% { transform: translateX(320%); }
+    }
+
+    .spinner-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .spinner {
+      width: 28px;
+      height: 28px;
+      border: 3px solid var(--light);
+      border-top-color: var(--primary);
+      border-right-color: var(--secondary);
+      border-radius: 50%;
+      animation: spin 0.85s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Cells / list */
+    .cell {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      background: #fff;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      margin-bottom: 8px;
+    }
+
+    .cell-label { font-size: 15px; font-weight: 500; }
+    .cell-value { font-size: 13px; color: var(--text-muted); }
+
+    /* Tags */
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+
+    .tag {
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-weight: 500;
+    }
+
+    .tag--primary { background: var(--light); color: var(--primary); }
+    .tag--gradient { background: var(--gradient); color: #fff; }
+    .tag--outline { border: 1px solid var(--primary); color: var(--primary); background: #fff; }
+
+    /* Card */
+    .card {
+      background: #fff;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 14px;
+      box-shadow: 0 2px 12px rgba(91, 108, 255, 0.06);
+    }
+
+    .card h3 { font-size: 15px; margin-bottom: 4px; }
+    .card p { font-size: 13px; color: var(--text-muted); }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      background: #e8ebfa;
+      border-radius: 10px;
+      padding: 4px;
+      position: relative;
+    }
+
+    .tab-indicator {
+      position: absolute;
+      top: 4px;
+      bottom: 4px;
+      left: 4px;
+      width: calc(50% - 4px);
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(91, 108, 255, 0.15);
+      transition: transform 0.35s cubic-bezier(0.34, 1.2, 0.64, 1);
+    }
+
+    .tab-btn {
+      flex: 1;
+      border: none;
+      background: transparent;
+      padding: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      position: relative;
+      z-index: 1;
+      transition: color 0.25s;
+    }
+
+    .tab-btn.active { color: var(--primary); }
+
+    /* Switch & checkbox */
+    .form-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+    }
+
+    .switch {
+      width: 48px;
+      height: 28px;
+      background: #d1d5e8;
+      border-radius: 99px;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.25s;
+    }
+
+    .switch.on { background: var(--primary); }
+
+    .switch-knob {
+      width: 22px;
+      height: 22px;
+      background: #fff;
+      border-radius: 50%;
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      transition: transform 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+    }
+
+    .switch.on .switch-knob { transform: translateX(20px); }
+
+    .checkbox {
+      width: 22px;
+      height: 22px;
+      border: 2px solid #c5cbe0;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .checkbox.checked {
+      background: var(--gradient);
+      border-color: transparent;
+    }
+
+    .checkbox.checked::after {
+      content: "✓";
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    /* Bessel / like */
+    .like-area {
+      position: relative;
+      text-align: center;
+      padding: 16px 0 8px;
+    }
+
+    .like-btn {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: none;
+      background: var(--light);
+      font-size: 26px;
+      cursor: pointer;
+      transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .like-btn:active { transform: scale(0.92); }
+
+    .heart-burst {
+      position: absolute;
+      pointer-events: none;
+      font-size: 18px;
+      animation: float-heart 0.9s ease-out forwards;
+      opacity: 0;
+    }
+
+    @keyframes float-heart {
+      0% { opacity: 1; transform: translate(0, 0) scale(0.6); }
+      100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1.1); }
+    }
+
+    /* Side legend */
+    .legend {
+      flex: 1;
+      min-width: 260px;
+      max-width: 400px;
+    }
+
+    .legend h2 { font-size: 1.1rem; margin-bottom: 0.75rem; }
+    .legend ul { list-style: none; font-size: 0.9rem; color: var(--text-muted); }
+    .legend li { padding: 0.35rem 0; border-bottom: 1px solid var(--border); }
+    .legend li strong { color: var(--primary); }
+
+    @media (max-width: 900px) {
+      .legend { max-width: var(--phone-w); }
+    }
+  </style>
+</head>
+<body>
+  <header class="page-header">
+    <h1>Breeze UI For Android</h1>
+    <p class="notice">此页为 Web 视觉预览，真实效果以 Jetpack Compose 库为准。无需安装 Android，可直接在浏览器中点击体验动效。</p>
+  </header>
+
+  <div class="layout">
+    <div class="phone-shell">
+      <div class="phone-notch" aria-hidden="true"></div>
+      <div class="phone-screen" id="phone">
+        <div class="title-bar">Breeze UI For Android</div>
+        <div class="screen-body">
+          <section class="section">
+            <div class="section-title">按钮</div>
+            <div class="btn-row">
+              <button type="button" class="bz-btn bz-btn--primary pulse" data-press>主要</button>
+              <button type="button" class="bz-btn bz-btn--secondary" data-press>次要</button>
+              <button type="button" class="bz-btn bz-btn--ghost" data-press>幽灵</button>
+            </div>
+            <button type="button" class="bz-btn bz-btn--primary bz-btn--block pulse" data-press>主 CTA（呼吸）</button>
+            <p class="caption">对应 Compose：<code>BzButton</code>（primary / line / ghost、按压缩放、pulseHint）</p>
+          </section>
+
+          <section class="section">
+            <div class="section-title">进度</div>
+            <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+            <button type="button" class="bz-btn bz-btn--secondary" style="margin-top:8px;font-size:12px;padding:6px 12px" id="progressAdd">+20%</button>
+            <div class="progress-indeterminate" style="margin-top:10px"></div>
+            <div class="spinner-wrap" style="margin-top:12px">
+              <div class="spinner" aria-hidden="true"></div>
+              <span style="font-size:13px;color:var(--text-muted)">加载中…</span>
+            </div>
+            <p class="caption">对应 Compose：<code>BzProgress</code>（确定 / 不确定 shimmer、圆形指示器）</p>
+          </section>
+
+          <section class="section">
+            <div class="section-title">布局</div>
+            <div class="cell">
+              <span class="cell-label">列表单元格</span>
+              <span class="cell-value">详情 ›</span>
+            </div>
+            <div class="tags" style="margin-bottom:10px">
+              <span class="tag tag--primary">默认</span>
+              <span class="tag tag--gradient">渐变</span>
+              <span class="tag tag--outline">描边</span>
+            </div>
+            <div class="card">
+              <h3>信息卡片</h3>
+              <p>圆角、浅阴影与品牌色点缀，贴近 Breeze 扁平风格。</p>
+            </div>
+            <div class="tabs" id="tabs" style="margin-top:10px">
+              <div class="tab-indicator" id="tabIndicator"></div>
+              <button type="button" class="tab-btn active" data-tab="0">推荐</button>
+              <button type="button" class="tab-btn" data-tab="1">关注</button>
+            </div>
+            <p class="caption">对应 Compose：<code>BzTitleBar</code> / <code>BzCell</code> / <code>BzTag</code> / <code>BzCard</code> / <code>BzSegment</code></p>
+          </section>
+
+          <section class="section">
+            <div class="section-title">表单</div>
+            <div class="form-row">
+              <span>推送通知</span>
+              <div class="switch on" id="switchEl" role="switch" aria-checked="true" tabindex="0">
+                <div class="switch-knob"></div>
+              </div>
+            </div>
+            <div class="form-row">
+              <span>同意协议</span>
+              <div class="checkbox" id="checkEl" role="checkbox" aria-checked="false" tabindex="0"></div>
+            </div>
+            <p class="caption">对应 Compose：<code>BzSwitch</code> / <code>BzCheckbox</code></p>
+          </section>
+
+          <section class="section like-area" id="likeArea">
+            <div class="section-title">点赞 / Bessel</div>
+            <button type="button" class="like-btn" id="likeBtn" aria-label="点赞">♥</button>
+            <p class="caption">对应 Compose：<code>BzBessel</code> / <code>BzFullLike</code> 路径与粒子动效</p>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <aside class="legend">
+      <h2>预览说明</h2>
+      <ul>
+        <li><strong>品牌色</strong> 主 #5b6cff · 辅 #7c3aed · 浅 #eef0ff</li>
+        <li><strong>渐变</strong> 135° #5b6cff → #7c3aed → #22d3ee</li>
+        <li>按钮按压约 <strong>0.92</strong> 缩放（Web 近似 Compose 弹簧）</li>
+        <li>完整组件与 API 见仓库 <code>docs/API.md</code></li>
+        <li>本地 Demo：<code>./gradlew :app:installDebug</code></li>
+      </ul>
+    </aside>
+  </div>
+
+  <script>
+    (function () {
+      document.querySelectorAll("[data-press]").forEach(function (btn) {
+        btn.addEventListener("pointerdown", function () {
+          btn.style.transform = "scale(0.92)";
+        });
+        btn.addEventListener("pointerup", function () {
+          btn.style.transform = "";
+        });
+        btn.addEventListener("pointerleave", function () {
+          btn.style.transform = "";
+        });
+      });
+
+      var progress = 0.35;
+      var fill = document.getElementById("progressFill");
+      document.getElementById("progressAdd").addEventListener("click", function () {
+        progress = Math.min(1, progress + 0.2);
+        fill.style.width = progress * 100 + "%";
+      });
+
+      var tabs = document.getElementById("tabs");
+      var indicator = document.getElementById("tabIndicator");
+      tabs.querySelectorAll(".tab-btn").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var idx = parseInt(btn.getAttribute("data-tab"), 10);
+          tabs.querySelectorAll(".tab-btn").forEach(function (b) {
+            b.classList.toggle("active", b === btn);
+          });
+          indicator.style.transform = "translateX(" + idx * 100 + "%)";
+        });
+      });
+
+      var switchEl = document.getElementById("switchEl");
+      switchEl.addEventListener("click", function () {
+        var on = switchEl.classList.toggle("on");
+        switchEl.setAttribute("aria-checked", on ? "true" : "false");
+      });
+
+      var checkEl = document.getElementById("checkEl");
+      checkEl.addEventListener("click", function () {
+        var checked = checkEl.classList.toggle("checked");
+        checkEl.setAttribute("aria-checked", checked ? "true" : "false");
+      });
+
+      var likeArea = document.getElementById("likeArea");
+      var likeBtn = document.getElementById("likeBtn");
+      var hearts = ["♥", "❤", "💜", "✨"];
+
+      likeBtn.addEventListener("click", function (e) {
+        for (var i = 0; i < 8; i++) {
+          var h = document.createElement("span");
+          h.className = "heart-burst";
+          h.textContent = hearts[i % hearts.length];
+          var angle = (Math.PI * 2 * i) / 8 + Math.random() * 0.5;
+          var dist = 40 + Math.random() * 50;
+          h.style.setProperty("--dx", Math.cos(angle) * dist + "px");
+          h.style.setProperty("--dy", Math.sin(angle) * dist - 30 + "px");
+          h.style.left = "50%";
+          h.style.top = "42%";
+          likeArea.appendChild(h);
+          setTimeout(function (el) {
+            return function () {
+              el.remove();
+            };
+          }(h), 950);
+        }
+        likeBtn.style.background = "linear-gradient(135deg,#5b6cff,#7c3aed)";
+        likeBtn.style.color = "#fff";
+        setTimeout(function () {
+          likeBtn.style.background = "";
+          likeBtn.style.color = "";
+        }, 400);
+      });
+    })();
+  </script>
+</body>
+</html>
