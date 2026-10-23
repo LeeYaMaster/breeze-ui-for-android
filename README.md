@@ -2,13 +2,22 @@
 
 将微信小程序 **Breeze UI** 移植为 **Jetpack Compose** Android 组件库，供其他应用通过 Maven / JitPack 依赖。
 
+## 文档
+
+| 文档 | 说明 |
+| ---- | ---- |
+| [**开发手册**](./docs/DEVELOPER_GUIDE.md) | 接入、主题与动效、命令式 API、本地 Demo、发布与贡献 |
+| [**API 文档**](./docs/API.md) | 公开 `Bz*` / 主题 API 分类索引与示例 |
+| [NAMING.md](./NAMING.md) | 小程序 ↔ Compose 命名对照 |
+| [PORTING.md](./PORTING.md) | 移植进度（含 v1.3 列表与互动组件） |
+
 - **公开仓库（GitHub）**：https://github.com/LeeYaMaster/breeze-ui-for-android
 - **公开仓库（Gitee）**：https://gitee.com/leeyamaster/breeze-ui-for-android
 - **Cursor 私有 codebase**：https://cursor.com/codebase/levi-li-dev/breeze-ui-for-android
 
 - **产品名**：Breeze UI For Android
-- **Maven 本地发布**：`com.breeze.ui:breeze-ui:1.2.0`
-- **JitPack**：`com.github.LeeYaMaster.breeze-ui-for-android:breeze-ui:1.2.0`（合并后由维护者打 Git tag `1.2.0` 再触发构建）
+- **Maven 本地发布**：`com.breeze.ui:breeze-ui:1.3.0`
+- **JitPack**：`com.github.LeeYaMaster.breeze-ui-for-android:breeze-ui:1.3.0`（合并后由维护者打 Git tag `1.3.0` 再触发构建）
 - **最低 SDK**：24
 - **UI**：Compose + Breeze 品牌视觉（非 Material 默认紫色）
 
@@ -27,7 +36,7 @@ Modal / ActionSheet / Toast、Tabs / Segment 指示器、进度条（含不确�
 | `:breeze-ui` | 可发布的 AAR 库 |
 | `:app` | 演示应用「Breeze UI For Android」 |
 
-命名对照见 [NAMING.md](./NAMING.md)，移植进度见 [PORTING.md](./PORTING.md)。
+详细说明见 [开发手册](./docs/DEVELOPER_GUIDE.md)；命名对照见 [NAMING.md](./NAMING.md)，移植进度见 [PORTING.md](./PORTING.md)。
 
 ## 同步到 GitHub
 
@@ -59,7 +68,7 @@ export GITEE_TOKEN=...
 
 ## 在其他项目中使用
 
-当前库版本：**1.2.0**（`group` = `com.breeze.ui`，`artifactId` = `breeze-ui`）。
+当前库版本：**1.3.0**（`group` = `com.breeze.ui`，`artifactId` = `breeze-ui`）。
 
 ### JitPack（推荐第三方接入）
 
@@ -91,13 +100,13 @@ dependencyResolutionManagement {
 }
 ```
 
-2. 在 **app 模块** 添加依赖（发布 tag `1.2.0` 后使用；合并前可用 JitPack 的 commit hash 试构建）：
+2. 在 **app 模块** 添加依赖（发布 tag `1.3.0` 后使用；合并前可用 JitPack 的 commit hash 试构建）：
 
 **Kotlin DSL — `build.gradle.kts`：**
 
 ```kotlin
 dependencies {
-    implementation("com.github.LeeYaMaster.breeze-ui-for-android:breeze-ui:1.2.0")
+    implementation("com.github.LeeYaMaster.breeze-ui-for-android:breeze-ui:1.3.0")
 }
 ```
 
@@ -105,7 +114,7 @@ dependencies {
 
 ```gradle
 dependencies {
-    implementation 'com.github.LeeYaMaster.breeze-ui-for-android:breeze-ui:1.2.0'
+    implementation 'com.github.LeeYaMaster.breeze-ui-for-android:breeze-ui:1.3.0'
 }
 ```
 
@@ -119,7 +128,7 @@ JitPack 构建配置见根目录 [`jitpack.yml`](./jitpack.yml)（执行 `:breez
 
 ```kotlin
 dependencies {
-    implementation("com.breeze.ui:breeze-ui:1.2.0")
+    implementation("com.breeze.ui:breeze-ui:1.3.0")
 }
 ```
 
@@ -138,4 +147,4 @@ setContent {
 
 命令式 API（需在 `BzPage` 内）：`BzToast`、`BzModal`、`BzActionSheet`。
 
-列表场景与互动组件（`BzListPage`、`BzAdminTable`、`BzBarrage`、`BzEmoji`、`BzFullLike` 等）见 [PORTING.md](./PORTING.md) v1.3。
+列表场景与互动组件（`BzListPage`、`BzAdminTable`、`BzBarrage`、`BzEmoji`、`BzBessel`、`BzFullLike` 等）见 [PORTING.md](./PORTING.md) v1.3。
