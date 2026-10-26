@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Breeze UI For Android 组件文档与可交互 Web 演示 — Jetpack Compose 组件库 v1.3.0" />
+  <title>Breeze UI For Android · 组件文档</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-label="打开菜单">☰</button>
+    <a class="site-header__brand" href="#/">
+      <span class="site-header__logo" aria-hidden="true"></span>
+      Breeze UI
+    </a>
+    <nav class="site-header__nav" aria-label="站点链接">
+      <span class="site-header__version" id="headerVersion">v1.3.0</span>
+      <label>
+        <span class="sr-only">主题</span>
+        <select class="theme-select" id="themeSelect" aria-label="主题变体"></select>
+      </label>
+      <a href="https://github.com/LeeYaMaster/breeze-ui-for-android" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://gitee.com/leeyamaster/breeze-ui-for-android" target="_blank" rel="noopener">Gitee</a>
+      <a href="../DEVELOPER_GUIDE.md">开发手册</a>
+      <a href="../API.md">API</a>
+      <a href="https://jitpack.io/#LeeYaMaster/breeze-ui-for-android" target="_blank" rel="noopener">JitPack</a>
+    </nav>
+  </header>
+
+  <div class="site-layout">
+    <aside class="site-sidebar" id="site-sidebar" aria-label="组件导航"></aside>
+    <main class="site-main" id="site-main"></main>
+  </div>
+
+  <script src="app.js"></script>
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+    }
+  </style>
+</body>
+</html>

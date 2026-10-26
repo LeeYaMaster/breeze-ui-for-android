@@ -1,5 +1,7 @@
 # Breeze UI — 浏览器效果预览
 
+> **推荐**：新版分组件文档站见 [`../site/index.html`](../site/index.html)（侧栏导航 + API 表）。
+
 无需安装 Android 或运行 Gradle，即可在浏览器中查看 Breeze UI For Android 的品牌色、按钮按压、进度条、分段控件与点赞动效等**视觉近似**演示。
 
 ## 打开方式

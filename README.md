@@ -4,21 +4,34 @@
 
 ## 效果预览
 
-无需安装 Android，在浏览器中点击体验按钮、进度条、分段控件与点赞动效等视觉近似演示：
+无需安装 Android，在浏览器中浏览 **Ant Design 风格组件文档站**（左侧分类导航、可点击 live demo、API 属性表）：
 
-**[打开交互预览 `docs/preview/index.html`](./docs/preview/index.html)** · [预览说明](./docs/preview/README.md)
+**[打开组件演示 / 文档站 `docs/site/index.html`](./docs/site/index.html)**
+
+本地直接双击 `docs/site/index.html`，或在仓库根目录执行：
+
+```bash
+# 任选一种本地静态服务（非必须，file:// 亦可打开 index.html）
+python3 -m http.server 8080 --directory docs/site
+# 浏览器访问 http://localhost:8080
+```
+
+GitHub Pages 可将站点根目录或 `docs/site` 作为发布路径（Settings → Pages → `/docs` 子路径时入口为 `docs/site/index.html`）。
+
+旧版单页手机预览仍保留：[docs/preview/index.html](./docs/preview/index.html) · [预览说明](./docs/preview/README.md)
 
 | 示意 | |
 | ---- | ---- |
 | ![手机布局示意](./docs/preview/assets/preview-phone.svg) | ![按钮样式示意](./docs/preview/assets/preview-buttons.svg) |
 
-> 此页为 Web 静态预览，真实效果以 Jetpack Compose 库与 `:app` 演示为准。
+> Web 预览为近似效果，真实视觉与动效以 Jetpack Compose 库与 `:app` 演示为准。
 
 ## 文档
 
 | 文档 | 说明 |
 | ---- | ---- |
-| [**效果预览（浏览器）**](./docs/preview/index.html) | 无需 Android，交互式查看品牌 UI 与动效近似 |
+| [**组件演示 / 文档站（浏览器）**](./docs/site/index.html) | Ant Design 风格：分组件 live demo + API 表 |
+| [单页手机预览](./docs/preview/index.html) | 旧版一屏汇总预览 |
 | [**开发手册**](./docs/DEVELOPER_GUIDE.md) | 接入、主题与动效、命令式 API、本地 Demo、发布与贡献 |
 | [**API 文档**](./docs/API.md) | 公开 `Bz*` / 主题 API 分类索引与示例 |
 | [NAMING.md](./NAMING.md) | 小程序 ↔ Compose 命名对照 |
