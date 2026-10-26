@@ -6,17 +6,15 @@
 
 无需安装 Android，在浏览器中浏览 **Ant Design 风格组件文档站**（左侧分类导航、可点击 live demo、API 属性表）：
 
-**[打开组件演示 / 文档站 `docs/site/index.html`](./docs/site/index.html)**
+**在线演示（GitHub Pages）**：[https://leeyamaster.github.io/breeze-ui-for-android/site/](https://leeyamaster.github.io/breeze-ui-for-android/site/)
 
-本地直接双击 `docs/site/index.html`，或在仓库根目录执行：
+本地：直接双击 [`docs/site/index.html`](./docs/site/index.html)，或在仓库根目录执行：
 
 ```bash
 # 任选一种本地静态服务（非必须，file:// 亦可打开 index.html）
 python3 -m http.server 8080 --directory docs/site
 # 浏览器访问 http://localhost:8080
 ```
-
-GitHub Pages 可将站点根目录或 `docs/site` 作为发布路径（Settings → Pages → `/docs` 子路径时入口为 `docs/site/index.html`）。
 
 旧版单页手机预览仍保留：[docs/preview/index.html](./docs/preview/index.html) · [预览说明](./docs/preview/README.md)
 
