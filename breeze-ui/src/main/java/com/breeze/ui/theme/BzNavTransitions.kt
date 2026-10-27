@@ -10,6 +10,7 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.unit.IntOffset
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavDeepLink
@@ -39,24 +40,26 @@ object BzNavTransitions {
 
     private fun pageEnterTransition(durationMs: Int, slideFromEnd: Boolean): EnterTransition {
         if (durationMs <= 0) return EnterTransition.None
-        val spec = tween(durationMs, easing = BreezeMotion.EasingDecelerate)
+        val fadeSpec = tween<Float>(durationMs, easing = BreezeMotion.EasingDecelerate)
+        val slideSpec = tween<IntOffset>(durationMs, easing = BreezeMotion.EasingDecelerate)
         val slide = if (slideFromEnd) {
-            slideInHorizontally(spec) { it }
+            slideInHorizontally(slideSpec) { fullWidth: Int -> fullWidth }
         } else {
-            slideInHorizontally(spec) { -it / 4 }
+            slideInHorizontally(slideSpec) { fullWidth: Int -> -fullWidth / 4 }
         }
-        return fadeIn(spec) + slide
+        return fadeIn(fadeSpec) + slide
     }
 
     private fun pageExitTransition(durationMs: Int, slideToStart: Boolean): ExitTransition {
         if (durationMs <= 0) return ExitTransition.None
-        val spec = tween(durationMs, easing = BreezeMotion.EasingAccelerate)
+        val fadeSpec = tween<Float>(durationMs, easing = BreezeMotion.EasingAccelerate)
+        val slideSpec = tween<IntOffset>(durationMs, easing = BreezeMotion.EasingAccelerate)
         val slide = if (slideToStart) {
-            slideOutHorizontally(spec) { -it / 4 }
+            slideOutHorizontally(slideSpec) { fullWidth: Int -> -fullWidth / 4 }
         } else {
-            slideOutHorizontally(spec) { it }
+            slideOutHorizontally(slideSpec) { fullWidth: Int -> fullWidth }
         }
-        return fadeOut(spec) + slide
+        return fadeOut(fadeSpec) + slide
     }
 }
 
@@ -66,41 +69,45 @@ fun rememberBzPageTransitionDuration(): Int = BreezeMotion.durationMs(BzNavTrans
 
 private fun AnimatedContentTransitionScope<NavBackStackEntry>.bzScopedForwardEnter(durationMs: Int): EnterTransition {
     if (durationMs <= 0) return EnterTransition.None
-    val spec = tween(durationMs, easing = BreezeMotion.EasingDecelerate)
-    return fadeIn(spec) +
+    val fadeSpec = tween<Float>(durationMs, easing = BreezeMotion.EasingDecelerate)
+    val slideSpec = tween<IntOffset>(durationMs, easing = BreezeMotion.EasingDecelerate)
+    return fadeIn(fadeSpec) +
         slideIntoContainer(
             towards = AnimatedContentTransitionScope.SlideDirection.Start,
-            animationSpec = spec,
+            animationSpec = slideSpec,
         )
 }
 
 private fun AnimatedContentTransitionScope<NavBackStackEntry>.bzScopedForwardExit(durationMs: Int): ExitTransition {
     if (durationMs <= 0) return ExitTransition.None
-    val spec = tween(durationMs, easing = BreezeMotion.EasingAccelerate)
-    return fadeOut(spec) +
+    val fadeSpec = tween<Float>(durationMs, easing = BreezeMotion.EasingAccelerate)
+    val slideSpec = tween<IntOffset>(durationMs, easing = BreezeMotion.EasingAccelerate)
+    return fadeOut(fadeSpec) +
         slideOutOfContainer(
             towards = AnimatedContentTransitionScope.SlideDirection.Start,
-            animationSpec = spec,
+            animationSpec = slideSpec,
         )
 }
 
 private fun AnimatedContentTransitionScope<NavBackStackEntry>.bzScopedBackwardEnter(durationMs: Int): EnterTransition {
     if (durationMs <= 0) return EnterTransition.None
-    val spec = tween(durationMs, easing = BreezeMotion.EasingDecelerate)
-    return fadeIn(spec) +
+    val fadeSpec = tween<Float>(durationMs, easing = BreezeMotion.EasingDecelerate)
+    val slideSpec = tween<IntOffset>(durationMs, easing = BreezeMotion.EasingDecelerate)
+    return fadeIn(fadeSpec) +
         slideIntoContainer(
             towards = AnimatedContentTransitionScope.SlideDirection.End,
-            animationSpec = spec,
+            animationSpec = slideSpec,
         )
 }
 
 private fun AnimatedContentTransitionScope<NavBackStackEntry>.bzScopedBackwardExit(durationMs: Int): ExitTransition {
     if (durationMs <= 0) return ExitTransition.None
-    val spec = tween(durationMs, easing = BreezeMotion.EasingAccelerate)
-    return fadeOut(spec) +
+    val fadeSpec = tween<Float>(durationMs, easing = BreezeMotion.EasingAccelerate)
+    val slideSpec = tween<IntOffset>(durationMs, easing = BreezeMotion.EasingAccelerate)
+    return fadeOut(fadeSpec) +
         slideOutOfContainer(
             towards = AnimatedContentTransitionScope.SlideDirection.End,
-            animationSpec = spec,
+            animationSpec = slideSpec,
         )
 }
 
