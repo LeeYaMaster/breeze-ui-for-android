@@ -1729,3 +1729,119 @@ a:hover {
   opacity: 0.7;
   margin-bottom: 2px;
 }
+
+.nav-transition-demo {
+  max-width: 360px;
+}
+
+.nav-transition-demo__viewport {
+  --nav-dur: 280ms;
+  position: relative;
+  height: 140px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: #fff;
+}
+
+.nav-transition-demo__page {
+  position: absolute;
+  inset: 0;
+  padding: 16px;
+  box-sizing: border-box;
+  background: #fff;
+  transition: none;
+}
+
+.nav-transition-demo__page h4 {
+  margin: 0 0 6px;
+  font-size: 16px;
+}
+
+.nav-transition-demo--animating .nav-transition-demo__page {
+  transition:
+    transform var(--nav-dur) cubic-bezier(0, 0, 0.2, 1),
+    opacity var(--nav-dur) ease;
+}
+
+.nav-transition-demo__page--idle-front {
+  transform: translateX(0);
+  opacity: 1;
+  z-index: 2;
+}
+
+.nav-transition-demo__page--idle-back {
+  transform: translateX(100%);
+  opacity: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.nav-transition-demo__page--enter-forward {
+  transform: translateX(100%);
+  opacity: 0;
+  z-index: 2;
+  animation: nav-enter-forward var(--nav-dur) cubic-bezier(0, 0, 0.2, 1) forwards;
+}
+
+.nav-transition-demo__page--exit-forward {
+  transform: translateX(0);
+  opacity: 1;
+  z-index: 1;
+  animation: nav-exit-forward var(--nav-dur) cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
+.nav-transition-demo__page--enter-back {
+  transform: translateX(-25%);
+  opacity: 0;
+  z-index: 1;
+  animation: nav-enter-back var(--nav-dur) cubic-bezier(0, 0, 0.2, 1) forwards;
+}
+
+.nav-transition-demo__page--exit-back {
+  transform: translateX(0);
+  opacity: 1;
+  z-index: 2;
+  animation: nav-exit-back var(--nav-dur) cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
+@keyframes nav-enter-forward {
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes nav-exit-forward {
+  to {
+    transform: translateX(-25%);
+    opacity: 0;
+  }
+}
+
+@keyframes nav-enter-back {
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes nav-exit-back {
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.nav-transition-demo__reduce {
+  display: block;
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.nav-transition-demo__reduce input {
+  margin-right: 6px;
+  vertical-align: middle;
+}

@@ -94,6 +94,7 @@ window.registerBreezeGallery = function (registry, ctx) {
       id: "motion",
       title: "动效",
       items: [
+        { route: "nav-transition", label: "Nav 页面转场" },
         { route: "bessel", label: "Bessel 底部点赞" },
         { route: "full-like", label: "FullLike 全屏点赞" },
       ],
@@ -138,7 +139,7 @@ window.registerBreezeGallery = function (registry, ctx) {
 
   P.button = {
     title: "Button 按钮",
-    lead: "对应小程序 bz-button。按压缩放约 0.92；主 CTA 可开启 pulseHint 呼吸动效。",
+    lead: "对应小程序 bz-button。内部通过 <code>Modifier.bzClickable</code> 提供品牌色涟漪（Ripple）；按压缩放约 0.92；主 CTA 可开启 pulseHint 呼吸动效。",
     render: function () {
       return (
         b() +
@@ -179,6 +180,7 @@ window.registerBreezeGallery = function (registry, ctx) {
           { name: "size", type: "BzButtonSize", default: "Md", desc: "Sm / Md / Lg" },
           { name: "pulseHint", type: "Boolean", default: "false", desc: "主按钮空闲呼吸动效（CTA）" },
           { name: "useTheme", type: "Boolean", default: "true", desc: "使用主题渐变/主色" },
+          { name: "（点击反馈）", type: "Modifier.bzClickable", default: "—", desc: "库内默认点击区域；品牌 Ripple + 按压缩放（与 BzButton 一致）" },
         ])
       );
     },
@@ -1195,6 +1197,44 @@ window.registerBreezeGallery = function (registry, ctx) {
       );
     },
     init: ctx.bindPressButtons,
+  };
+
+  P["nav-transition"] = {
+    title: "Nav 页面转场",
+    lead:
+      "Navigation Compose 默认页面转场：<strong>横向滑入 + 淡入</strong>，基准时长约 <strong>280ms</strong>（<code>BzNavTransitions.DurationPageMs</code>）。系统关闭动画（Animator 时长为 0）时通过 <code>rememberBzPageTransitionDuration()</code> 降为 <strong>0ms</strong>。",
+    render: function () {
+      return (
+        b() +
+        demo(
+          "前进 / 返回",
+          "点击下方按钮模拟 push / pop（Web 近似，真机以 Compose 为准）。",
+          '<div class="nav-transition-demo" id="navTransitionDemo">' +
+            '<div class="nav-transition-demo__viewport" id="navTransitionViewport">' +
+            '<div class="nav-transition-demo__page" data-nav-page="home">' +
+            '<h4>首页</h4><p class="muted">startDestination</p></div>' +
+            '<div class="nav-transition-demo__page nav-transition-demo__page--under" data-nav-page="detail">' +
+            '<h4>详情页</h4><p class="muted">navigate(\"detail\")</p></div>' +
+            "</div>" +
+            '<div class="btn-row" style="margin-top:12px">' +
+            '<button type="button" class="bz-btn bz-btn--secondary bz-btn--sm" id="navDemoBack" data-press disabled>返回</button>' +
+            '<button type="button" class="bz-btn bz-btn--primary bz-btn--sm" id="navDemoForward" data-press>前进</button>' +
+            "</div>" +
+            '<label class="nav-transition-demo__reduce"><input type="checkbox" id="navDemoReduceMotion" /> 模拟关闭系统动画（0ms）</label>' +
+            "</div>",
+          "bzPage(route, rememberBzPageTransitionDuration(), …)"
+        ) +
+        api([
+          { name: "DurationPageMs", type: "Int", default: "280", desc: "页面转场基准时长（ms）" },
+          { name: "forwardEnter / forwardExit", type: "(Int) -> Transition", default: "—", desc: "前进：新页从右侧滑入 + 淡入；旧页向左偏移并淡出" },
+          { name: "backwardEnter / backwardExit", type: "(Int) -> Transition", default: "—", desc: "返回（pop）：与前进对称的反向转场" },
+          { name: "rememberBzPageTransitionDuration", type: "@Composable () -> Int", default: "—", desc: "读取 ANIMATOR_DURATION_SCALE；动画关闭时为 0" },
+          { name: "bzPage", type: "NavGraphBuilder 扩展", default: "—", desc: "封装 composable 的 enter/exit/popEnter/popExit 为 Breeze 默认转场" },
+          { name: "transitionDurationMs", type: "Int", default: "—", desc: "bzPage 必填；建议在 NavHost 外 remember 一次后传入各路由" },
+        ])
+      );
+    },
+    init: ctx.initNavTransition,
   };
 
   P.bessel = {

@@ -256,11 +256,24 @@ BzModal.show("提示", "确认删除？", onConfirm = { delete() })
 | **`BreezeTokens`** | 静态色板 | `namedColor`, `namedLightColor` |
 | **`BreezeMotion`** | 动效时长、缓动与弹簧 | `Duration*`, `Easing*`, `isEnabled()`, `durationMs`, `springPress()`, `springSmooth()`, `springEmphasis()`, `springEmphasisDp()` |
 | **`Modifier.bzClickable`** | 品牌 Ripple 点击 | `enabled`, `onClick`, … |
+| **`BzNavTransitions`** | Navigation Compose 页面转场 | `DurationPageMs`（**280**）；`forwardEnter/Exit`、`backwardEnter/Exit(durationMs)`（滑入 + 淡入，缓动与 `BreezeMotion` 一致） |
+| **`rememberBzPageTransitionDuration()`** | 读取当前页面转场时长 | 基于 `BreezeMotion.durationMs(DurationPageMs)`；系统 **ANIMATOR_DURATION_SCALE** 为 0 时返回 **0**（无动画） |
+| **`NavGraphBuilder.bzPage(...)`** | 带默认转场的 `composable` 路由 | `route`, `transitionDurationMs`（通常由 `rememberBzPageTransitionDuration()` 在 `NavHost` 外算一次传入），`arguments`, `deepLinks`, `content` |
 
 ```kotlin
 BreezeTheme(variant = BreezeThemeVariant.Purple, radius = BreezeRadius.Lg) {
     val primary = BreezeTheme.colors.primary
     Box(Modifier.bzClickable { }) { /* ... */ }
+}
+```
+
+```kotlin
+val navController = rememberNavController()
+val pageDuration = rememberBzPageTransitionDuration()
+
+NavHost(navController, startDestination = "home") {
+    bzPage("home", pageDuration) { HomeScreen(onOpenDetail = { navController.navigate("detail") }) }
+    bzPage("detail", pageDuration) { DetailScreen(onBack = { navController.popBackStack() }) }
 }
 ```
 
