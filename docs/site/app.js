@@ -123,6 +123,10 @@
     initColorPicker: initColorPicker,
     initUpload: initUpload,
     initModal: initModal,
+    initToast: initToast,
+    initToastTop: initToastTop,
+    initActionSheet: initActionSheet,
+    initIcon: initIcon,
     initStateBox: initStateBox,
     initFlexGrid: initFlexGrid,
     initAvatar: initAvatar,
@@ -710,6 +714,132 @@
       btn.addEventListener("click", close);
     });
     if (mask) mask.addEventListener("click", close);
+  }
+
+  var toastTimer = null;
+
+  function initToast() {
+    var layer = document.getElementById("demoToastLayer");
+    var box = document.getElementById("demoToast");
+    if (!layer || !box) return;
+    var iconEl = box.querySelector(".bz-toast__icon");
+    var textEl = box.querySelector(".bz-toast__text");
+
+    function hide() {
+      layer.classList.remove("open");
+      box.classList.remove("open");
+      if (toastTimer) {
+        clearTimeout(toastTimer);
+        toastTimer = null;
+      }
+    }
+
+    function show(message, mode) {
+      if (!textEl || !iconEl) return;
+      textEl.textContent = message;
+      iconEl.hidden = mode === "none";
+      iconEl.classList.remove("bz-toast__icon--loading");
+      if (mode === "success") {
+        iconEl.textContent = "✓";
+        iconEl.hidden = false;
+      } else if (mode === "error") {
+        iconEl.textContent = "!";
+        iconEl.hidden = false;
+      } else if (mode === "loading") {
+        iconEl.textContent = "";
+        iconEl.classList.add("bz-toast__icon--loading");
+        iconEl.hidden = false;
+      }
+      layer.classList.add("open");
+      box.classList.add("open");
+      if (toastTimer) clearTimeout(toastTimer);
+      if (mode !== "loading") {
+        toastTimer = setTimeout(hide, 1500);
+      }
+    }
+
+    function bind(id, message, mode) {
+      var btn = document.getElementById(id);
+      if (!btn) return;
+      btn.addEventListener("click", function () {
+        show(message, mode);
+      });
+    }
+
+    bind("toastPlain", "你好，Breeze", "none");
+    bind("toastSuccess", "保存成功", "success");
+    bind("toastError", "操作失败", "error");
+    bind("toastLoading", "加载中…", "loading");
+    var hideBtn = document.getElementById("toastHide");
+    if (hideBtn) hideBtn.addEventListener("click", hide);
+  }
+
+  var toastTopTimer = null;
+
+  function initToastTop() {
+    var bar = document.getElementById("demoToastTop");
+    var textEl = document.getElementById("demoToastTopText");
+    if (!bar || !textEl) return;
+
+    function hide() {
+      bar.classList.remove("open", "bz-toast-top--error");
+      if (toastTopTimer) {
+        clearTimeout(toastTopTimer);
+        toastTopTimer = null;
+      }
+    }
+
+    function show(message, success) {
+      textEl.textContent = message;
+      bar.classList.toggle("bz-toast-top--error", !success);
+      bar.classList.add("open");
+      if (toastTopTimer) clearTimeout(toastTopTimer);
+      toastTopTimer = setTimeout(hide, 2000);
+    }
+
+    var ok = document.getElementById("toastTopOk");
+    var err = document.getElementById("toastTopErr");
+    var hideBtn = document.getElementById("toastTopHide");
+    if (ok) ok.addEventListener("click", function () {
+      show("网络已恢复", true);
+    });
+    if (err) err.addEventListener("click", function () {
+      show("连接失败，请重试", false);
+    });
+    if (hideBtn) hideBtn.addEventListener("click", hide);
+  }
+
+  function initActionSheet() {
+    var open = document.getElementById("actionSheetOpen");
+    var panel = document.getElementById("actionSheetPanel");
+    var mask = document.getElementById("actionSheetMask");
+    if (!open || !panel) return;
+
+    function close() {
+      panel.classList.remove("open");
+      if (mask) mask.classList.remove("open");
+    }
+
+    function openSheet() {
+      panel.classList.add("open");
+      if (mask) mask.classList.add("open");
+    }
+
+    open.addEventListener("click", openSheet);
+    if (mask) mask.addEventListener("click", close);
+    panel.querySelectorAll("[data-action-sheet-pick]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var label = btn.getAttribute("data-action-sheet-pick");
+        close();
+        alert("已选择：" + label);
+      });
+    });
+    var cancel = panel.querySelector("[data-action-sheet-cancel]");
+    if (cancel) cancel.addEventListener("click", close);
+  }
+
+  function initIcon() {
+    bindPressButtons();
   }
 
   function initStateBox() {

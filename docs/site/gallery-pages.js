@@ -13,7 +13,10 @@ window.registerBreezeGallery = function (registry, ctx) {
     {
       id: "general",
       title: "通用",
-      items: [{ route: "button", label: "Button 按钮" }],
+      items: [
+        { route: "button", label: "Button 按钮" },
+        { route: "icon", label: "Icon 图标" },
+      ],
     },
     {
       id: "layout",
@@ -75,6 +78,9 @@ window.registerBreezeGallery = function (registry, ctx) {
       title: "反馈",
       items: [
         { route: "modal", label: "Modal 对话框" },
+        { route: "toast", label: "Toast 轻提示" },
+        { route: "toast-top", label: "ToastTop 顶部条" },
+        { route: "action-sheet", label: "ActionSheet 操作菜单" },
         { route: "skeleton", label: "Skeleton 骨架" },
         { route: "state-box", label: "StateBox 状态盒" },
         { route: "load-more", label: "LoadMore 加载更多" },
@@ -1053,6 +1059,137 @@ window.registerBreezeGallery = function (registry, ctx) {
       );
     },
     init: ctx.initModal,
+  };
+
+  P.toast = {
+    title: "Toast 轻提示",
+    lead: "命令式 <code>BzToast</code>（<code>com.breeze.ui.imperative</code>）；须在 <code>BzPage</code> 子树内调用，由 Overlay 居中展示。",
+    render: function () {
+      return (
+        b() +
+        demo(
+          "类型",
+          "show / success / error / loading；默认约 1.5s 自动消失，loading 需 hide。",
+          '<div class="btn-row">' +
+            '<button type="button" class="bz-btn bz-btn--secondary bz-btn--sm" id="toastPlain" data-press>普通</button>' +
+            '<button type="button" class="bz-btn bz-btn--primary bz-btn--sm" id="toastSuccess" data-press>成功</button>' +
+            '<button type="button" class="bz-btn bz-btn--secondary bz-btn--sm" id="toastError" data-press>失败</button>' +
+            '<button type="button" class="bz-btn bz-btn--ghost bz-btn--sm" id="toastLoading" data-press>加载</button>' +
+            '<button type="button" class="bz-btn bz-btn--ghost bz-btn--sm" id="toastHide" data-press>hide</button></div>' +
+            '<div class="bz-toast-layer" id="demoToastLayer" aria-live="polite">' +
+            '<div class="bz-toast" id="demoToast"><span class="bz-toast__icon" hidden></span><span class="bz-toast__text"></span></div></div>',
+          "BzToast.show · success · error · loading · hide"
+        ) +
+        api([
+          { name: "show(message, durationMs, icon)", type: "Unit", default: "1500ms", desc: "居中文案；icon 默认 None" },
+          { name: "success(message)", type: "Unit", default: "—", desc: "成功图标 + 文案" },
+          { name: "error(message)", type: "Unit", default: "—", desc: "错误图标 + 文案" },
+          { name: "loading(message)", type: "Unit", default: "60s", desc: "转圈加载，需 hide" },
+          { name: "hide()", type: "Unit", default: "—", desc: "关闭当前 Toast" },
+          { name: "icon", type: "BzToastIcon", default: "None", desc: "None / Success / Error / Loading" },
+        ])
+      );
+    },
+    init: ctx.initToast,
+  };
+
+  P["toast-top"] = {
+    title: "ToastTop 顶部条",
+    lead: "命令式 <code>BzToastTop</code>：自顶栏滑入的全宽提示条，success 为绿色底，否则为红色警示。",
+    render: function () {
+      return (
+        b() +
+        demo(
+          "成功 / 失败",
+          "约 2s 自动消失，可手动 hide。",
+          '<div class="btn-row">' +
+            '<button type="button" class="bz-btn bz-btn--primary bz-btn--sm" id="toastTopOk" data-press>网络已恢复</button>' +
+            '<button type="button" class="bz-btn bz-btn--secondary bz-btn--sm" id="toastTopErr" data-press>连接失败</button>' +
+            '<button type="button" class="bz-btn bz-btn--ghost bz-btn--sm" id="toastTopHide" data-press>hide</button></div>' +
+            '<div class="bz-toast-top" id="demoToastTop" role="status"><span id="demoToastTopText"></span></div>',
+          "BzToastTop.show(message, success = true)"
+        ) +
+        api([
+          { name: "show(message, success, durationMs)", type: "Unit", default: "success=true, 2000ms", desc: "顶部横条提示" },
+          { name: "hide()", type: "Unit", default: "—", desc: "立即关闭" },
+        ])
+      );
+    },
+    init: ctx.initToastTop,
+  };
+
+  P["action-sheet"] = {
+    title: "ActionSheet 操作菜单",
+    lead: "命令式 <code>BzActionSheet</code>：底部弹出操作列表，destructive 项为红色；点击遮罩或取消关闭。",
+    render: function () {
+      return (
+        b() +
+        demo(
+          "带标题菜单",
+          "选择项后关闭并触发回调（Web 演示用 alert 模拟）。",
+          '<button type="button" class="bz-btn bz-btn--primary" id="actionSheetOpen" data-press>打开 ActionSheet</button>' +
+            '<div class="sheet-mask" id="actionSheetMask"></div>' +
+            '<div class="bz-action-sheet" id="actionSheetPanel">' +
+            '<div class="bz-action-sheet__group">' +
+            '<div class="bz-action-sheet__title">更多操作</div>' +
+            '<button type="button" class="bz-action-sheet__item" data-action-sheet-pick="分享">分享</button>' +
+            '<button type="button" class="bz-action-sheet__item bz-action-sheet__item--destructive" data-action-sheet-pick="删除">删除</button>' +
+            "</div>" +
+            '<button type="button" class="bz-action-sheet__cancel" data-action-sheet-cancel>取消</button></div>',
+          "BzActionSheet.show(title, items, cancelText)"
+        ) +
+        api([
+          { name: "show(title, items, cancelText)", type: "Unit", default: "取消", desc: "展示底部菜单" },
+          { name: "hide()", type: "Unit", default: "—", desc: "关闭菜单" },
+          { name: "BzActionSheetItem", type: "data class", default: "—", desc: "label, destructive, onClick" },
+        ])
+      );
+    },
+    init: ctx.initActionSheet,
+  };
+
+  P.icon = {
+    title: "Icon 图标",
+    lead: "BzIcon 封装 Material <code>ImageVector</code>，统一 tint 与 size；Web 演示用符号占位。",
+    render: function () {
+      return (
+        b() +
+        demo(
+          "尺寸",
+          "默认 24.dp，可按场景放大导航或列表图标。",
+          '<div class="bz-icon-row">' +
+            '<span class="bz-icon-demo" style="--bz-icon-size:16px" title="16dp">⌂</span>' +
+            '<span class="bz-icon-demo" style="--bz-icon-size:24px" title="24dp">⌂</span>' +
+            '<span class="bz-icon-demo" style="--bz-icon-size:32px" title="32dp">⌂</span>' +
+            '<span class="bz-icon-demo" style="--bz-icon-size:40px" title="40dp">⌂</span></div>',
+          "BzIcon(imageVector, size = 24.dp)"
+        ) +
+        demo(
+          "着色",
+          "tint 默认 textPrimary，可改为主题色或语义色。",
+          '<div class="bz-icon-row">' +
+            '<span class="bz-icon-demo bz-icon-demo--primary">♥</span>' +
+            '<span class="bz-icon-demo bz-icon-demo--muted">⚙</span>' +
+            '<span class="bz-icon-demo bz-icon-demo--success">✓</span>' +
+            '<span class="bz-icon-demo bz-icon-demo--danger">!</span></div>',
+          "BzIcon(tint = BreezeTheme.colors.primary)"
+        ) +
+        demo(
+          "与文案组合",
+          "常见于 Cell、ListMenu 的 leading 槽位。",
+          '<div class="bz-icon-label"><span class="bz-icon-demo bz-icon-demo--primary">◆</span><span>设置与隐私</span></div>' +
+            '<div class="bz-icon-label"><span class="bz-icon-demo bz-icon-demo--primary">★</span><span>我的收藏</span></div>',
+          "BzCell(leading = { BzIcon(Icons.Default.Settings) })"
+        ) +
+        api([
+          { name: "imageVector", type: "ImageVector", default: "—", desc: "Material 矢量图标" },
+          { name: "tint", type: "Color", default: "textPrimary", desc: "着色" },
+          { name: "size", type: "Dp", default: "24.dp", desc: "宽高" },
+          { name: "contentDescription", type: "String?", default: "null", desc: "无障碍描述" },
+        ])
+      );
+    },
+    init: ctx.initIcon,
   };
 
   P.skeleton = {
