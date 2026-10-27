@@ -2,6 +2,10 @@
 
 Ant Design 风格的组件演示与 API 速查，对应 Jetpack Compose 库 `com.breeze.ui:breeze-ui` **1.3.0**。
 
+- `gallery-pages.js`：侧栏导航与各组件页（演示 + API 表）
+- `app.js`：路由、主题、通用交互初始化
+- `styles.css`：布局与 Web 近似组件样式
+
 ## 打开
 
 - 本地：浏览器打开 [`index.html`](./index.html)（`file://` 即可，无需 npm）。

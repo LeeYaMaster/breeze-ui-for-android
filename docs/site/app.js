@@ -12,45 +12,19 @@
     cyan: { primary: "#1cbbb4", secondary: "#10b981", accent: "#10b981", light: "#d2f1f0", label: "青绿 cyan" },
   };
 
-  var NAV = [
-    { id: "start", title: "开始", items: [{ route: "home", label: "介绍" }, { route: "theme", label: "主题变体" }] },
-    {
-      id: "general",
-      title: "通用",
-      items: [{ route: "button", label: "Button 按钮" }],
+  var NAV = [];
+  var PAGES = {};
+
+  var registry = {
+    setNav: function (n) {
+      NAV = n;
     },
-    {
-      id: "layout",
-      title: "布局",
-      items: [{ route: "title-bar", label: "TitleBar / Page" }],
-    },
-    {
-      id: "display",
-      title: "数据展示",
-      items: [
-        { route: "cell-tag-card", label: "Cell / Tag / Card" },
-        { route: "progress", label: "Progress 进度" },
-      ],
-    },
-    {
-      id: "nav",
-      title: "导航",
-      items: [{ route: "tabs-segment", label: "Tabs / Segment" }],
-    },
-    {
-      id: "form",
-      title: "表单",
-      items: [
-        { route: "switch-checkbox", label: "Switch / Checkbox" },
-        { route: "input", label: "Input 输入框" },
-      ],
-    },
-    {
-      id: "motion",
-      title: "动效",
-      items: [{ route: "bessel", label: "Bessel / FullLike" }],
-    },
-  ];
+    pages: PAGES,
+  };
+
+  function banner() {
+    return '<p class="global-banner">Web 预览为近似效果，真机以 Jetpack Compose 为准。</p>';
+  }
 
   function apiTable(rows) {
     var html =
@@ -84,328 +58,95 @@
     );
   }
 
-  var PAGES = {
-    home: {
-      title: "Breeze UI For Android",
-      render: function () {
+  function homeCardsHtml() {
+    var pairs = [];
+    NAV.forEach(function (group) {
+      group.items.forEach(function (item) {
+        if (item.route !== "home") pairs.push([item.route, item.label]);
+      });
+    });
+    return pairs
+      .map(function (pair) {
         return (
-          '<div class="home-hero"><p class="page-lead" style="margin:0">将微信小程序 <strong>Breeze UI</strong> 移植为 Jetpack Compose 组件库。本站提供可点击的 Web 近似演示与 API 速查；完整说明见 <a href="../API.md">API.md</a>、<a href="../DEVELOPER_GUIDE.md">开发手册</a>。</p></div>' +
-          '<p class="global-banner">Web 预览为近似效果，真机与最终视觉以 Jetpack Compose 为准。</p>' +
-          '<h2 style="font-size:18px;margin-bottom:12px">组件演示</h2><div class="home-grid">' +
-          [
-            ["button", "Button 按钮"],
-            ["progress", "Progress 进度"],
-            ["title-bar", "TitleBar 顶栏"],
-            ["cell-tag-card", "Cell / Tag / Card"],
-            ["tabs-segment", "Tabs / Segment"],
-            ["switch-checkbox", "Switch / Checkbox"],
-            ["input", "Input 输入"],
-            ["bessel", "点赞动效"],
-            ["theme", "主题变体"],
-          ]
-            .map(function (pair) {
-              return (
-                '<a class="home-card" href="#/components/' +
-                pair[0] +
-                '"><strong>' +
-                pair[1] +
-                "</strong><span>交互演示 + API</span></a>"
-              );
-            })
-            .join("") +
-          '</div><p style="margin-top:24px;font-size:13px;color:var(--text-muted)">旧版单页手机预览仍保留：<a href="../preview/index.html">docs/preview/index.html</a></p>'
+          '<a class="home-card" href="#/components/' +
+          pair[0] +
+          '"><strong>' +
+          pair[1] +
+          "</strong><span>交互演示 + API</span></a>"
         );
-      },
-    },
-    theme: {
-      title: "主题变体 Theme",
-      lead: "通过 BzConfigProvider 或 BreezeTheme 切换主题；对应小程序 theme-wrap.theme-*。",
-      render: function () {
-        return (
-          '<p class="global-banner">Web 预览为近似效果，真机以 Jetpack Compose 为准。</p>' +
-          demoBlock(
-            "主题切换",
-            "点击色块切换整站品牌色（模拟 BzConfigProvider(theme = …)）。",
-            '<div class="theme-swatches" id="themeSwatches"></div><div style="margin-top:16px" class="btn-row"><button type="button" class="bz-btn bz-btn--primary pulse" data-press>主色按钮</button><span class="tag tag--primary">标签</span></div>',
-            "BzConfigProvider · BreezeThemeVariant"
-          ) +
-          apiTable([
-            { name: "theme", type: "BreezeThemeVariant?", default: "null", desc: "局部主题变体：Default / Blue / Purple / Orange / Red / Cyan" },
-            { name: "radius", type: "BreezeRadius?", default: "null", desc: "局部圆角令牌" },
-            { name: "fontScale", type: "Float", default: "当前 Local", desc: "字号缩放（LocalBreezeFontScale）" },
-          ])
-        );
-      },
-      init: initThemePage,
-    },
-    button: {
-      title: "Button 按钮",
-      lead: "对应小程序 bz-button。按压缩放约 0.92；主 CTA 可开启 pulseHint 呼吸动效。",
-      render: function () {
-        return (
-          '<p class="global-banner">Web 预览为近似效果，真机以 Jetpack Compose 为准。</p>' +
-          demoBlock(
-            "类型与尺寸",
-            "渐变主按钮、线框次要、幽灵；Sm / Md / Lg。",
-            '<div class="btn-row">' +
-              '<button type="button" class="bz-btn bz-btn--primary bz-btn--sm" data-press>小</button>' +
-              '<button type="button" class="bz-btn bz-btn--primary" data-press>主要</button>' +
-              '<button type="button" class="bz-btn bz-btn--primary bz-btn--lg" data-press>大</button>' +
-              '<button type="button" class="bz-btn bz-btn--secondary" data-press>次要</button>' +
-              '<button type="button" class="bz-btn bz-btn--ghost" data-press>幽灵</button>' +
-              "</div>",
-            "BzButton"
-          ) +
-          demoBlock(
-            "按压与 pulseHint",
-            "pointer 按下缩放；pulseHint 主按钮空闲呼吸。",
-            '<div class="btn-row"><button type="button" class="bz-btn bz-btn--primary pulse" data-press>主按钮（pulseHint）</button></div>' +
-              '<button type="button" class="bz-btn bz-btn--primary bz-btn--block pulse" data-press>块级 CTA</button>',
-            "BzButton(pulseHint = true, block = true)"
-          ) +
-          demoBlock(
-            "加载与禁用",
-            "loading 显示指示器；enabled = false 不可点。",
-            '<div class="btn-row">' +
-              '<button type="button" class="bz-btn bz-btn--primary bz-btn--loading" disabled>加载中</button>' +
-              '<button type="button" class="bz-btn bz-btn--primary" disabled>已禁用</button>' +
-              '<button type="button" class="bz-btn bz-btn--primary bz-btn--round" data-press>圆角 round</button>' +
-              "</div>",
-            "BzButton(loading, enabled, round)"
-          ) +
-          apiTable([
-            { name: "text", type: "String?", default: "null", desc: "按钮文案" },
-            { name: "onClick", type: "() -> Unit", default: "—", desc: "点击回调" },
-            { name: "enabled", type: "Boolean", default: "true", desc: "是否可点击" },
-            { name: "loading", type: "Boolean", default: "false", desc: "加载态（显示进度圈）" },
-            { name: "block", type: "Boolean", default: "false", desc: "是否撑满宽度" },
-            { name: "round", type: "Boolean", default: "false", desc: "胶囊圆角" },
-            { name: "size", type: "BzButtonSize", default: "Md", desc: "Sm / Md / Lg" },
-            { name: "pulseHint", type: "Boolean", default: "false", desc: "主按钮空闲呼吸动效（CTA）" },
-            { name: "useTheme", type: "Boolean", default: "true", desc: "使用主题渐变/主色" },
-          ])
-        );
-      },
-      init: bindPressButtons,
-    },
-    progress: {
-      title: "Progress 进度条",
-      lead: "确定进度使用 springSmooth 补间；indeterminate 为不确定态；circular 为圆形。",
-      render: function () {
-        return (
-          '<p class="global-banner">Web 预览为近似效果，真机以 Jetpack Compose 为准。</p>' +
-          demoBlock(
-            "确定进度",
-            "点击按钮增减进度（0~1）。",
-            '<div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>' +
-              '<div class="btn-row" style="margin-top:10px">' +
-              '<button type="button" class="bz-btn bz-btn--secondary bz-btn--sm" id="progressSub">-20%</button>' +
-              '<button type="button" class="bz-btn bz-btn--secondary bz-btn--sm" id="progressAdd">+20%</button>' +
-              '<span id="progressLabel" style="font-size:13px;color:var(--text-muted)">35%</span></div>',
-            "BzProgress(progress)"
-          ) +
-          demoBlock(
-            "不确定态",
-            "线性 shimmer 与圆形转圈。",
-            '<div class="progress-indeterminate"></div>' +
-              '<div class="spinner-wrap" style="margin-top:14px"><div class="spinner spinner--lg" aria-hidden="true"></div><span style="font-size:13px;color:var(--text-muted)">indeterminate + circular</span></div>',
-            "BzProgress(indeterminate = true) · circular"
-          ) +
-          apiTable([
-            { name: "progress", type: "Float", default: "—", desc: "0f~1f，确定态进度" },
-            { name: "indeterminate", type: "Boolean", default: "false", desc: "不确定加载（忽略 progress）" },
-            { name: "circular", type: "Boolean", default: "false", desc: "圆形指示器" },
-            { name: "color", type: "Color", default: "primary", desc: "进度条颜色" },
-          ])
-        );
-      },
-      init: initProgress,
-    },
-    "title-bar": {
-      title: "TitleBar 与页面壳",
-      lead: "BzPage 挂载 Overlay；BzTitleBar 为顶栏标题与返回。",
-      render: function () {
-        return (
-          '<p class="global-banner">Web 预览为近似效果，真机以 Jetpack Compose 为准。</p>' +
-          demoBlock(
-            "渐变顶栏",
-            "useGradient = true 时使用品牌渐变。",
-            '<div class="title-bar-demo"><button type="button" class="title-bar-demo__back" aria-label="返回">‹</button><span>设置</span><span class="title-bar-demo__actions">完成</span></div>',
-            "BzTitleBar(useGradient = true, showBack, actions)"
-          ) +
-          demoBlock(
-            "页面布局",
-            "BzPage + BzTitleBar + 内容区示意。",
-            '<div class="page-shell-demo">' +
-              '<div class="title-bar-demo"><button type="button" class="title-bar-demo__back">‹</button><span>Breeze UI</span></div>' +
-              '<div class="page-shell-demo__body">页面内容区域（列表、表单等）</div></div>',
-            "BzPage { BzTitleBar(...) { … } }"
-          ) +
-          apiTable([
-            { name: "title", type: "String", default: "—", desc: "标题文字" },
-            { name: "showBack", type: "Boolean", default: "false", desc: "是否显示返回" },
-            { name: "onBack", type: "(() -> Unit)?", default: "null", desc: "返回回调" },
-            { name: "useGradient", type: "Boolean", default: "false", desc: "渐变背景" },
-            { name: "actions", type: "@Composable?", default: "null", desc: "右侧操作区" },
-            { name: "content", type: "@Composable", default: "—", desc: "BzPage 子内容" },
-          ])
-        );
-      },
-      init: bindPressButtons,
-    },
-    "cell-tag-card": {
-      title: "Cell / Tag / Card",
-      lead: "列表单元格、胶囊标签与信息卡片。",
-      render: function () {
-        return (
-          '<p class="global-banner">Web 预览为近似效果，真机以 Jetpack Compose 为准。</p>' +
-          demoBlock(
-            "BzCell",
-            "点击单元格有反馈。",
-            '<div class="cell" data-cell><div><div class="cell-label">账号与安全</div><div class="cell-sub">管理登录方式</div></div><span class="cell-value">›</span></div>' +
-              '<div class="cell" data-cell><div class="cell-label">消息通知</div><span class="cell-value">已开启 ›</span></div>',
-            "BzCell(title, subtitle, value, showArrow, onClick)"
-          ) +
-          demoBlock(
-            "BzTag",
-            "colorName、light 控制配色。",
-            '<div class="tags"><span class="tag tag--primary" data-tag>默认 light</span><span class="tag tag--solid" data-tag>主题实心</span><span class="tag tag--outline" data-tag>描边</span></div>',
-            "BzTag(text, colorName, light, onClick)"
-          ) +
-          demoBlock(
-            "BzCard",
-            "可选 title 与 onClick。",
-            '<div class="card" id="demoCard"><h3>本周概览</h3><p>圆角白底卡片，贴近 Breeze 扁平风格。</p></div>',
-            "BzCard(title, onClick, content)"
-          ) +
-          apiTable([
-            { name: "title", type: "String", default: "—", desc: "Cell / Card 标题" },
-            { name: "subtitle", type: "String?", default: "null", desc: "Cell 副标题" },
-            { name: "value", type: "String?", default: "null", desc: "Cell 右侧文案" },
-            { name: "showArrow", type: "Boolean", default: "false", desc: "Cell 显示 ›" },
-            { name: "colorName", type: "String", default: "\"theme\"", desc: "Tag 颜色名" },
-            { name: "light", type: "Boolean", default: "false", desc: "Tag 浅色底" },
-          ])
-        );
-      },
-      init: initCellTagCard,
-    },
-    "tabs-segment": {
-      title: "Tabs / Segment",
-      lead: "Tabs 底部指示条滑动；Segment 选中块位移动画。",
-      render: function () {
-        return (
-          '<p class="global-banner">Web 预览为近似效果，真机以 Jetpack Compose 为准。</p>' +
-          demoBlock(
-            "BzTabs",
-            "点击切换 Tab，指示条弹簧位移。",
-            '<div class="bz-tabs" id="bzTabs"><div class="bz-tabs__indicator" id="tabsIndicator"></div>' +
-              '<button type="button" class="bz-tabs__item active" data-tab="0">首页</button>' +
-              '<button type="button" class="bz-tabs__item" data-tab="1">发现</button>' +
-              '<button type="button" class="bz-tabs__item" data-tab="2">我的</button></div>' +
-              '<p id="tabsPanel" style="margin-top:12px;font-size:13px;color:var(--text-muted)">当前：首页</p>',
-            "BzTabs(tabs, selectedIndex, onSelected)"
-          ) +
-          demoBlock(
-            "BzSegment",
-            "分段选择器。",
-            '<div class="bz-segment" id="bzSegment"><div class="bz-segment__pill" id="segmentPill"></div>' +
-              '<button type="button" class="bz-segment__btn active" data-seg="0">日</button>' +
-              '<button type="button" class="bz-segment__btn" data-seg="1">周</button>' +
-              '<button type="button" class="bz-segment__btn" data-seg="2">月</button></div>',
-            "BzSegment(options, selectedIndex, onSelected)"
-          ) +
-          apiTable([
-            { name: "tabs / options", type: "List<String>", default: "—", desc: "标签文案列表" },
-            { name: "selectedIndex", type: "Int", default: "—", desc: "当前选中下标" },
-            { name: "onSelected", type: "(Int) -> Unit", default: "—", desc: "选中变化回调" },
-          ])
-        );
-      },
-      init: initTabsSegment,
-    },
-    "switch-checkbox": {
-      title: "Switch / Checkbox",
-      lead: "表单开关与复选框，主题色轨道与勾选动画。",
-      render: function () {
-        return (
-          '<p class="global-banner">Web 预览为近似效果，真机以 Jetpack Compose 为准。</p>' +
-          demoBlock(
-            "BzSwitch",
-            "点击切换；可禁用。",
-            '<div class="form-row"><span>推送通知</span><div class="bz-switch on" id="demoSwitch" role="switch" tabindex="0"><div class="bz-switch__knob"></div></div></div>' +
-              '<div class="form-row"><span>只读项</span><div class="bz-switch disabled" role="switch" aria-disabled="true"><div class="bz-switch__knob"></div></div></div>',
-            "BzSwitch(checked, onCheckedChange, enabled)"
-          ) +
-          demoBlock(
-            "BzCheckbox",
-            "勾选带轻微缩放。",
-            '<div class="form-row"><span>同意用户协议</span><div class="bz-checkbox" id="demoCheckbox" role="checkbox" tabindex="0"></div></div>',
-            "BzCheckbox(checked, onCheckedChange, label)"
-          ) +
-          apiTable([
-            { name: "checked", type: "Boolean", default: "—", desc: "是否选中" },
-            { name: "onCheckedChange", type: "(Boolean) -> Unit", default: "—", desc: "状态变化" },
-            { name: "enabled", type: "Boolean", default: "true", desc: "Switch 是否可用" },
-            { name: "label", type: "String?", default: "null", desc: "Checkbox 旁文案" },
-          ])
-        );
-      },
-      init: initSwitchCheckbox,
-    },
-    input: {
-      title: "Input 输入框",
-      lead: "单行输入 BzInput，圆角描边与主题色光标。",
-      render: function () {
-        return (
-          '<p class="global-banner">Web 预览为近似效果，真机以 Jetpack Compose 为准。</p>' +
-          demoBlock(
-            "基础输入",
-            "受控 value 与 placeholder。",
-            '<input class="bz-input" id="demoInput" type="text" placeholder="请输入昵称" autocomplete="off" />' +
-              '<p style="margin-top:8px;font-size:12px;color:var(--text-muted)">当前值：<span id="inputMirror">（空）</span></p>' +
-              '<input class="bz-input" style="margin-top:10px" type="text" placeholder="禁用态" disabled />',
-            "BzInput(value, onValueChange, placeholder, enabled)"
-          ) +
-          apiTable([
-            { name: "value", type: "String", default: "—", desc: "当前文本" },
-            { name: "onValueChange", type: "(String) -> Unit", default: "—", desc: "内容变化" },
-            { name: "placeholder", type: "String", default: "\"\"", desc: "占位提示" },
-            { name: "enabled", type: "Boolean", default: "true", desc: "是否可编辑" },
-          ])
-        );
-      },
-      init: initInput,
-    },
-    bessel: {
-      title: "Bessel / FullLike",
-      lead: "直播底部点赞 BzBessel（2s 汇总）；全屏双击区 BzFullLike（3s 汇总，120ms 节流）。",
-      render: function () {
-        return (
-          '<p class="global-banner">Web 预览为近似效果，真机以 Jetpack Compose 为准。</p>' +
-          demoBlock(
-            "BzBessel",
-            "底部爱心按钮，点击喷射粒子。",
-            '<div class="like-area" id="besselArea"><button type="button" class="like-btn" id="besselBtn" aria-label="点赞">♥</button><p style="font-size:12px;color:var(--text-muted);margin-top:8px">汇总计数：<span id="besselCount">0</span></p></div>',
-            "BzBessel(onLikeClick, onLikeClickDelay)"
-          ) +
-          demoBlock(
-            "BzFullLike",
-            "在区域内任意位置点击生成气泡。",
-            '<div class="full-like-zone" id="fullLikeZone">点击此区域任意位置点赞<div id="fullLikeCount" style="position:absolute;bottom:8px;right:10px;font-size:11px">0 次</div></div>',
-            "BzFullLike(onLikeClick, onLikeClickDelay, content)"
-          ) +
-          apiTable([
-            { name: "onLikeClick", type: "() -> Unit", default: "{}", desc: "每次有效点击" },
-            { name: "onLikeClickDelay", type: "(Int) -> Unit", default: "{}", desc: "Bessel 2s / FullLike 3s 防抖汇总次数" },
-            { name: "icon", type: "ImageVector", default: "Favorite", desc: "BzBessel 底部图标" },
-            { name: "content", type: "@Composable", default: "{}", desc: "FullLike 下层内容" },
-          ])
-        );
-      },
-      init: initBessel,
+      })
+      .join("");
+  }
+
+  PAGES.home = {
+    title: "Breeze UI For Android",
+    render: function () {
+      return (
+        '<div class="home-hero"><p class="page-lead" style="margin:0">将微信小程序 <strong>Breeze UI</strong> 移植为 Jetpack Compose 组件库。本站提供可点击的 Web 近似演示与 API 速查；完整说明见 <a href="../API.md">API.md</a>、<a href="../DEVELOPER_GUIDE.md">开发手册</a>。</p></div>' +
+        banner() +
+        '<h2 style="font-size:18px;margin-bottom:12px">组件演示（' +
+        (NAV.reduce(function (n, g) {
+          return n + g.items.filter(function (i) {
+            return i.route !== "home";
+          }).length;
+        }, 0) || "—") +
+        ' 个路由）</h2><div class="home-grid">' +
+        homeCardsHtml() +
+        '</div><p style="margin-top:24px;font-size:13px;color:var(--text-muted)">旧版单页手机预览仍保留：<a href="../preview/index.html">docs/preview/index.html</a></p>'
+      );
     },
   };
+
+  var siteCtx = {
+    VERSION: VERSION,
+    banner: banner,
+    apiTable: apiTable,
+    demoBlock: demoBlock,
+    bindPressButtons: bindPressButtons,
+    spawnHearts: spawnHearts,
+    initThemePage: initThemePage,
+    initProgress: initProgress,
+    initCellTagCard: initCellTagCard,
+    initTabsSegment: initTabsSegment,
+    initSwitchCheckbox: initSwitchCheckbox,
+    initInput: initInput,
+    initBessel: initBessel,
+    initForm: initForm,
+    initTextarea: initTextarea,
+    initRadio: initRadio,
+    initRate: initRate,
+    initSlider: initSlider,
+    initDoubleSlider: initDoubleSlider,
+    initChoose: initChoose,
+    initPicker: initPicker,
+    initCalendar: initCalendar,
+    initColorPicker: initColorPicker,
+    initUpload: initUpload,
+    initModal: initModal,
+    initStateBox: initStateBox,
+    initFlexGrid: initFlexGrid,
+    initAvatar: initAvatar,
+    initSteps: initSteps,
+    initTimeline: initTimeline,
+    initEmpty: initEmpty,
+    initLoadMore: initLoadMore,
+    initBarrage: initBarrage,
+    initEmoji: initEmoji,
+    initAdminTable: initAdminTable,
+    initListMessage: initListMessage,
+    initWaterfall: initWaterfall,
+    initPullRefresh: initPullRefresh,
+    initCheckboxGroup: initCheckboxGroup,
+    initSwitchOnly: initSwitchOnly,
+    initCheckboxOnly: initCheckboxOnly,
+    initTabsOnly: initTabsOnly,
+    initSegmentOnly: initSegmentOnly,
+    initFullLike: initFullLike,
+  };
+
+  if (typeof window.registerBreezeGallery === "function") {
+    window.registerBreezeGallery(registry, siteCtx);
+  }
 
   var mainEl = document.getElementById("site-main");
   var sidebarEl = document.getElementById("site-sidebar");
@@ -585,12 +326,18 @@
     var card = document.getElementById("demoCard");
     if (card) {
       card.addEventListener("click", function () {
-        card.querySelector("p").textContent = "已点击 — onClick 回调触发";
+        var p = card.querySelector("p");
+        if (p) p.textContent = "已点击 — onClick 回调触发";
       });
     }
   }
 
   function initTabsSegment() {
+    initTabsOnly();
+    initSegmentOnly();
+  }
+
+  function initTabsOnly() {
     var tabs = document.getElementById("bzTabs");
     var indicator = document.getElementById("tabsIndicator");
     var panel = document.getElementById("tabsPanel");
@@ -607,6 +354,9 @@
         });
       });
     }
+  }
+
+  function initSegmentOnly() {
     var seg = document.getElementById("bzSegment");
     var pill = document.getElementById("segmentPill");
     if (seg && pill) {
@@ -623,28 +373,435 @@
   }
 
   function initSwitchCheckbox() {
-    var sw = document.getElementById("demoSwitch");
-    if (sw) {
+    initSwitchOnly();
+    initCheckboxOnly();
+  }
+
+  function initSwitchOnly() {
+    document.querySelectorAll("[data-bz-switch]").forEach(function (sw) {
+      if (sw.dataset.bound) return;
+      sw.dataset.bound = "1";
       sw.addEventListener("click", function () {
+        if (sw.classList.contains("disabled")) return;
         var on = sw.classList.toggle("on");
         sw.setAttribute("aria-checked", on ? "true" : "false");
       });
-    }
-    var chk = document.getElementById("demoCheckbox");
-    if (chk) {
+    });
+  }
+
+  function initCheckboxOnly() {
+    document.querySelectorAll("[data-bz-checkbox]").forEach(function (chk) {
+      if (chk.dataset.bound) return;
+      chk.dataset.bound = "1";
       chk.addEventListener("click", function () {
         var checked = chk.classList.toggle("checked");
         chk.setAttribute("aria-checked", checked ? "true" : "false");
       });
+    });
+  }
+
+  function initCheckboxGroup() {
+    var out = document.getElementById("checkboxGroupOut");
+    function sync() {
+      if (!out) return;
+      var vals = [];
+      document.querySelectorAll("[data-cb-opt]").forEach(function (el) {
+        if (el.classList.contains("checked")) vals.push(el.getAttribute("data-cb-opt"));
+      });
+      out.textContent = vals.length ? vals.join("、") : "（未选）";
     }
+    document.querySelectorAll("[data-cb-opt]").forEach(function (chk) {
+      if (chk.dataset.cbBound) return;
+      chk.dataset.cbBound = "1";
+      chk.addEventListener("click", function () {
+        chk.classList.toggle("checked");
+        sync();
+      });
+    });
+    sync();
   }
 
   function initInput() {
-    var input = document.getElementById("demoInput");
-    var mirror = document.getElementById("inputMirror");
-    if (!input || !mirror) return;
-    input.addEventListener("input", function () {
-      mirror.textContent = input.value || "（空）";
+    document.querySelectorAll("[data-input-mirror]").forEach(function (input) {
+      var mirrorId = input.getAttribute("data-input-mirror");
+      var mirror = document.getElementById(mirrorId);
+      if (!mirror) return;
+      input.addEventListener("input", function () {
+        mirror.textContent = input.value || "（空）";
+      });
+    });
+  }
+
+  function initForm() {
+    initInput();
+    initSwitchOnly();
+    var submit = document.getElementById("formSubmit");
+    var err = document.getElementById("formNameErr");
+    var nameInput = document.getElementById("formName");
+    if (submit && nameInput) {
+      submit.addEventListener("click", function () {
+        var ok = nameInput.value.trim().length > 0;
+        if (err) err.style.display = ok ? "none" : "block";
+        if (ok) alert("校验通过 — 模拟 onSubmit");
+      });
+    }
+  }
+
+  function initTextarea() {
+    var ta = document.getElementById("demoTextarea");
+    var mirror = document.getElementById("textareaMirror");
+    if (ta && mirror) {
+      ta.addEventListener("input", function () {
+        mirror.textContent = ta.value.length ? ta.value.length + " 字" : "（空）";
+      });
+    }
+  }
+
+  function initRadio() {
+    var out = document.getElementById("radioOut");
+    document.querySelectorAll("[data-radio]").forEach(function (row) {
+      row.addEventListener("click", function () {
+        var val = row.getAttribute("data-radio");
+        document.querySelectorAll("[data-radio]").forEach(function (r) {
+          r.classList.toggle("active", r === row);
+        });
+        if (out) out.textContent = val;
+      });
+    });
+  }
+
+  function initRate() {
+    var stars = document.querySelectorAll("[data-rate-star]");
+    var out = document.getElementById("rateOut");
+    stars.forEach(function (star) {
+      star.addEventListener("click", function () {
+        var v = parseInt(star.getAttribute("data-rate-star"), 10);
+        stars.forEach(function (s, i) {
+          s.classList.toggle("filled", i < v);
+        });
+        if (out) out.textContent = String(v);
+      });
+    });
+  }
+
+  function initSlider() {
+    var slider = document.getElementById("demoSlider");
+    var label = document.getElementById("sliderOut");
+    if (!slider) return;
+    function sync() {
+      if (label) label.textContent = slider.value;
+    }
+    slider.addEventListener("input", sync);
+    sync();
+  }
+
+  function initDoubleSlider() {
+    var min = document.getElementById("rangeMin");
+    var max = document.getElementById("rangeMax");
+    var out = document.getElementById("doubleSliderOut");
+    if (!min || !max) return;
+    function sync() {
+      var a = Math.min(parseFloat(min.value), parseFloat(max.value));
+      var b = Math.max(parseFloat(min.value), parseFloat(max.value));
+      if (out) out.textContent = a + " ~ " + b;
+    }
+    min.addEventListener("input", sync);
+    max.addEventListener("input", sync);
+    sync();
+  }
+
+  function initChoose() {
+    var multi = document.getElementById("chooseMulti");
+    var out = document.getElementById("chooseOut");
+    if (!multi) return;
+    var multiMode = true;
+    var single = document.getElementById("chooseSingleToggle");
+    if (single) {
+      single.addEventListener("click", function () {
+        multiMode = !multiMode;
+        single.textContent = multiMode ? "当前：多选" : "当前：单选";
+        multi.querySelectorAll(".bz-choose-tag").forEach(function (t) {
+          t.classList.remove("active");
+        });
+        if (out) out.textContent = "（未选）";
+      });
+    }
+    multi.querySelectorAll(".bz-choose-tag").forEach(function (tag) {
+      tag.addEventListener("click", function () {
+        var val = tag.getAttribute("data-val");
+        if (multiMode) {
+          tag.classList.toggle("active");
+        } else {
+          multi.querySelectorAll(".bz-choose-tag").forEach(function (t) {
+            t.classList.toggle("active", t === tag);
+          });
+        }
+        var selected = [];
+        multi.querySelectorAll(".bz-choose-tag.active").forEach(function (t) {
+          selected.push(t.getAttribute("data-val"));
+        });
+        if (out) out.textContent = selected.length ? selected.join("、") : "（未选）";
+      });
+    });
+  }
+
+  function initPicker() {
+    var open = document.getElementById("pickerOpen");
+    var sheet = document.getElementById("pickerSheet");
+    var mask = document.getElementById("pickerMask");
+    var label = document.getElementById("pickerValue");
+    var options = ["北京", "上海", "广州", "深圳"];
+    if (!open || !sheet) return;
+    function close() {
+      sheet.classList.remove("open");
+      if (mask) mask.classList.remove("open");
+    }
+    open.addEventListener("click", function () {
+      sheet.classList.add("open");
+      if (mask) mask.classList.add("open");
+    });
+    if (mask) mask.addEventListener("click", close);
+    sheet.querySelectorAll("[data-picker-opt]").forEach(function (row, idx) {
+      row.addEventListener("click", function () {
+        sheet.querySelectorAll("[data-picker-opt]").forEach(function (r) {
+          r.classList.toggle("selected", r === row);
+        });
+        if (label) label.textContent = options[idx];
+        close();
+      });
+    });
+  }
+
+  function initCalendar() {
+    var grid = document.getElementById("calGrid");
+    var title = document.getElementById("calTitle");
+    var out = document.getElementById("calOut");
+    if (!grid || !title) return;
+    var view = new Date();
+    view.setDate(1);
+    function renderCal() {
+      var y = view.getFullYear();
+      var m = view.getMonth();
+      title.textContent = y + "年" + (m + 1) + "月";
+      var first = new Date(y, m, 1);
+      var offset = first.getDay();
+      var days = new Date(y, m + 1, 0).getDate();
+      var html = "";
+      for (var i = 0; i < offset; i++) html += '<span class="cal-cell cal-cell--empty"></span>';
+      for (var d = 1; d <= days; d++) {
+        html += '<button type="button" class="cal-cell" data-day="' + d + '">' + d + "</button>";
+      }
+      grid.innerHTML = html;
+      grid.querySelectorAll(".cal-cell[data-day]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var day = btn.getAttribute("data-day");
+          grid.querySelectorAll(".cal-cell").forEach(function (c) {
+            c.classList.remove("selected");
+          });
+          btn.classList.add("selected");
+          if (out) out.textContent = y + "-" + String(m + 1).padStart(2, "0") + "-" + String(day).padStart(2, "0");
+        });
+      });
+    }
+    var prev = document.getElementById("calPrev");
+    var next = document.getElementById("calNext");
+    if (prev)
+      prev.addEventListener("click", function () {
+        view.setMonth(view.getMonth() - 1);
+        renderCal();
+      });
+    if (next)
+      next.addEventListener("click", function () {
+        view.setMonth(view.getMonth() + 1);
+        renderCal();
+      });
+    renderCal();
+  }
+
+  function initColorPicker() {
+    document.querySelectorAll("[data-color-swatch]").forEach(function (sw) {
+      sw.addEventListener("click", function () {
+        document.querySelectorAll("[data-color-swatch]").forEach(function (s) {
+          s.classList.toggle("selected", s === sw);
+        });
+        var preview = document.getElementById("colorPreview");
+        if (preview) preview.style.background = sw.style.background;
+      });
+    });
+  }
+
+  function initUpload() {
+    var add = document.getElementById("uploadAdd");
+    var grid = document.getElementById("uploadGrid");
+    var countEl = document.getElementById("uploadCount");
+    if (!add || !grid) return;
+    var count = 0;
+    var max = 3;
+    add.addEventListener("click", function () {
+      if (count >= max) return;
+      count += 1;
+      var slot = document.createElement("div");
+      slot.className = "upload-slot upload-slot--filled";
+      slot.textContent = "图" + count;
+      grid.insertBefore(slot, add);
+      if (countEl) countEl.textContent = count + " / " + max;
+      if (count >= max) add.style.display = "none";
+    });
+  }
+
+  function initModal() {
+    var open = document.getElementById("modalOpen");
+    var dlg = document.getElementById("demoModal");
+    var mask = document.getElementById("demoModalMask");
+    function close() {
+      if (dlg) dlg.classList.remove("open");
+      if (mask) mask.classList.remove("open");
+    }
+    if (open && dlg) {
+      open.addEventListener("click", function () {
+        dlg.classList.add("open");
+        if (mask) mask.classList.add("open");
+      });
+    }
+    document.querySelectorAll("[data-modal-close]").forEach(function (btn) {
+      btn.addEventListener("click", close);
+    });
+    if (mask) mask.addEventListener("click", close);
+  }
+
+  function initStateBox() {
+    var sel = document.getElementById("stateBoxSelect");
+    var panel = document.getElementById("stateBoxPanel");
+    if (!sel || !panel) return;
+    var map = {
+      Content: '<div class="state-box-content">内容区：列表或表单</div>',
+      Loading: '<div class="spinner-wrap"><div class="spinner"></div><span>加载中…</span></div>',
+      Skeleton:
+        '<div class="skeleton-stack"><div class="bz-skeleton"></div><div class="bz-skeleton"></div><div class="bz-skeleton bz-skeleton--short"></div></div>',
+      Error: '<div class="bz-empty"><span class="bz-empty__icon">📭</span><p>加载失败</p><button type="button" class="bz-btn bz-btn--primary bz-btn--sm" data-press>重试</button></div>',
+      Empty: '<div class="bz-empty"><span class="bz-empty__icon">📭</span><p>暂无数据</p></div>',
+    };
+    sel.addEventListener("change", function () {
+      panel.innerHTML = map[sel.value] || map.Content;
+      bindPressButtons();
+    });
+  }
+
+  function initFlexGrid() {
+    bindPressButtons();
+  }
+
+  function initAvatar() {
+    bindPressButtons();
+  }
+
+  function initSteps() {
+    var wrap = document.getElementById("stepsDemo");
+    if (!wrap) return;
+    var current = 1;
+    wrap.querySelectorAll("[data-step-go]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        current = parseInt(btn.getAttribute("data-step-go"), 10);
+        wrap.querySelectorAll(".bz-step").forEach(function (step, i) {
+          step.classList.toggle("done", i < current);
+          step.classList.toggle("active", i === current);
+        });
+      });
+    });
+  }
+
+  function initTimeline() {
+    bindPressButtons();
+  }
+
+  function initEmpty() {
+    bindPressButtons();
+  }
+
+  function initLoadMore() {
+    var sel = document.getElementById("loadMoreStatus");
+    var panel = document.getElementById("loadMorePanel");
+    if (!sel || !panel) return;
+    function render() {
+      var s = sel.value;
+      if (s === "Loading") panel.innerHTML = '<div class="loadmore-row"><div class="spinner spinner--sm"></div>加载中…</div>';
+      else if (s === "NoMore") panel.innerHTML = '<div class="loadmore-row muted">没有更多了</div>';
+      else if (s === "Error")
+        panel.innerHTML =
+          '<div class="loadmore-row"><span>加载失败</span><button type="button" class="bz-btn bz-btn--ghost bz-btn--sm" id="loadMoreRetry" data-press>重试</button></div>';
+      else panel.innerHTML = '<div class="loadmore-row muted">上拉加载更多</div>';
+      bindPressButtons();
+      var retry = document.getElementById("loadMoreRetry");
+      if (retry)
+        retry.addEventListener("click", function () {
+          sel.value = "Loading";
+          render();
+        });
+    }
+    sel.addEventListener("change", render);
+    render();
+  }
+
+  function initBarrage() {
+    var lane = document.getElementById("barrageLane");
+    var push = document.getElementById("barragePush");
+    if (!lane || !push) return;
+    var texts = ["欢迎来到直播间", "666", "主播加油", "🎁 礼物+1"];
+    push.addEventListener("click", function () {
+      var item = document.createElement("span");
+      item.className = "barrage-item";
+      item.textContent = texts[Math.floor(Math.random() * texts.length)];
+      item.style.top = 10 + Math.random() * 60 + "%";
+      item.style.animationDuration = 4 + Math.random() * 3 + "s";
+      lane.appendChild(item);
+      setTimeout(function () {
+        item.remove();
+      }, 8000);
+    });
+  }
+
+  function initEmoji() {
+    document.querySelectorAll("[data-emoji]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var out = document.getElementById("emojiOut");
+        if (out) out.textContent = btn.getAttribute("data-emoji");
+      });
+    });
+  }
+
+  function initAdminTable() {
+    document.querySelectorAll("[data-admin-action]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var row = btn.closest("[data-admin-row]");
+        var id = row ? row.getAttribute("data-admin-row") : "?";
+        alert("操作：" + btn.getAttribute("data-admin-action") + " · id=" + id);
+      });
+    });
+  }
+
+  function initListMessage() {
+    bindPressButtons();
+  }
+
+  function initWaterfall() {
+    bindPressButtons();
+  }
+
+  function initPullRefresh() {
+    var zone = document.getElementById("pullZone");
+    var hint = document.getElementById("pullHint");
+    if (!zone) return;
+    var startY = 0;
+    zone.addEventListener("pointerdown", function (e) {
+      startY = e.clientY;
+    });
+    zone.addEventListener("pointerup", function (e) {
+      if (e.clientY - startY > 80 && hint) {
+        hint.textContent = "刷新中…";
+        setTimeout(function () {
+          hint.textContent = "下拉刷新（松开模拟 onRefresh）";
+        }, 1200);
+      }
     });
   }
 
@@ -696,6 +853,9 @@
         }, 2000);
       });
     }
+  }
+
+  function initFullLike() {
     var zone = document.getElementById("fullLikeZone");
     var fullCount = document.getElementById("fullLikeCount");
     var clicks = 0;

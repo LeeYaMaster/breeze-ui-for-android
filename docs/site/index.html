@@ -5,6 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Breeze UI For Android 组件文档与可交互 Web 演示 — Jetpack Compose 组件库 v1.3.0" />
   <!-- GitHub Pages：Settings → 源分支 main、文件夹 /docs；本站路径为 /breeze-ui-for-android/site/ -->
+  <script>
+    (function () {
+      var path = location.pathname;
+      var marker = "/site/";
+      var i = path.indexOf(marker);
+      if (i !== -1) {
+        var base = document.createElement("base");
+        base.href = path.slice(0, i + marker.length);
+        document.head.appendChild(base);
+      }
+    })();
+  </script>
   <title>Breeze UI For Android · 组件文档</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -34,6 +46,7 @@
     <main class="site-main" id="site-main"></main>
   </div>
 
+  <script src="gallery-pages.js"></script>
   <script src="app.js"></script>
   <style>
     .sr-only {
