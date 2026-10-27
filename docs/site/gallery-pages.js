@@ -139,7 +139,8 @@ window.registerBreezeGallery = function (registry, ctx) {
 
   P.button = {
     title: "Button 按钮",
-    lead: "对应小程序 bz-button。内部通过 <code>Modifier.bzClickable</code> 提供品牌色涟漪（Ripple）；按压缩放约 0.92；主 CTA 可开启 pulseHint 呼吸动效。",
+    lead:
+      "对应小程序 bz-button。点击处会扩散品牌色水波纹（近似 Compose <code>Modifier.bzClickable</code> 的 Ripple，α≈0.36）；按压缩放约 0.92；主 CTA 可开启 pulseHint 呼吸动效。",
     render: function () {
       return (
         b() +
@@ -156,7 +157,7 @@ window.registerBreezeGallery = function (registry, ctx) {
         ) +
         demo(
           "按压与 pulseHint",
-          "pointer 按下缩放；pulseHint 主按钮空闲呼吸。",
+          "pointer 按下显示 bounded 涟漪并缩放；pulseHint 主按钮空闲呼吸。",
           '<div class="btn-row"><button type="button" class="bz-btn bz-btn--primary pulse" data-press>主按钮（pulseHint）</button></div>' +
             '<button type="button" class="bz-btn bz-btn--primary bz-btn--block pulse" data-press>块级 CTA</button>',
           "BzButton(pulseHint = true, block = true)"

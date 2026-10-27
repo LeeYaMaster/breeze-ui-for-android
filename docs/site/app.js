@@ -266,12 +266,54 @@
     bindPressButtons();
   }
 
+  function prefersReducedMotion() {
+    try {
+      return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function spawnRipple(el, clientX, clientY) {
+    if (prefersReducedMotion() || el.disabled) return;
+    var rect = el.getBoundingClientRect();
+    if (!rect.width || !rect.height) return;
+    var x = clientX - rect.left;
+    var y = clientY - rect.top;
+    var radius = Math.max(
+      Math.hypot(x, y),
+      Math.hypot(rect.width - x, y),
+      Math.hypot(x, rect.height - y),
+      Math.hypot(rect.width - x, rect.height - y)
+    );
+    var size = radius * 2;
+    var ripple = document.createElement("span");
+    ripple.className = "bz-ripple";
+    ripple.setAttribute("aria-hidden", "true");
+    ripple.style.width = size + "px";
+    ripple.style.height = size + "px";
+    ripple.style.left = x - size / 2 + "px";
+    ripple.style.top = y - size / 2 + "px";
+    el.appendChild(ripple);
+    ripple.addEventListener("animationend", function () {
+      ripple.remove();
+    });
+  }
+
   function bindPressButtons() {
     document.querySelectorAll("[data-press]").forEach(function (btn) {
       if (btn.dataset.pressBound) return;
       btn.dataset.pressBound = "1";
-      btn.addEventListener("pointerdown", function () {
-        if (!btn.disabled) btn.style.transform = "scale(0.92)";
+      btn.addEventListener("pointerdown", function (e) {
+        if (btn.disabled) return;
+        if (typeof e.button === "number" && e.button !== 0) return;
+        spawnRipple(btn, e.clientX, e.clientY);
+        btn.style.transform = "scale(0.92)";
+      });
+      btn.addEventListener("click", function (e) {
+        if (btn.disabled || e.detail !== 0) return;
+        var rect = btn.getBoundingClientRect();
+        spawnRipple(btn, rect.left + rect.width / 2, rect.top + rect.height / 2);
       });
       btn.addEventListener("pointerup", function () {
         btn.style.transform = "";
