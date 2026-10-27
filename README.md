@@ -41,7 +41,7 @@ python3 -m http.server 8080 --directory docs/site
 
 - **产品名**：Breeze UI For Android
 - **Maven 本地发布**：`com.breeze.ui:breeze-ui:1.3.0`
-- **JitPack**：`com.github.LeeYaMaster.breeze-ui-for-android:breeze-ui:1.3.0`（合并后由维护者打 Git tag `1.3.0` 再触发构建）
+- **JitPack**：`com.github.LeeYaMaster:breeze-ui-for-android:1.3.0.1`（Git tag `1.3.0.1`；JitPack 将库模块发布为仓库级 artifact）
 - **最低 SDK**：24
 - **UI**：Compose + Breeze 品牌视觉（非 Material 默认紫色）
 
@@ -92,11 +92,11 @@ export GITEE_TOKEN=...
 
 ## 在其他项目中使用
 
-当前库版本：**1.3.0**（`group` = `com.breeze.ui`，`artifactId` = `breeze-ui`）。
+当前库版本：**1.3.0**（Maven Local：`com.breeze.ui:breeze-ui`）。JitPack 可解析版本：**1.3.0.1**（`com.github.LeeYaMaster:breeze-ui-for-android`）。
 
 ### JitPack（推荐第三方接入）
 
-1. 在 **settings** 中增加 JitPack 仓库（本仓库为多模块工程，依赖坐标中的模块名为 `breeze-ui`）。
+1. 在 **settings** 中增加 JitPack 仓库。
 
 **Kotlin DSL — `settings.gradle.kts`：**
 
@@ -124,13 +124,13 @@ dependencyResolutionManagement {
 }
 ```
 
-2. 在 **app 模块** 添加依赖（发布 tag `1.3.0` 后使用；合并前可用 JitPack 的 commit hash 试构建）：
+2. 在 **app 模块** 添加依赖（使用已通过 JitPack 构建的 tag `1.3.0.1`）：
 
 **Kotlin DSL — `build.gradle.kts`：**
 
 ```kotlin
 dependencies {
-    implementation("com.github.LeeYaMaster.breeze-ui-for-android:breeze-ui:1.3.0")
+    implementation("com.github.LeeYaMaster:breeze-ui-for-android:1.3.0.1")
 }
 ```
 
@@ -138,7 +138,7 @@ dependencies {
 
 ```gradle
 dependencies {
-    implementation 'com.github.LeeYaMaster.breeze-ui-for-android:breeze-ui:1.3.0'
+    implementation 'com.github.LeeYaMaster:breeze-ui-for-android:1.3.0.1'
 }
 ```
 
