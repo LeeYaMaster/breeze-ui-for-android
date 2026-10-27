@@ -172,3 +172,7 @@ setContent {
 命令式 API（需在 `BzPage` 内）：`BzToast`、`BzModal`、`BzActionSheet`。
 
 列表场景与互动组件（`BzListPage`、`BzAdminTable`、`BzBarrage`、`BzEmoji`、`BzBessel`、`BzFullLike` 等）见 [PORTING.md](./PORTING.md) v1.3。
+
+## 许可证
+
+本仓库以 [MIT License](./LICENSE) 发布。版本变更见 [CHANGELOG.md](./CHANGELOG.md)。

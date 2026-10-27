@@ -63,9 +63,27 @@ afterEvaluate {
                 artifactId = "breeze-ui"
                 version = project.version.toString()
                 pom {
-                    name.set("Breeze UI")
+                    name.set("Breeze UI For Android")
                     description.set("Jetpack Compose UI kit ported from Breeze WeChat mini-program components")
-                    url.set("https://github.com/breeze-ui/breeze-ui-android")
+                    url.set("https://github.com/LeeYaMaster/breeze-ui-for-android")
+                    licenses {
+                        license {
+                            name.set("MIT License")
+                            url.set("https://opensource.org/licenses/MIT")
+                        }
+                    }
+                    developers {
+                        developer {
+                            id.set("LeeYaMaster")
+                            name.set("Levi Li")
+                            url.set("https://github.com/LeeYaMaster")
+                        }
+                    }
+                    scm {
+                        url.set("https://github.com/LeeYaMaster/breeze-ui-for-android")
+                        connection.set("scm:git:git://github.com/LeeYaMaster/breeze-ui-for-android.git")
+                        developerConnection.set("scm:git:ssh://git@github.com/LeeYaMaster/breeze-ui-for-android.git")
+                    }
                 }
             }
         }
