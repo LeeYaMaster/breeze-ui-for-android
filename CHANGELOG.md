@@ -2,6 +2,12 @@
 
 All notable changes to **Breeze UI For Android** (`com.breeze.ui:breeze-ui`) are documented here.
 
+## [1.3.0.1]
+
+### Fixed
+- JitPack republish: explicit `tween<Float>` / `tween<IntOffset>` in `BzNavTransitions` (Kotlin 2.0 inference)
+- Documented working JitPack coordinate: `com.github.LeeYaMaster:breeze-ui-for-android:1.3.0.1`
+
 ## [1.3.0]
 
 First Maven / JitPack release aligned with the Breeze WeChat mini-program UI through **v1.3**.
@@ -18,7 +24,7 @@ First Maven / JitPack release aligned with the Breeze WeChat mini-program UI thr
 ### Publishing
 
 - Maven coordinates: `com.breeze.ui:breeze-ui:1.3.0`
-- JitPack: `com.github.LeeYaMaster.breeze-ui-for-android:breeze-ui:1.3.0` (after Git tag `1.3.0` on the public repo)
+- JitPack (use **1.3.0.1**): `com.github.LeeYaMaster:breeze-ui-for-android:1.3.0.1` (tag `1.3.0` build was cached Error; repo-level artifactId)
 - Min SDK **24**, Compose + Material3 plumbing
 
 ### Known limitations
