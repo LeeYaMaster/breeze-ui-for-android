@@ -19,6 +19,8 @@ import androidx.compose.ui.unit.Dp
  * Breeze UI 动效令牌（时长 / 缓动）。
  *
  * 设计目标：比小程序更顺滑，默认 60fps 友好；当系统关闭动画时自动降级。
+ *
+ * Navigation 页面转场见 [BzNavTransitions] / [rememberBzPageTransitionDuration]。
  */
 object BreezeMotion {
     const val DurationInstant = 0

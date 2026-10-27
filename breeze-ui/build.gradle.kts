@@ -50,6 +50,7 @@ dependencies {
     implementation(libs.compose.material.icons)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.androidx.navigation.compose)
     debugImplementation(libs.compose.ui.tooling)
 }
 
