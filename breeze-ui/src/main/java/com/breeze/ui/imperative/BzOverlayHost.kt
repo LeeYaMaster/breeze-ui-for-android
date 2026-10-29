@@ -149,7 +149,7 @@ internal fun BzOverlayHost(state: BzOverlayState) {
                         Modifier
                             .fillMaxWidth(0.85f)
                             .clip(RoundedCornerShape(12.dp))
-                            .background(BreezeTokens.White)
+                            .background(BreezeTheme.colors.surface)
                             .padding(top = 20.dp),
                     ) {
                         Text(
@@ -231,7 +231,7 @@ internal fun BzOverlayHost(state: BzOverlayState) {
                             Modifier
                                 .fillMaxWidth()
                                 .clip(RoundedCornerShape(12.dp))
-                                .background(BreezeTokens.White),
+                                .background(BreezeTheme.colors.surface),
                         ) {
                             sheet.title?.let {
                                 Text(
@@ -266,7 +266,7 @@ internal fun BzOverlayHost(state: BzOverlayState) {
                             Modifier
                                 .fillMaxWidth()
                                 .clip(RoundedCornerShape(12.dp))
-                                .background(BreezeTokens.White)
+                                .background(BreezeTheme.colors.surface)
                                 .bzClickable { BzActionSheet.hide() }
                                 .padding(vertical = 16.dp),
                             contentAlignment = Alignment.Center,

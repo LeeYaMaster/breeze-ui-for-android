@@ -218,7 +218,7 @@ fun BzEmoji(
         columns = GridCells.Fixed(columns),
         modifier = modifier
             .clip(RoundedCornerShape(BreezeTheme.radius.md))
-            .background(BreezeTokens.White)
+            .background(BreezeTheme.colors.surface)
             .padding(8.dp),
         horizontalArrangement = Arrangement.spacedBy(4.dp),
         verticalArrangement = Arrangement.spacedBy(4.dp),

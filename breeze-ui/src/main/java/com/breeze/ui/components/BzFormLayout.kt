@@ -34,7 +34,7 @@ fun BzForm(
         modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(BreezeTheme.radius.lg))
-            .background(BreezeTokens.White)
+            .background(BreezeTheme.colors.surface)
             .padding(vertical = 4.dp),
     ) {
         content()

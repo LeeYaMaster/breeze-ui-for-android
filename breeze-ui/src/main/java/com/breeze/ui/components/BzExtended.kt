@@ -94,7 +94,7 @@ fun BzSticky(
     Box(
         modifier
             .fillMaxWidth()
-            .background(BreezeTokens.White)
+            .background(BreezeTheme.colors.surface)
             .padding(vertical = 8.dp, horizontal = 16.dp),
     ) {
         content()
@@ -147,7 +147,7 @@ fun BzCalendar(
     month: YearMonth = YearMonth.from(selected),
 ) {
     var currentMonth by remember(month) { mutableStateOf(month) }
-    Column(modifier.fillMaxWidth().clip(RoundedCornerShape(BreezeTheme.radius.lg)).background(BreezeTokens.White).padding(12.dp)) {
+    Column(modifier.fillMaxWidth().clip(RoundedCornerShape(BreezeTheme.radius.lg)).background(BreezeTheme.colors.surface).padding(12.dp)) {
         Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
             Box(Modifier.bzClickable { currentMonth = currentMonth.minusMonths(1) }) {
                 BzIcon(Icons.Default.ChevronLeft, tint = BreezeTheme.colors.primary)
@@ -190,7 +190,7 @@ fun BzCalendar(
                         day?.let {
                             Text(
                                 "${it.dayOfMonth}",
-                                color = if (it == selected) BreezeTokens.White else BreezeTokens.Black,
+                                color = if (it == selected) BreezeTokens.White else BreezeTheme.colors.textPrimary,
                                 fontSize = 13.sp,
                             )
                         }
@@ -224,7 +224,7 @@ fun BzPicker(
                 Modifier
                     .fillMaxWidth()
                     .clip(RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp))
-                    .background(BreezeTokens.White)
+                    .background(BreezeTheme.colors.surface)
                     .padding(bottom = 24.dp),
             ) {
                 Text(title, Modifier.fillMaxWidth().padding(16.dp), textAlign = TextAlign.Center, fontWeight = FontWeight.SemiBold)
@@ -241,7 +241,7 @@ fun BzPicker(
                     ) {
                         Text(
                             label,
-                            color = if (index == selectedIndex) BreezeTheme.colors.primary else BreezeTokens.Black,
+                            color = if (index == selectedIndex) BreezeTheme.colors.primary else BreezeTheme.colors.textPrimary,
                             fontWeight = if (index == selectedIndex) FontWeight.SemiBold else FontWeight.Normal,
                         )
                     }
@@ -298,7 +298,7 @@ fun BzColorPicker(
                         .background(c)
                         .border(
                             width = if (c == selected) 2.dp else 0.dp,
-                            color = BreezeTokens.Black,
+                            color = BreezeTheme.colors.textPrimary,
                             shape = CircleShape,
                         )
                         .bzClickable { onSelected(c) },
@@ -387,7 +387,7 @@ fun BzTable(
         modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(BreezeTheme.radius.md))
-            .background(BreezeTokens.White)
+            .background(BreezeTheme.colors.surface)
             .border(1.dp, BreezeTheme.colors.divider, RoundedCornerShape(BreezeTheme.radius.md)),
     ) {
         Row(Modifier.background(BreezeTheme.colors.light).padding(12.dp)) {

@@ -111,7 +111,7 @@ fun BzCell(
     Row(
         modifier
             .fillMaxWidth()
-            .background(BreezeTokens.White)
+            .background(BreezeTheme.colors.surface)
             .then(if (onClick != null) Modifier.bzClickable(onClick = onClick) else Modifier)
             .padding(horizontal = 16.dp, vertical = 14.dp),
         verticalAlignment = Alignment.CenterVertically,

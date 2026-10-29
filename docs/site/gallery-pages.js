@@ -123,7 +123,7 @@ window.registerBreezeGallery = function (registry, ctx) {
 
   P.theme = {
     title: "主题变体 Theme",
-    lead: "通过 BzConfigProvider 或 BreezeTheme 切换主题；对应小程序 theme-wrap.theme-*。",
+    lead: "通过 BreezeTheme / BzConfigProvider 切换品牌变体与深浅色（darkTheme）；对应小程序 theme-wrap.theme-*。Android Demo 首页可切换「跟随系统 / 深色 / 浅色」。",
     render: function () {
       return (
         b() +

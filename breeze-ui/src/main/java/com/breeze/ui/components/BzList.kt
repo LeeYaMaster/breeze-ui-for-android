@@ -40,7 +40,7 @@ fun BzCard(
         modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(BreezeTheme.radius.lg))
-            .background(BreezeTokens.White)
+            .background(BreezeTheme.colors.surface)
             .then(if (onClick != null) Modifier.bzClickable(onClick = onClick) else Modifier)
             .padding(16.dp),
     ) {
@@ -61,7 +61,7 @@ fun BzListMenu(
         modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(BreezeTheme.radius.lg))
-            .background(BreezeTokens.White),
+            .background(BreezeTheme.colors.surface),
     ) {
         content()
     }
@@ -129,7 +129,7 @@ fun BzTabs(
     onSelected: (Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    BoxWithConstraints(modifier.fillMaxWidth().background(BreezeTokens.White)) {
+    BoxWithConstraints(modifier.fillMaxWidth().background(BreezeTheme.colors.surface)) {
         val tabWidth = maxWidth / tabs.size.coerceAtLeast(1)
         val indicatorOffset by animateDpAsState(
             targetValue = tabWidth * selectedIndex,
@@ -192,7 +192,7 @@ fun BzSegment(
                 .offset(x = pillOffset)
                 .width(segmentWidth)
                 .clip(RoundedCornerShape(BreezeTheme.radius.sm))
-                .background(BreezeTokens.White)
+                .background(BreezeTheme.colors.surface)
                 .height(36.dp),
         )
         Row(Modifier.fillMaxWidth()) {

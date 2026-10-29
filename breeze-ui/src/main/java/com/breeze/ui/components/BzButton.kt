@@ -108,7 +108,7 @@ fun BzButton(
     val contentColor = when {
         line -> BreezeTokens.namedColor(lineColor) ?: BreezeTheme.colors.primary
         useTheme && !line -> BreezeTokens.White
-        bg == BreezeTheme.colors.buttonNeutral -> BreezeTokens.Black
+        bg == BreezeTheme.colors.buttonNeutral -> BreezeTheme.colors.textPrimary
         else -> BreezeTokens.White
     }
     val brush = if (!line && isGradient) BreezeTheme.colors.variant.gradientBrush else null

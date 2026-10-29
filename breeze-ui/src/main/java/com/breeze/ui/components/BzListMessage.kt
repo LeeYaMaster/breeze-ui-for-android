@@ -45,7 +45,7 @@ fun BzListMessage(
 
 @Composable
 private fun BoxBubble(text: String, isSelf: Boolean) {
-    val bg = if (isSelf) BreezeTheme.colors.primary else BreezeTokens.White
+    val bg = if (isSelf) BreezeTheme.colors.primary else BreezeTheme.colors.surface
     val fg = if (isSelf) BreezeTokens.White else BreezeTheme.colors.textPrimary
     Text(
         text,

@@ -27,12 +27,7 @@ fun BzConfigProvider(
     val base = BreezeTheme.colors
     val variant = theme ?: base.variant
     val colors = if (theme != null) {
-        BreezeColors(
-            primary = variant.primary,
-            secondary = variant.secondary,
-            light = variant.light,
-            variant = variant,
-        )
+        BreezeColors.fromVariant(variant, base.isDark)
     } else base
 
     CompositionLocalProvider(

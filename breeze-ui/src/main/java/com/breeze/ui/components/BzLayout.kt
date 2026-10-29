@@ -98,7 +98,7 @@ fun BzTitleBar(
     val bgMod = if (useGradient) {
         Modifier.background(BreezeTheme.colors.variant.gradientBrush)
     } else {
-        Modifier.background(BreezeTokens.White)
+        Modifier.background(BreezeTheme.colors.surface)
     }
     Row(
         modifier

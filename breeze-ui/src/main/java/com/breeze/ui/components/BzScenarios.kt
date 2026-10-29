@@ -73,7 +73,7 @@ fun BzAdminTable(
         modifier
             .fillMaxWidth()
             .clip(shape)
-            .background(BreezeTokens.White)
+            .background(BreezeTheme.colors.surface)
             .border(1.dp, BreezeTheme.colors.divider, shape),
     ) {
         header.forEach { col ->
@@ -191,7 +191,7 @@ fun BzListGrid(
             .fillMaxWidth()
             .clip(RoundedCornerShape(BreezeTheme.radius.md))
             .then(borderMod)
-            .background(BreezeTokens.White)
+            .background(BreezeTheme.colors.surface)
             .padding(8.dp),
     ) {
         data.chunked(gridCol).forEachIndexed { rowIndex, row ->

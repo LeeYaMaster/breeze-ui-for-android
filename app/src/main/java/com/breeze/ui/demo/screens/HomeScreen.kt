@@ -15,9 +15,12 @@ import com.breeze.ui.components.BzCell
 import com.breeze.ui.components.BzPage
 import com.breeze.ui.components.BzSegment
 import com.breeze.ui.components.BzTitleBar
+import com.breeze.ui.theme.BreezeThemeController
 import com.breeze.ui.theme.BreezeThemeVariant
 
 private data class DemoCategory(val id: String, val title: String)
+
+private val darkModeLabels = listOf("跟随系统", "深色", "浅色")
 
 private val categories = listOf(
     DemoCategory("nav", "导航与布局"),
@@ -32,8 +35,18 @@ private val categories = listOf(
 fun HomeScreen(
     onOpenCategory: (String) -> Unit,
     onThemeChange: (BreezeThemeVariant) -> Unit,
+    onDarkModeChange: (Boolean?) -> Unit,
 ) {
     var themeIndex by remember { androidx.compose.runtime.mutableIntStateOf(0) }
+    var darkModeIndex by remember {
+        androidx.compose.runtime.mutableIntStateOf(
+            when (BreezeThemeController.darkTheme) {
+                true -> 1
+                false -> 2
+                null -> 0
+            },
+        )
+    }
     val variants = BreezeThemeVariant.entries
 
     BzPage {
@@ -50,6 +63,20 @@ fun HomeScreen(
                 onSelected = {
                     themeIndex = it
                     onThemeChange(variants[it])
+                },
+                modifier = Modifier.padding(bottom = 12.dp),
+            )
+            BzSegment(
+                options = darkModeLabels,
+                selectedIndex = darkModeIndex,
+                onSelected = {
+                    darkModeIndex = it
+                    val mode = when (it) {
+                        1 -> true
+                        2 -> false
+                        else -> null
+                    }
+                    onDarkModeChange(mode)
                 },
                 modifier = Modifier.padding(bottom = 16.dp),
             )

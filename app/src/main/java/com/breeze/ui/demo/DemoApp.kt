@@ -25,6 +25,7 @@ fun DemoApp() {
             HomeScreen(
                 onOpenCategory = { id -> nav.navigate("category/$id") },
                 onThemeChange = { BreezeThemeController.currentVariant = it },
+                onDarkModeChange = { BreezeThemeController.darkTheme = it },
             )
         }
         bzPage(

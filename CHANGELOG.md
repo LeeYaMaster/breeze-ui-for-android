@@ -8,6 +8,9 @@ All notable changes to **Breeze UI For Android** (`com.breeze.ui:breeze-ui`) are
 - JitPack republish: explicit `tween<Float>` / `tween<IntOffset>` in `BzNavTransitions` (Kotlin 2.0 inference)
 - Documented working JitPack coordinate: `com.github.LeeYaMaster:breeze-ui-for-android:1.3.0.1`
 
+### Added
+- **Dark theme**: `BreezeTheme(darkTheme = …)` with Material3 `darkColorScheme`, semantic `BreezeColors.surface` / `isDark`, and Demo 首页「跟随系统 / 深色 / 浅色」切换。
+
 ## [1.3.0]
 
 First Maven / JitPack release aligned with the Breeze WeChat mini-program UI through **v1.3**.
@@ -24,13 +27,12 @@ First Maven / JitPack release aligned with the Breeze WeChat mini-program UI thr
 ### Publishing
 
 - Maven coordinates: `com.breeze.ui:breeze-ui:1.3.0`
-- JitPack (use **1.3.0.1**): `com.github.LeeYaMaster:breeze-ui-for-android:1.3.0.1` (tag `1.3.0` build was cached Error; repo-level artifactId)
+- JitPack (use **1.3.0.1**): `com.github.LeeYaMaster:breeze-ui-for-android:1.3.0.1` (tag `1.3.0` build was cached Error; repo-level artifactId `breeze-ui-for-android`)
 - Min SDK **24**, Compose + Material3 plumbing
 
 ### Known limitations
 
 - **`BzStickyHeader`**: list-item style placeholder; true sticky behavior depends on Compose `stickyHeader` APIs ([PORTING.md](./PORTING.md)).
 - **`BzAvatar`**: `imageUrl` is accepted in the API but not loaded yet (label / placeholder icon only).
-- **Dark theme**: `BreezeTheme` uses a light color scheme only; no dedicated dark variant yet.
 - **Imperative overlays** must be used within a `BzPage` host.
 - Remaining mini-program–only plugins are out of scope; see `source/docs/组件清单.md`.

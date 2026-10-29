@@ -53,7 +53,7 @@ fun BzModal(
         Column(
             Modifier
                 .clip(RoundedCornerShape(12.dp))
-                .background(BreezeTokens.White)
+                .background(BreezeTheme.colors.surface)
                 .padding(top = 20.dp),
         ) {
             Text(title, modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center, fontWeight = FontWeight.SemiBold)

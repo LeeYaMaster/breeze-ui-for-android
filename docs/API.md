@@ -247,11 +247,11 @@ BzModal.show("提示", "确认删除？", onConfirm = { delete() })
 
 | API | 用途 | 说明 |
 | --- | --- | --- |
-| **`BreezeTheme`** | 根主题 Composable | `variant`, `radius`, `content` |
+| **`BreezeTheme`** | 根主题 Composable | `variant`, `darkTheme`（默认跟随系统）, `radius`, `content` |
 | **`BreezeTheme`**（object） | 读取当前主题 | `colors`, `radius` |
-| **`BreezeColors`** | 语义色数据类 | `primary`, `secondary`, `light`, `pageBackground`, … |
+| **`BreezeColors`** | 语义色数据类 | `primary`, `secondary`, `light`, `pageBackground`, `surface`, `isDark`, … |
 | **`BreezeThemeVariant`** | 主题变体枚举 | `Default`, `Blue`, `Purple`, …；`gradientBrush`, `fromId` |
-| **`BreezeThemeController`** | 全局变体状态 | `currentVariant` |
+| **`BreezeThemeController`** | 全局变体 / 深浅色 | `currentVariant`；`darkTheme`（`null` = 跟随系统） |
 | **`BreezeRadius`** | 圆角令牌 | `Sm` / `Md` / `Lg` 预设 |
 | **`BreezeTokens`** | 静态色板 | `namedColor`, `namedLightColor` |
 | **`BreezeMotion`** | 动效时长、缓动与弹簧 | `Duration*`, `Easing*`, `isEnabled()`, `durationMs`, `springPress()`, `springSmooth()`, `springEmphasis()`, `springEmphasisDp()` |
@@ -261,7 +261,11 @@ BzModal.show("提示", "确认删除？", onConfirm = { delete() })
 | **`NavGraphBuilder.bzPage(...)`** | 带默认转场的 `composable` 路由 | `route`, `transitionDurationMs`（通常由 `rememberBzPageTransitionDuration()` 在 `NavHost` 外算一次传入），`arguments`, `deepLinks`, `content` |
 
 ```kotlin
-BreezeTheme(variant = BreezeThemeVariant.Purple, radius = BreezeRadius.Lg) {
+BreezeTheme(
+    variant = BreezeThemeVariant.Purple,
+    darkTheme = isSystemInDarkTheme(), // 或 BreezeThemeController.darkTheme ?: …
+    radius = BreezeRadius.Lg,
+) {
     val primary = BreezeTheme.colors.primary
     Box(Modifier.bzClickable { }) { /* ... */ }
 }

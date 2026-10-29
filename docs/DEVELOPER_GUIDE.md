@@ -158,12 +158,19 @@ setContent {
 
 ### 5.1 `BreezeTheme` 与变体
 
-`BreezeTheme(variant, radius, content)` 注入语义色与圆角。读取当前值：
+`BreezeTheme(variant, darkTheme, radius, content)` 注入语义色、Material3 深浅色方案与圆角。`darkTheme` 默认为 `isSystemInDarkTheme()`；也可通过 `BreezeThemeController.darkTheme`（`null` = 跟随系统）或显式参数强制深浅。读取当前值：
 
 ```kotlin
 BreezeTheme.colors.primary
+BreezeTheme.colors.surface
+BreezeTheme.colors.isDark
 BreezeTheme.colors.variant.gradientBrush
 BreezeTheme.radius.md
+```
+
+```kotlin
+BreezeTheme(darkTheme = false) { /* 强制浅色 */ }
+BreezeThemeController.darkTheme = true // Demo：强制深色
 ```
 
 `BreezeThemeVariant` 对应小程序 `theme-wrap.theme-*`：
@@ -173,7 +180,7 @@ BreezeTheme.radius.md
 | `Default` | 品牌默认 `#5b6cff` / `#7c3aed` |
 | `Blue` / `Purple` / `Orange` / `Red` / `Cyan` | 预设主题 |
 
-运行时切换（全局状态）可使用 `BreezeThemeController.currentVariant`。
+运行时切换（全局状态）可使用 `BreezeThemeController.currentVariant` 与 `BreezeThemeController.darkTheme`。
 
 ### 5.2 `BreezeTokens`
 

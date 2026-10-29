@@ -58,7 +58,7 @@ fun BzInput(
         modifier = modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(BreezeTheme.radius.md))
-            .background(BreezeTokens.White)
+            .background(BreezeTheme.colors.surface)
             .border(1.dp, BreezeTheme.colors.divider, RoundedCornerShape(BreezeTheme.radius.md))
             .padding(horizontal = 12.dp, vertical = 12.dp),
         textStyle = androidx.compose.ui.text.TextStyle(fontSize = 14.sp, color = BreezeTheme.colors.textPrimary),
@@ -92,7 +92,7 @@ fun BzTextarea(
             .fillMaxWidth()
             .height(96.dp)
             .clip(RoundedCornerShape(BreezeTheme.radius.md))
-            .background(BreezeTokens.White)
+            .background(BreezeTheme.colors.surface)
             .border(1.dp, BreezeTheme.colors.divider, RoundedCornerShape(BreezeTheme.radius.md))
             .padding(12.dp),
         textStyle = androidx.compose.ui.text.TextStyle(fontSize = 14.sp),
